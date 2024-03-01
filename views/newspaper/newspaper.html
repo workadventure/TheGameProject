@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="title" content="Newspaper">
+        <title>NEWS</title>
+        <link rel="stylesheet" href="../styles/main.css">
+
+        <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+        <script src="newspaper.ts" type="module"></script>
+
+        <style>
+            #newspaper {
+                animation-name: SPIN;
+                animation-delay: 0.2s;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+                width: 600px;
+                height: 400px;
+                overflow: hidden;
+            }
+
+            @keyframes SPIN {
+                from {
+                    transform: scale(0) rotate(0);
+                }
+                to {
+                    transform: scale(1) rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bg-main h-100 d-flex align-items-center justify-content-center">
+            <div id="newspaper" style="background-color: #ddba8b; border: 2px black solid; padding: 20px;">
+                <div style="text-align: center">
+                    DAILY BUGGLE
+                </div>
+                <div style="border-top: 2px black solid; border-bottom: 2px black solid; text-align: center;" class="mt-2 mb-2 p-2" id="date">
+                    date
+                </div>
+                <div style="display: flex;">
+                    <div class="mr-2">
+                        <div class="bg-main p-2" style="border: 2px black solid;">
+                            <img src="" alt="picture" id="picture" style="width: 100px;">
+                        </div>
+                    </div>
+                    <div>
+                        <div id="title" style="text-align: center; font-weight: bold; font-size: 25px;" class="pb-2">
+                        </div>
+                        <div id="content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Players list</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="title" content="Players list">
+
+        <link rel="stylesheet" href="../styles/main.css">
+
+        <style>
+            .player-line {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 20px;
+                border-bottom: 1px black solid;
+            }
+
+            .player-line img {
+                padding: 10px;
+            }
+        </style>
+
+        <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+        <script src="./playerList.ts" type="module"></script>
+    </head>
+    <body>
+        <div class="bg-main p-2">
+            <div id="playerList">
+                Liste des joueurs autour de moi
+            </div>
+            <div>
+                <button class="btn bg-error mt-2 mb-2" id="close">
+                    FERMER
+                </button>
+            </div>
+        </div>
+    </body>
+</html>

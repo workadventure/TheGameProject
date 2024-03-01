@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="title" content="Camera moving">
+
+        <title>Camera moving</title>
+        <link rel="stylesheet" href="../styles/main.css">
+        <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+        <script src="cameraMoving.ts" type="module"></script>
+    </head>
+    <body style="margin: 0">
+        <div class="p-2" style="border-bottom: 4px black solid; background: #c8c8c8">
+            <div class="bg-main p-2" style="display: inline-block; border: 4px black solid;">
+                <div id="cameraMoveTitle">
+                    Caméra mobile
+                </div>
+                <div>
+                    <table style="margin: auto">
+                        <tr>
+                            <td style="text-align: center"></td>
+                            <td style="text-align: center">
+                                <button id="cameraMoveUp">⬆️</button>
+                            </td>
+                            <td style="text-align: center"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center"><button id="cameraMoveLeft">⬅️</button></td>
+                            <td style="text-align: center"><button id="cameraMoveDown">⬇️</button></td>
+                            <td style="text-align: center"><button id="cameraMoveRight">➡️</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="display: none">
+                    <button id="close">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
