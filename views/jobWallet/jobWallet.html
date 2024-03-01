@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="title" content="My job wallet">
+
+    <title>My job wallet</title>
+    
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    
+    <style lang="scss">
+        *{
+            transition: transform 0.6s;
+        }
+
+        .card{
+            background: #23475f;
+            border-radius: 20px;
+            overflow: hidden;
+            color: white;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            perspective: 1000px;
+        }
+
+        .card:hover #game,
+        .card:hover #closeWalletWebsiteButton,
+        .card:hover #title,
+        .card:hover {
+            transform: rotateY(180deg);
+        }
+        .card:hover #title{
+            opacity: 0;
+        }
+
+        section{
+            padding: 20px;
+            padding-top: 10px;
+            padding-bottom: 0px;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: #d64e50;
+            margin: 5% 15%;
+            padding: 5%;
+            border-radius: 16px;
+        }
+        #game{
+            font-size: 14px;
+            height: 140px;
+            display: none;
+        }
+        .card:hover #game{
+            display: block;
+        }
+        #attributes{
+            font-weight: bold;
+            font-size: 16px;
+            margin: 2px;
+        }
+        
+        #attributes,
+        #description{
+            text-align: center;
+            margin: 2px;
+        }
+
+        #title {
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        img{
+            margin: 20px;
+        }
+        .card:hover img{
+            display: none;
+        }
+    </style>
+  <script type="module" crossorigin src="../../assets/view_jobWallet-6e11fc2d.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/main-531b8551.js">
+  <link rel="modulepreload" crossorigin href="../../assets/init-0f7c740a.js">
+  <link rel="modulepreload" crossorigin href="../../assets/translate-d272070d.js">
+  <link rel="modulepreload" crossorigin href="../../assets/sounds-5d3f972e.js">
+  <link rel="modulepreload" crossorigin href="../../assets/job-eb8dc8ef.js">
+  <link rel="stylesheet" href="../../assets/main-83c918d8.css">
+</head>
+    <body>
+        <div class="card">
+            <section>
+                <img id="photo" src="" width="100px" height="100px" alt="Ma photo">
+                <div id="game">
+                    <div id="attributes"></div>
+                    <div id="description"></div>
+                    <div id="permissions"></div>
+                </div>
+                <div id="title">
+                </div>
+            </section>
+            <div class="text-align-center m-2">
+                <button class="btn bg-info-outline" id="closeWalletWebsiteButton">
+                    test
+                </button>
+            </div>
+        </div>
+    </body>
+</html>

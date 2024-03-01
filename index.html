@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <meta name="title" content="WorkAdventure Starter Kit">
-    <title>WorkAdventure test map</title>
-    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+    <meta name="title" content="Weasley project">
+
+    <link rel="icon" href="https://morganehuebratcm.github.io/workadventureBaseTemplate/images/pages/favicon.png">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+    <title>Weasley project</title>
     <script>
         window.onload = function () {
             const host = window.location.host;
@@ -17,41 +18,25 @@
                 path = path.substr(path, path.length - 'index.html'.length);
             }
             const instanceId = Math.random().toString(36).substring(2, 15);
-            const url = `https://play.workadventu.re/_/${instanceId}/${host}${path}map.tmj`;
+            const url = `http://play.staging.workadventu.re/_/${instanceId}/${host}${path}maps/starter.tmj`;
             document.getElementById('testMapURL').href = url;
-            document.getElementById('testMapBtnURL').href = url;
-            document.getElementById('testMapURL').innerText = url;
-
-            const tmjURL = window.location.protocol + '//' + window.location.host + path + 'map.tmj';
-            document.getElementById('tmjURL').innerText = tmjURL;
-
-            const gettingStartedLink = 'https://workadventu.re/getting-started?name=Map&mapUrl=' + tmjURL;
-            document.getElementById('gettingStartedLink').href = gettingStartedLink;
-
+            document.getElementById('testMapAdminURL').href = url + '#admin-entry';
         };
     </script>
     <style>
-        html, body {
-        height: 100%;
-        }
         body {
-        display: flex;
-        flex-direction: column;
-        }
-        .content {
-        flex: 1 0 auto;
-        }
-        footer {
-        flex-shrink: 0;
-        }
-
-        body {
-            font-family: Roboto Condensed,Arial;
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
             max-width: 800px;
-            margin: 0 auto;
+            margin: auto !important;
             text-align: center;
         }
-        
+
+        h1,
+        h2 {
+            font-weight: bold;
+        }
+
         header {
             margin: 30px;
         }
@@ -68,19 +53,8 @@
             text-align: center;
         }
 
-        h1,
-        h2 {
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        section {
-            margin-top: 3rem;
-        }
-
-        .tips {
-            font-size: 0.8rem;
-            font-style: italic;
+        main {
+            margin-bottom: 30px;
         }
 
         .socials img {
@@ -88,29 +62,50 @@
             height: 30px;
         }
 
-        .socials > a {
+        .socials>a {
             display: inline-block;
             margin: 20px 5px;
+        }
+
+        .content {
+            width: 100%;
+            position: relative;
+            z-index: 99999;
+        }
+
+        .content>h2 {
+            padding: 1rem 5vw;
+            max-width: 1200px;
         }
 
         a.button {
             display: inline-block;
             padding: 13px 20px 12px;
-            background-color: rgba(65, 86, 246, 0.9);
+            background: rgba(20, 48, 76, 0.9);
             color: white;
-            border-radius: 8px;
             font-weight: bold;
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
             width: auto;
             position: relative;
-            font-size: 1.3em;
+            font-size: 1.8em;
+            margin-top: 2rem;
         }
 
         a.button:hover {
-            background-color: rgb(65, 86, 246);
+            top: -3px;
+            background: rgba(20, 48, 76);
             cursor: pointer;
+            color: white;
+        }
+
+
+        .maps {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .map {
@@ -119,12 +114,18 @@
             min-width: 200px;
         }
 
-        .url-box {
-            border: 1px solid rgb(65, 86, 246);
-            border-radius: 3px;
-            padding: 3px;
-            background-color: rgba(65, 86, 246, 0.1);
+        .map a,
+        .map img {
+            width: 100%;
+            display: block;
         }
+
+        .map a.button {
+            display: inline-block;
+            width: auto;
+            margin: 1rem auto;
+        }
+
         .url {
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
@@ -132,72 +133,66 @@
 
         footer {
             display: block;
+            font-size: 1.2em;
             padding: 2rem 5vw;
+        }
+
+
+        /*/ MEDIA QUERIES START HERE /*/
+        @media (max-width: 768px) {
+            /* Hand Held Device */
+
+            body {
+                font-size: 13px;
+            }
+
+            .logo img {
+                width: 60vw;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .maps {
+                gap: 1rem;
+            }
+
+            .map {
+                width: 47%;
+                margin-bottom: 3%;
+                min-width: 200px;
+            }
+
         }
     </style>
 </head>
 
 <body>
-    <div class="content">
-        <header>
-            <div class="logo">
-                <a href="https://workadventu.re/" target="_blank" title="Workadventure">
-                    <img src="./images/logo.svg" alt="WorkAdventure logo" />
-                </a>
+    <header>
+        <div class="logo">
+            <a href="https://morganehuebratcm.github.io/workadventureBaseTemplate" target="_blank" title="Lyon Games Adventures"><img
+                    src="https://morganehuebratcm.github.io/workadventureBaseTemplate/images/pages/logo_black.svg" alt="Lyon Games Adventures Loog" /></a>
+        </div>
+    </header>
+    <main>
+        <div class="useful-width">
+            <div class="nes-container with-title is-centered" style="margin-top: 1rem">
+                <h1 class="title">Weasley project</h1>
+                <p><b>Welcome to this new 2-player adventure!</b></p>
+                <p>Will you be able to save the world?</p>
+                <br>
+                <br>
+                <p>To play, you need to go to the starter map with an even number of people. Everyone must enter the red zone, and wait for the administrator to start the draw.</p>
+                <p>The administrator is someone who goes to the url of this map with <b><a id="testMapAdminURL" href="" target="_blank">"#admin-entry"</a></b> to launch the draw that will send players to their instance.</p>
+                <br>
+                <p><a id="testMapURL" href="" class="nes-btn is-primary">Start the adventure</a></p>
+                <br>
+                <p><b>NOTE : To play with your friends, you must go on the same instance of the game. To make people play at the same time, the "Start the adventure" button creates a new instance for all players, so send your link to your friends !</b></p>
+                <p>NOTE : This adventure was created to be played on a computer. It is not intended for cell phones. In order to have the best experience possible, please use a computer.</p>
             </div>
-        </header>
-        <main>
-            <section>
-                <h2>Test my map</h2>
-                <p><a id="testMapURL" href="#" class="url"></a></p>
-                <p class="tips">(In order to test another map, locate "map.tmj" at the end of the URL and replace it by another file name)</p>
-                <img src="./assets/map-7f74ee09.png" alt="Map thumbnail" class="map">
-                <p><a id="testMapBtnURL" href="#" class="button">Test my map</a></p>
-            </section>
-
-            <section>
-                <h2>Publish my map</h2>
-                <p>Register your room on WorkAdventure!</p>
-                <p>Copy and paste the map URL in WorkAdventure's administration panel:</p>
-                <p><span id="tmjURL" class="url-box url"></span></p>
-            </section>
-
-            <section>
-                <h2>Connect and get help</h2>
-                <div>
-                    <div class="socials">
-                        <a href="https://discord.gg/G6Xh9ZM9aR" target="_blank" title="discord">
-                            <img src="./images/discord.png" alt="discord">
-                        </a>
-                        <a href="https://github.com/thecodingmachine/workadventure" target="_blank" title="github">
-                            <img src="./images/github.png" alt="github">
-                        </a>
-                        <a href="https://www.youtube.com/channel/UCXJ9igV-kb9gw1ftR33y5tA" target="_blank" title="youtube">
-                            <img src="./images/youtube.png" alt="youtube">
-                        </a>
-                        <a href="https://twitter.com/Workadventure_" target="_blank" title="twitter">
-                            <img src="./images/twitter.png" alt="twitter">
-                        </a>
-                        <a href="https://www.instagram.com/workadventure_" target="_blank" title="instagram">
-                            <img src="./images/instagram.png" alt="instagram">
-                        </a>
-                        <a href="https://www.linkedin.com/company/workadventu-re" target="_blank" title="linkedin">
-                            <img src="./images/linkedin.png" alt="linkedin">
-                        </a>
-                    </div>
-
-                    <div>
-                        <a href="https://www.youtube.com/watch?v=lu1IZgBJJD4&list=PL7jmrMKZfjCnz36FvezxJ-Tshuh3Zz-nc&ab_channel=WorkAdventure"
-                        target="_blank">Watch tutorials</a>
-                        <a href="https://discord.gg/G6Xh9ZM9aR" target="_blank">Talk to the community</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-    <footer>
-        <a href="https://workadventu.re/" target="_blank" title="workadventu.re">&copy; WorkAdventure</a>
-    </footer>
+        </div>
+    </main>
 </body>
 
 </html>

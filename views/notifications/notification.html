@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="title" content="My job wallet">
+
+    <title>Notification</title>
+    
+    <style>
+        #notificationContainer {
+            overflow: scroll;
+            opacity: 1;
+            transition: opacity 1s;
+            backdrop-filter: blur(5px);
+            color: white;
+            border-radius: 15px;
+        }
+
+        #notificationContainer.hidden {
+            opacity: 0;
+            will-change: opacity;
+            transition: opacity 1s;
+        }
+
+        #status {
+            width: 10px;
+            min-height: 100px;
+            height: 100%;
+        }
+
+        #title {
+            font-size: 18px;
+        }
+    </style>
+
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    
+  <script type="module" crossorigin src="../../assets/view_notification-d1276fe7.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/main-531b8551.js">
+  <link rel="modulepreload" crossorigin href="../../assets/init-0f7c740a.js">
+  <link rel="modulepreload" crossorigin href="../../assets/translate-d272070d.js">
+  <link rel="stylesheet" href="../../assets/main-83c918d8.css">
+</head>
+<body>
+<div class="bg-main d-flex align-items-center h-auto hidden" id="notificationContainer">
+    <div id="status" class="h-100">
+    </div>
+    <div class="p-2">
+        <div id="title">
+            Titre
+        </div>
+        <div id="content">Contenu</div>
+    </div>
+</div>
+</body>
+</html>

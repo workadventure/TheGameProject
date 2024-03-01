@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="title" content="My inventory">
+
+    <title>My inventory</title>
+    
+    <style>
+        .inventory-item {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: flex-end;
+            cursor: help;
+            border-radius: 20px;
+        }
+
+        .inventory-item:not(.empty):hover::after {
+            content: attr(data-description);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            z-index: 3;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .inventory-item .inventory-item-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .inventory-item .inventory-item-image img,
+        .inventory-item .inventory-item-image object {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            z-index: 0;
+        }
+
+        .inventory-item .inventory-item-name {
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+    </style>
+
+
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    
+  <script type="module" crossorigin src="../../assets/view_inventory-f31cf2c6.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/main-531b8551.js">
+  <link rel="modulepreload" crossorigin href="../../assets/init-0f7c740a.js">
+  <link rel="modulepreload" crossorigin href="../../assets/translate-d272070d.js">
+  <link rel="modulepreload" crossorigin href="../../assets/sounds-5d3f972e.js">
+  <link rel="modulepreload" crossorigin href="../../assets/notifications-69979190.js">
+  <link rel="modulepreload" crossorigin href="../../assets/inventory-cca9f553.js">
+  <link rel="stylesheet" href="../../assets/main-83c918d8.css">
+</head>
+<body>
+    <main class="p-2">
+        <div id="title" class="text-align-center mb-2">Mon titre</div>
+        <div id="inventoryContent" class="d-flex align-items-center justify-content-center"></div>
+        <div class="text-align-center mt-2">
+            <button id="closeButton" class="btn bg-info">Fermer</button>
+        </div>
+    </main>
+</body>
+</html>

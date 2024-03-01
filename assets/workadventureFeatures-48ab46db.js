@@ -1,0 +1,1 @@
+const e=()=>{setTimeout(()=>{WA.ui.actionBar.removeButton("pricing-btn")},200)},t=()=>{setTimeout(()=>{WA.ui.actionBar.removeButton("invite-btn")},200)},n=()=>{setTimeout(()=>{WA.ui.banner.closeBanner("freemium-banner")},200)};export{t as a,n as b,e as h};
