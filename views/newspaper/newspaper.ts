@@ -4,13 +4,15 @@ import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
   onInit().then(async () => {
-    const picture = document.getElementById('picture')
-    const title = document.getElementById('title')
-    const content = document.getElementById('content')
-    const date = document.getElementById('date')
+    const picture = document.getElementById('picture') as HTMLImageElement;
+    const title = document.getElementById('title');
+    const content = document.getElementById('content');
+    const date = document.getElementById('date');
+
+    console.log('WA.player', utils.translations);
 
     if (content) {
-      content.innerText = utils.translations.translate('views.newspaper.text')
+      content.innerText = utils.translations.translate('views.newspaper.text');
     }
 
     if (title) {

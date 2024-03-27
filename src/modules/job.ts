@@ -3,6 +3,7 @@
 import * as utils from '../utils'
 import {UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "../config";
+import { savePlayerJob as savePlayerJobFromFirebase, getPlayerJob as getPlayerJobFromFirebase } from '../utils/firebase';
 
 export enum Job {
   archaeologist = 'archaeologist',
@@ -59,20 +60,9 @@ const setPlayerJob = (newJob: Job|undefined) => {
   if(newJob === 'archaeologist'){
     WA.player.setOutlineColor(85, 53, 42);
   }
-  
-  /*let playerId = WA.player.uuid
-  let slug = playerId?.replaceAll('.', '').replaceAll('@', '')
 
-  fetch(`https://weasley-project-default-rtdb.europe-west1.firebasedatabase.app/userRole/${slug}.json`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ "playerId": playerId, "job": newJob })
-  })
-      .then(response => response.json())
-      .then(response => console.log('response', JSON.stringify(response)))*/
+  if(!newJob) return;
+  savePlayerJobFromFirebase(newJob);
 }
 
 const setSypJob = () => {
@@ -131,8 +121,14 @@ const unclaimArchaeologistJob = () => {
   setPlayerJob(undefined);
 }
 
-const getPlayerJob = () => {
-  return WA.player.state.job
+const getPlayerJob = async () => {
+  // If job is already set, return it
+  if(WA.player.state.job) return WA.player.state.job;
+
+  // Get job from firebase
+  const {job} = await getPlayerJobFromFirebase();
+  WA.player.state.job = job
+  return job;
 }
 
 // Open job wallet website
@@ -193,23 +189,11 @@ const hideJobWallet = () => {
 
 const initiateJob = async () => {
   // block users while initiating jobs
-  WA.controls.disablePlayerControls();
+  WA.controls.disablePlayerControls();  
 
-  /*let playerId = WA.player.uuid
-  let slug = playerId?.replaceAll('.', '').replaceAll('@', '')
+  await getPlayerJob();
 
-  let response = await fetch(`https://weasley-project-default-rtdb.europe-west1.firebasedatabase.app/userRole/${slug}.json`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-
-  const responseJson = await response.json()*/
-
-  //WA.player.state.job = responseJson?.job
-  console.info('initiateJob => My job is', WA.player.state.job);
+  console.info('initiateJob => My job is: ', WA.player.state.job);
   if (WA.player.state.job) {
     showJobWallet();
   } else {

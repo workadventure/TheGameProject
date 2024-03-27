@@ -58,15 +58,16 @@ onInit().then(async () => {
     setPlayerJob(Job.spy)
   }
 
+  const myJob = await getPlayerJob();
   // Speech at arriving
   discussion.openDiscussionWebsite(
     utils.translations.translate('utils.mySelf'),
-    utils.translations.translate(`bomb.story.${getPlayerJob()}`),
+    utils.translations.translate(`bomb.story.${myJob}`),
     'views.choice.close',
     "discussion",
     () => {
       if (!actionForAllPlayers.hasBeenTriggered('freeSpy')) {
-        if (getPlayerJob() === 'spy') {
+        if (myJob === 'spy') {
           // Is blocked under a rock
           WA.controls.disablePlayerControls()
           WA.player.setOutlineColor(255, 0, 0)
@@ -100,7 +101,7 @@ onInit().then(async () => {
       {x: 15, y: 8, tile: null, layer: 'rockCollisions'},
     ]);
 
-    if (getPlayerJob() === 'spy') {
+    if (myJob === 'spy') {
       WA.player.removeOutlineColor()
       WA.controls.restorePlayerControls()
     }
@@ -117,8 +118,8 @@ onInit().then(async () => {
         utils.translations.translate('bomb.bomb.failure.message'),
         'views.choice.close',
         "discussion",
-        () => {
-          if (getPlayerJob() === 'spy') {
+        async () => {
+          if (myJob === 'spy') {
             // Is blocked under a rock
             WA.controls.disablePlayerControls()
           }
@@ -144,7 +145,7 @@ onInit().then(async () => {
     )
   })
 
-  if (getPlayerJob() === 'spy') {
+  if (myJob === 'spy') {
     WA.player.state.askForCloseCheatSheet = false
     // Can see cheatSheet
     WA.ui.actionBar.addButton({

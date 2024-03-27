@@ -587,10 +587,11 @@ onInit().then(async () => {
         utils.layers.toggleLayersVisibility(`fogs/fog${value}`, false)
     })
 
+    const myJob = await getPlayerJob();
     for (let i = 0; i < cameras.length; i++) {
         WA.room.onEnterLayer(cameras[i]).subscribe(() => {
             if (actionForAllPlayers.currentValue('deactivateCamera') !== cameras[i]) {
-                if (getPlayerJob() === 'spy') {
+                if (myJob === 'spy') {
                     discussion.openDiscussionWebsite(
                       'utils.mySelf',
                       'museum.cantStayInCamera',

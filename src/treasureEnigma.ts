@@ -172,7 +172,7 @@ onInit().then(async () => {
     utils.layers.toggleLayersVisibility('badGuy', true)
   }, 300)
   await utils.layers.triggerAnimationWithLayers(['pouf1', 'pouf2', 'pouf3'], 100)
-
+  const myjob = await getPlayerJob()
   setTimeout(() => {
     // Bad guy monologue
     discussion.openDiscussionWebsite(
@@ -184,7 +184,7 @@ onInit().then(async () => {
         // Redirect to next map
         treasureSound.stop()
 
-        WA.nav.goToRoom(`./bomb.tmj#${getPlayerJob()}-entry`)
+        WA.nav.goToRoom(`./bomb.tmj#${myjob}-entry`)
       }
     )
   }, 300) // Let time to understand what happen

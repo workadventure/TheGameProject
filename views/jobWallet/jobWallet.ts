@@ -3,23 +3,23 @@ import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
 import { onInit } from '../../src/utils/init.ts'
 
-const getTitle = () => {
+const getTitle = async () => {
   return utils.translations.translate(`views.jobWallet.title`, {
-    job: utils.translations.translate(`views.jobWallet.jobs.${modules.job.getPlayerJob()}.name`)
+    job: utils.translations.translate(`views.jobWallet.jobs.${await modules.job.getPlayerJob()}.name`)
   })
 }
 
-const getAttributes = () => {
-  return utils.translations.translate(`views.jobWallet.jobs.${modules.job.getPlayerJob()}.attributes`, {
+const getAttributes = async () => {
+  return utils.translations.translate(`views.jobWallet.jobs.${await modules.job.getPlayerJob()}.attributes`, {
     name: WA.player.name
   })
 }
 
-const getDescription = () => {
-  return utils.translations.translate(`views.jobWallet.jobs.${modules.job.getPlayerJob()}.description`)
+const getDescription = async () => {
+  return utils.translations.translate(`views.jobWallet.jobs.${await modules.job.getPlayerJob()}.description`)
 }
 
-const getPermissions = () => {
+const getPermissions = async () => {
   const ul = document.createElement('ul')
   const permissions = modules.job.getUserPermissions()
   
@@ -27,7 +27,7 @@ const getPermissions = () => {
   for (let i = 0; i < permissions.length; i++) {
     const li = document.createElement('li')
     li.innerHTML = utils.translations.translate(
-      `views.jobWallet.jobs.${modules.job.getPlayerJob()}.permissions.${permissions[i]}`
+      `views.jobWallet.jobs.${await modules.job.getPlayerJob()}.permissions.${permissions[i]}`
     )
     ul.appendChild(li)
   }
@@ -60,22 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Card title
     if (title) {
-      title.innerText = getTitle()
+      title.innerText = await getTitle()
     }
 
     // User attributes
     if (attributes) {
-      attributes.innerHTML = getAttributes()
+      attributes.innerHTML = await getAttributes()
     }
 
     // User job description
     if (description) {
-      description.innerText = getDescription()
+      description.innerText = await getDescription()
     }
 
     // User job permissions
     if (permissions) {
-      permissions.appendChild(getPermissions())
+      permissions.appendChild(await getPermissions())
     }
 
     // Close button event

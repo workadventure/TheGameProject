@@ -39,6 +39,11 @@
          "opacity":1,
          "properties":[
                 {
+                 "name":"jitsiClosable",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"jitsiRoom",
                  "type":"string",
                  "value":"TheGame"

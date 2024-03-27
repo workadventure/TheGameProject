@@ -1,6 +1,6 @@
 export default {
   story: {
-    spy: 'ARF! When he ran away, it triggered an earthquake which trapped him under a rock... And this bomb that\'s about to explode... Fortunately, I\'ve always got my bomb-disarming cheat sheet with me!',
+    spy: 'ARF! When he ran away, it triggered an earthquake which trapped me under a rock... And this bomb that\'s about to explode... Fortunately, I\'ve always got my bomb-disarming cheat sheet with me!',
     archaeologist: 'Damn! The spy is stuck under a rock... We\'ve got to find a way to get out of here, but I\'ll never have time to get him unstuck before this bomb explodes...'
   },
   freeSpy: {
