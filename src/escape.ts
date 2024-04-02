@@ -14,9 +14,13 @@ import {
 } from "./modules/actionForAllPlayers";
 import {env, rootLink} from "./config";
 import { onInit } from "./utils/init";
+import { disableMapEditor, disableScreenSharing } from "./utils/ui";
 
 
 onInit().then(async () => {
+
+    disableMapEditor();
+    disableScreenSharing();
 
     const cave = WA.sound.loadSound(`${rootLink}/sounds/cavedark.mp3`)
     cave.play({
@@ -121,6 +125,7 @@ onInit().then(async () => {
         WA.room.hideLayer('victoryRunesWall')
         WA.room.hideLayer('victoryRunes/victoryFog')
         WA.room.showLayer('victoryRunes/openedWall')
+        WA.camera.set(34*32, 34*32, undefined, undefined, false, true);
     })
 
     arrayFilling.setArrayFilling(
@@ -321,7 +326,8 @@ onInit().then(async () => {
             artifact = WA.ui.displayActionMessage({
                 message: utils.translations.translate('escape.artifact'),
                 callback: () => {
-                    actionForAllPlayers.activateActionForAllPlayer('artifactBrok')
+                    actionForAllPlayers.activateActionForAllPlayer('artifactBrok');
+                    WA.camera.set(9*32, 4*32, undefined, undefined, false, true);
                 }
             })
         }

@@ -126,9 +126,10 @@ const getPlayerJob = async () => {
   if(WA.player.state.job) return WA.player.state.job;
 
   // Get job from firebase
-  const {job} = await getPlayerJobFromFirebase();
-  WA.player.state.job = job
-  return job;
+  const response = await getPlayerJobFromFirebase();
+  if(response == undefined) return false;
+  WA.player.state.job = response.job
+  return response.job;
 }
 
 // Open job wallet website

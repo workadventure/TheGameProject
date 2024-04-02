@@ -5,6 +5,7 @@ import { actionForAllPlayers, discussion, notifications, secretPassages, sounds,
 import * as utils from './utils'
 import {env} from "./config"
 import { onInit } from "./utils/init";
+import { disableMapEditor, disableMouseWheel, disableScreenSharing } from "./utils/ui";
 
 let bombWebsite:UIWebsite|null = null
 let cheatSheetWebsite:UIWebsite|null = null
@@ -20,6 +21,10 @@ const resetCamera = async () => {
 }
 
 onInit().then(async () => {
+
+  disableMapEditor();
+  disableMouseWheel();
+  disableScreenSharing();
 
   // Reset camera Zoom
   WA.camera.followPlayer(true)
@@ -69,7 +74,9 @@ onInit().then(async () => {
       if (!actionForAllPlayers.hasBeenTriggered('freeSpy')) {
         if (myJob === 'spy') {
           // Is blocked under a rock
-          WA.controls.disablePlayerControls()
+          if(WA.state.difused == false) {
+            WA.controls.disablePlayerControls()
+          }
           WA.player.setOutlineColor(255, 0, 0)
         }
       } else {
@@ -83,14 +90,18 @@ onInit().then(async () => {
   )
 
 
-    WA.player.state.askForDefuseBomb = false
-    WA.player.state.askForBoom = false
+  WA.player.state.askForDefuseBomb = false
+  WA.player.state.askForBoom = false
+  WA.state.onVariableChange('difused').subscribe((value) => {
+    if(!value) return;
+    closeBombWebsite();
+  });
 
-    // secret passages initialisation
-    secretPassages.initiateSecretPassages(
-      ['secretPassage'],
-      [() => {console.log('secret passage discovered !')}
-      ])
+  // secret passages initialisation
+  secretPassages.initiateSecretPassages(
+    ['secretPassage'],
+    [() => {console.log('secret passage discovered !')}
+  ]);
 
   // FREE SPY ACTION
   actionForAllPlayers.initializeActionForAllPlayers('freeSpy', () => {
@@ -137,12 +148,13 @@ onInit().then(async () => {
     // Success sound
     bombSound.stop()
     WA.ui.actionBar.removeButton('cheatSheetButton');
-    sounds.playSound('successSound')
+    sounds.playSound('successSound');
     notifications.notify(
       utils.translations.translate('bomb.bomb.success'),
       utils.translations.translate('utils.success'),
       'success'
-    )
+    );
+    WA.state.difused = true;
   })
 
   if (myJob === 'spy') {
@@ -204,7 +216,9 @@ onInit().then(async () => {
           action: utils.translations.translate('bomb.bomb.defuse')
         }),
         callback: async () => {
-          WA.controls.disablePlayerControls();
+          if(WA.state.difused == false) {
+            WA.controls.disablePlayerControls();
+          }
 
           // Open card
           bombWebsite = await WA.ui.website.open({
@@ -244,8 +258,6 @@ onInit().then(async () => {
       actionForAllPlayers.activateActionForAllPlayer('defuseBomb')
     }
   })
-
-
 })
 
 const openCheatSheetWebsite = async () => {
@@ -274,6 +286,6 @@ const closeBombWebsite = () => {
   if (bombWebsite) {
     bombWebsite.close()
     bombWebsite = null
-    WA.controls.restorePlayerControls()
   }
+  WA.controls.restorePlayerControls();
 }

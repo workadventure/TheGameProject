@@ -6,19 +6,39 @@ bootstrapExtra();
 
 import {discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, workadventureFeatures, cameraMovingMode, digicode } from './modules'
 import {Job, canUser, getPlayerJob, initiateJob, setPlayerJob} from "./modules/job";
-import {ActionMessage, UIWebsite} from "@workadventure/iframe-api-typings";
+import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
 import {env, rootLink} from "./config";
 import {toggleLayersVisibility} from "./utils/layers";
 import { HasPlayerMovedEvent } from "@workadventure/iframe-api-typings/front/Api/Events/HasPlayerMovedEvent";
 import { onInit } from "./utils/init";
+import { disableMapEditor, disableMouseWheel, disableScreenSharing } from "./utils/ui";
 
 let moveCameraTimeout: NodeJS.Timeout|undefined = undefined;
 let smothCameraUpdate = 0;
 
+const removePlanButton = () => {
+    WA.ui.actionBar.removeButton('planButton')
+}
+
+const endOfTheRoom = async (electroLow?: Sound) => {
+    // Disable player controls
+    WA.controls.disablePlayerControls();
+
+    // Open tutorial discussion
+    discussion.openDiscussionWebsite( 'museum.mapRetrieved', 'museum.goToTheNextRoom', "museum.go", "discussion", () => {
+        electroLow?.stop()
+        removePlanButton()
+        WA.nav.goToRoom('maze.tmj');
+    });
+}
+
 onInit().then(async () => {
     await initiateJob()
 
+    disableMapEditor();
+    disableMouseWheel();
+    disableScreenSharing();
 
     const electro = WA.sound.loadSound(`${rootLink}/sounds/electro.mp3`)
     const electroLow = WA.sound.loadSound(`${rootLink}/sounds/electroLow.mp3`)
@@ -42,6 +62,16 @@ onInit().then(async () => {
     }
 
     electroLow.play(soundConfigLow)
+
+    // Check if the map has been retrieved
+    if(WA.state.mapRetrieved || inventory.hasItem('secret-map')){
+        endOfTheRoom(electroLow);
+        return;
+    }
+    WA.state.onVariableChange('mapRetrieved').subscribe((value) => {
+        if(!value)return;
+        endOfTheRoom(electroLow);
+    });
 
     let electroH: ActionMessage | null = null
     // Open digicode when walking on chest zone
@@ -74,7 +104,6 @@ onInit().then(async () => {
         // Close digicode
         digicode.closeDigicode()
     })
-
 
     // Create digicode for chest
     digicode.createDigicode('chestDigicode', [{
@@ -126,28 +155,6 @@ onInit().then(async () => {
     // Inventory initialisation
     inventory.initiateInventory()
 
-    // Go out after retrieving the map
-    let outMessage: ActionMessage | null = null
-    WA.room.onEnterLayer('start').subscribe(() => {
-        if (WA.state.mapRetrieved) {
-            outMessage = WA.ui.displayActionMessage({
-                message: utils.translations.translate('utils.executeAction', {
-                    action: utils.translations.translate('museum.escape')
-                }),
-                callback: () => {
-                    electroLow.stop()
-                    removePlanButton()
-                    WA.nav.goToRoom('maze.tmj');
-                }
-            })
-        }
-    })
-
-    WA.room.onLeaveLayer('start').subscribe(() => {
-        outMessage?.remove()
-        outMessage = null
-    })
-
     const openPlan = () => {
         removePlanButton()
         discussion.openDiscussionWebsite(WA.player.name, 'views.museum.beginDiscussion', 'views.choice.close', 'discussion', () => {
@@ -182,12 +189,6 @@ onInit().then(async () => {
         });
     }
 
-    const removePlanButton = () => {
-        WA.ui.actionBar.removeButton('planButton')
-    }
-
-
-
     let isLight1Visible = false
     let lightLoop: NodeJS.Timer|null = null
     const launchLightLoop = () => {
@@ -220,7 +221,6 @@ onInit().then(async () => {
         toggleLayersVisibility('noLights/conversations', true)
         toggleLayersVisibility('lights/conversations', false)
     }
-
 
     hooking.setHooking('hookingD7', () => {
         const tiles = []

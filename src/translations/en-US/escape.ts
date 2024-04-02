@@ -13,6 +13,6 @@ export default {
         '\n' +
         'FROM THAT DAY FORWARD, IT BECAME A LEGEND AMONG THE KNIGHT\'S PEOPLE: THAT IN TIMES OF DARKNESS AND DESPAIR, THERE WILL ALWAYS BE A KNIGHT CHOSEN TO PROTECT THE LIGHT, AND THAT THESE CHOSEN WARRIORS NEED NOT FIGHT ALONE, FOR IN TIMES OF DESPERATION, AN ANGEL WILL COME TO SAVE THEM.',
     title : 'Ancient text',
-    active : 'Touch the status',
-    artifact : "[TOUCH] How beautiful, I can't resist to touch it..."
+    active : 'Touch the status 🤩',
+    artifact : "[TOUCH] How beautiful, I can't resist to touch it... 😍"
 }

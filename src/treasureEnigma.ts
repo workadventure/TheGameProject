@@ -4,10 +4,15 @@ import {ActionMessage} from "@workadventure/iframe-api-typings";
 import {getPlayerJob, initiateJob} from "./modules/job";
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
+import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 onInit().then(async () => {
   // Initiate players jobs
   await initiateJob()
+
+  disableMapEditor();
+  disableMouseWheel();
+  disableScreenSharing();
 
   const treasureSound = WA.sound.loadSound(`${rootLink}/sounds/treasure.mp3`)
   let soundConfig = {

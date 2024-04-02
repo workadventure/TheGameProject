@@ -7,8 +7,13 @@ import {ActionMessage} from "@workadventure/iframe-api-typings";
 import {env, rootLink} from "./config"
 import { onInit } from './utils/init';
 import { getGem, saveGem } from './utils/firebase';
+import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 onInit().then( async () => {
+    disableMapEditor();
+    disableMouseWheel();
+    disableScreenSharing();
+
     // Trigger fire
     let triggerBlue: ActionMessage|null = null;
     WA.room.onEnterLayer(`triggerBlue`).subscribe(() => {

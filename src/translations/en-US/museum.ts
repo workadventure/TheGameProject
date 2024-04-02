@@ -34,6 +34,7 @@ export default {
     escape: 'Escape',
     plan: 'Plan',
     inspect: 'Inspect',
-    mapRetrieved: "The map has been retrieved",
+    mapRetrieved: "The map has been retrieved 💪",
     cannotWalkInCameras: "I can't walk in the field of vision of a camera",
+    goToTheNextRoom: "You can go to the next step... don't wait too long... tic tac tic tac... 🕰️"
 }

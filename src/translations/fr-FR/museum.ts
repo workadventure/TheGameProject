@@ -35,5 +35,6 @@ export default {
     escape: 'S\'enfuir',
     plan: 'Plan',
     inspect: 'Inspecter',
-    mapRetrieved: "La carte a été récupérée"
+    mapRetrieved: "La carte a été récupérée 💪",
+    goToTheNextRoom: "Vous pouvez vous diriger vers la prochaine étape... ne tardez pas... tic tac tic tac... 🕰️",
 }

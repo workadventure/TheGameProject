@@ -4,10 +4,15 @@ import {initiateJob} from "./modules/job";
 import { sounds, workadventureFeatures } from './modules'
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
+import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 onInit().then(async () => {
     // Jobs initialisation
-    await initiateJob()
+    await initiateJob();
+
+    disableMapEditor();
+    disableMouseWheel();
+    disableScreenSharing();
 
     // Hide pricing button
     workadventureFeatures.hidePricingButton()
