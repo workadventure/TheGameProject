@@ -5,8 +5,11 @@ import {getPlayerJob, initiateJob} from "./modules/job";
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
+import { saveGameStep } from './utils/firebase';
 
-onInit().then(async () => {
+const STEP_GAME = "treasureEnigma";
+
+onInit(STEP_GAME).then(async () => {
   // Initiate players jobs
   await initiateJob()
 
@@ -16,7 +19,7 @@ onInit().then(async () => {
 
   const treasureSound = WA.sound.loadSound(`${rootLink}/sounds/treasure.mp3`)
   let soundConfig = {
-    volume: 0.5,
+    volume: 0.1,
     loop: true,
     rate: 1,
     detune: 1,
@@ -185,10 +188,11 @@ onInit().then(async () => {
       'treasureEnigma.badGuy.monologue',
       'views.choice.close',
       "discussion",
-      () => {
+      async () => {
         // Redirect to next map
         treasureSound.stop()
 
+        await saveGameStep(STEP_GAME);
         WA.nav.goToRoom(`./bomb.tmj#${myjob}-entry`)
       }
     )

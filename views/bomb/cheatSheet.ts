@@ -1,11 +1,7 @@
-
-//import * as utils from '../../src/utils/index.js'
-import * as modules from '../../src/modules/index.js'
 import * as utils from '../../src/utils/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
 
     const content = document.getElementById('content')
     const note = document.getElementById('note')

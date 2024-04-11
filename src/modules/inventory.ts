@@ -46,36 +46,44 @@ const initiateInventory = () => {
   // Return true if item was added
   // False either
 const addToInventory = (item: InventoryItem) => {
-  const currentInventory = JSON.parse(WA.player.state.inventory as string)
+  try{
+    const currentInventory = JSON.parse(WA.player.state.inventory as string)
+    
+    // If the user has not already an item with the same id and inventory is not full
+    if (!hasItem(item.id) && currentInventory.length < INVENTORY_MAX_SIZE) {
+      sounds.playSound('successSound')
+      currentInventory.push(item)
 
-  // If the user has not already an item with the same id and inventory is not full
-  if (!hasItem(item.id) && currentInventory.length < INVENTORY_MAX_SIZE) {
-    sounds.playSound('successSound')
-    currentInventory.push(item)
-
-    WA.player.state.inventory = JSON.stringify(currentInventory)
-    notifications.notify(utils.translations.translate(
-      'modules.inventory.objectTaken',
-      {
-        object: utils.translations.translate(item.name)
-      }), null, 'success')
-    return true
-  } else {
-    notifications.notify('modules.inventory.cannotTakeThis', null, 'error')
+      WA.player.state.inventory = JSON.stringify(currentInventory)
+      notifications.notify(utils.translations.translate(
+        'modules.inventory.objectTaken',
+        {
+          object: utils.translations.translate(item.name)
+        }), null, 'success')
+      return true
+    } else {
+      notifications.notify('modules.inventory.cannotTakeThis', null, 'error')
+    }
+    return false
+  }catch(e){
+    return false;
   }
-  return false
 }
 
 // Return true if user has item with id parameter in his/her inventory
 const hasItem = (id: string) => {
-  const currentInventory = JSON.parse(WA.player.state.inventory as string)
+  try{
+    const currentInventory = JSON.parse(WA.player.state.inventory as string)
 
-  for (let i = 0; i < currentInventory.length; i++) {
-    if (currentInventory[i].id === id) {
-      return true
+    for (let i = 0; i < currentInventory.length; i++) {
+      if (currentInventory[i].id === id) {
+        return true
+      }
     }
+    return false
+  }catch(e){
+    return false;
   }
-  return false
 }
 
 // remove item by id from user inventory

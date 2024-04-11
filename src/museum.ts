@@ -10,9 +10,9 @@ import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings
 import * as utils from "./utils";
 import {env, rootLink} from "./config";
 import {toggleLayersVisibility} from "./utils/layers";
-import { HasPlayerMovedEvent } from "@workadventure/iframe-api-typings/front/Api/Events/HasPlayerMovedEvent";
+import { HasPlayerMovedEvent } from "@workadventure/iframe-api-typings";
 import { onInit } from "./utils/init";
-import { disableMapEditor, disableMouseWheel, disableScreenSharing } from "./utils/ui";
+import { saveGameStep } from "./utils/firebase";
 
 let moveCameraTimeout: NodeJS.Timeout|undefined = undefined;
 let smothCameraUpdate = 0;
@@ -22,28 +22,30 @@ const removePlanButton = () => {
 }
 
 const endOfTheRoom = async (electroLow?: Sound) => {
-    // Disable player controls
-    WA.controls.disablePlayerControls();
+    // Close all discussions
+    WA.ui.modal.closeModal();
 
     // Open tutorial discussion
-    discussion.openDiscussionWebsite( 'museum.mapRetrieved', 'museum.goToTheNextRoom', "museum.go", "discussion", () => {
-        electroLow?.stop()
-        removePlanButton()
-        WA.nav.goToRoom('maze.tmj');
-    });
+    setTimeout(() => {
+        discussion.openDiscussionWebsite( 'museum.mapRetrieved', 'museum.goToTheNextRoom', "museum.go", "discussion", async () => {
+            electroLow?.stop()
+            removePlanButton()
+            await saveGameStep(STEP_GAME);
+            WA.nav.goToRoom('maze.tmj');
+        });
+    }, 1000);
 }
 
-onInit().then(async () => {
-    await initiateJob()
+const STEP_GAME = "museum";
 
-    disableMapEditor();
-    disableMouseWheel();
-    disableScreenSharing();
+onInit(STEP_GAME).then(async () => {
+    await initiateJob();
+    WA.state.mapRetrieved = false;
 
     const electro = WA.sound.loadSound(`${rootLink}/sounds/electro.mp3`)
     const electroLow = WA.sound.loadSound(`${rootLink}/sounds/electroLow.mp3`)
     let soundConfigLow = {
-        volume: 0.4,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,
@@ -52,7 +54,7 @@ onInit().then(async () => {
         mute: false
     }
     let soundConfig = {
-        volume: 1,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,
@@ -64,27 +66,28 @@ onInit().then(async () => {
     electroLow.play(soundConfigLow)
 
     // Check if the map has been retrieved
-    if(WA.state.mapRetrieved || inventory.hasItem('secret-map')){
-        endOfTheRoom(electroLow);
-        return;
-    }
     WA.state.onVariableChange('mapRetrieved').subscribe((value) => {
+        console.log('WA.state.onVariableChange("mapRetrieved") => value', value);
         if(!value)return;
         endOfTheRoom(electroLow);
     });
 
-    let electroH: ActionMessage | null = null
+    // Check if the map has been retrieved
+    if(WA.state.mapRetrieved || inventory.hasItem('secret-map')){
+        WA.state.mapRetrieved = true;
+        endOfTheRoom(electroLow);
+        return;
+    }
+
     // Open digicode when walking on chest zone
     WA.room.onEnterLayer('electroH').subscribe(() => {
         electroLow.stop()
         electro.play(soundConfig)
-
     })
 
     WA.room.onLeaveLayer('electroH').subscribe(() => {
         electro.stop()
         electroLow.play(soundConfigLow)
-        electroH?.remove()
     })
 
     actionForAllPlayers.initializeActionForAllPlayers('retrieveMap', () => {

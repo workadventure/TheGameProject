@@ -14,7 +14,7 @@ const sounds: Record<string, any> = {
 }
 
 const soundConfig = {
-  volume: 1,
+  volume: 0.1,
   loop: false,
   rate: 1,
   detune: 1,
@@ -26,7 +26,7 @@ const soundConfig = {
 // initiate player inventory (reset all items)
 const initiateSounds = (soundList: Array<soundType> = [], soundsPath: string = `${rootLink}/sounds/`) => {
   for (let i = 0; i < soundList.length; i++) {
-    sounds[soundList[i].name] = WA.sound.loadSound(`${soundsPath}${soundList[i].path}`)
+    sounds[soundList[i].name] = WA.sound.loadSound(`${soundsPath}${soundList[i].path}`);
   }
 
   actionForAllPlayers.initializeActionForAllPlayers('playSoundForAllPlayers', (name: string | null) => {

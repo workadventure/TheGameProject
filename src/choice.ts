@@ -5,8 +5,9 @@ import { discussion, inventory, workadventureFeatures } from './modules'
 import { JobPlayerVaraible, initiateJob } from "./modules/job";
 import * as utils from "./utils";
 import { rootLink } from "./config";
-import { RemotePlayerInterface } from '@workadventure/iframe-api-typings/front/Api/Iframe/Players/RemotePlayer';
+import { RemotePlayerInterface } from '@workadventure/iframe-api-typings';
 import { onInit } from './utils/init';
+import { saveGameStep } from './utils/firebase';
 
 const bannerInviteUser = () => {
     WA.ui.banner.closeBanner();
@@ -43,24 +44,22 @@ const bannerTheTeamIsComplete = () => {
 // Function to determine if all players already have a job
 export const checkAllPlayersGotJob = () => {
     WA.state.saveVariable('allPlayersGotJob', false);
-    const jobs = [...WA.players.list()].length === 1 && [...WA.players.list(), WA.player].reduce((tab, player) => {
-        tab.push(player.state.job);
-        return tab;
-    }, Array<unknown>());
-    if(!jobs || !jobs.includes('spy') || !jobs.includes('archaeologist')) return;
-    // Save the variable to indicate that all players have a job
-    WA.state.saveVariable('allPlayersGotJob', true);
+    const spyPlayer = WA.state.loadVariable(JobPlayerVaraible.spyPlayer) as {name: string, uuid: string} | false;
+    const archaeologistPlayer = WA.state.loadVariable(JobPlayerVaraible.archaeologistPlayer) as {name: string, uuid: string} | false;
+    if(spyPlayer != undefined && archaeologistPlayer != undefined) {
+        WA.state.saveVariable('allPlayersGotJob', true);
+    }
 }
 
-
+const STEP_GAME = "choice";
 
 // Waiting for the API to be ready
-onInit().then(async () => {
+onInit(STEP_GAME).then(async () => {
 
     // Load and play sound of the room
     const choiceSound = WA.sound.loadSound(`${rootLink}/sounds/choice.mp3`)
     let soundConfig = {
-        volume: 0.2,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,
@@ -206,10 +205,11 @@ onInit().then(async () => {
     }
 
     // When all players have a job, send them to next map
-    WA.state.onVariableChange('allPlayersGotJob').subscribe((value) => {
+    WA.state.onVariableChange('allPlayersGotJob').subscribe(async (value) => {
         bannerTheTeamIsComplete();
         if(value) {
             choiceSound.stop();
+            await saveGameStep(STEP_GAME);
             WA.nav.goToRoom('./museum.tmj');
         }
     });

@@ -33,8 +33,7 @@ const hash = (message: string) => {
 
 const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 
-
-onInit().then(() => {
+WA.onInit().then(() => {
 
   // Get Room id and redirect user to choice map
   const roomId = WA.room.id;
@@ -44,7 +43,7 @@ onInit().then(() => {
   WA.player.state.isInSelectionZone = false
   const starterSound = WA.sound.loadSound(`${rootLink}/sounds/starter.mp3`)
   let soundConfig = {
-    volume: 0.2,
+    volume: 0.1,
     loop: true,
     rate: 1,
     detune: 1,

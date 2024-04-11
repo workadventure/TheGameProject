@@ -1,9 +1,8 @@
 
 import * as utils from '../../src/utils/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     const picture = document.getElementById('picture') as HTMLImageElement;
     const title = document.getElementById('title');
     const content = document.getElementById('content');

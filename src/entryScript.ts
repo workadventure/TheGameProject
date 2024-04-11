@@ -1,11 +1,10 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import {job, excavations, lobby, secretPassages, hiddenZone, switchingTiles, readRunes, inventory, hooking, notifications, arrayFilling} from './modules'
-import { onInit } from './utils/init'
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 // Waiting for the API to be ready
-onInit().then(() => {
+WA.onInit().then(() => {
 
     disableMapEditor();
     disableMouseWheel();

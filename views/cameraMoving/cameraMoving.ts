@@ -1,10 +1,9 @@
 
 import * as modules from '../../src/modules/index.js'
 import * as utils from '../../src/utils/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     const rightButton = document.getElementById('cameraMoveRight')
     const leftButton = document.getElementById('cameraMoveLeft')
     const upButton = document.getElementById('cameraMoveUp')

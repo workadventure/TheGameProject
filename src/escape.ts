@@ -16,15 +16,16 @@ import {env, rootLink} from "./config";
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableScreenSharing } from "./utils/ui";
 
+const STEP_GAME = "escape";
 
-onInit().then(async () => {
+onInit(STEP_GAME).then(async () => {
 
     disableMapEditor();
     disableScreenSharing();
 
     const cave = WA.sound.loadSound(`${rootLink}/sounds/cavedark.mp3`)
     cave.play({
-        volume: 0.3,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,

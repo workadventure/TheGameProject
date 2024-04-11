@@ -9,7 +9,9 @@ import { onInit } from './utils/init';
 import { getGem, saveGem } from './utils/firebase';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
-onInit().then( async () => {
+const STEP_GAME = "maze";
+
+onInit(STEP_GAME).then( async () => {
     disableMapEditor();
     disableMouseWheel();
     disableScreenSharing();
@@ -135,7 +137,7 @@ onInit().then( async () => {
 
     const forestSound = WA.sound.loadSound(`${rootLink}/sounds/forest.mp3`)
     let soundConfig = {
-        volume: 0.5,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,

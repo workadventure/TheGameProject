@@ -1,12 +1,11 @@
 
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 const WRONG_TIME = 30
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(() => {
+  WA.onInit().then(() => {
     const askForDefuseBomb = () => {
       modules.sounds.playSound('successSound')
       WA.player.state.askForDefuseBomb = true
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(clickableParts[i].getAttribute('id'))
           console.log('COUCOUCOUCOUC')
           clickableParts[i].classList.add('clicked')
-          modules.arrayFilling.testArrayFilling('bomb', clickableParts[i].getAttribute('id'))
+          modules.arrayFilling.testArrayFilling('bomb', clickableParts[i].getAttribute('id') as string)
         })
       }
     }

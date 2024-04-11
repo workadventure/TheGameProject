@@ -1,7 +1,5 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import { onInit } from "../utils/init"
-
 export type mapVariableType = Record<string, string|number|boolean> | boolean | number | string | null
 
 let callbacks: Record<string, Function> = {}
@@ -68,7 +66,7 @@ const activateActionForAllPlayer = (id: string, value: mapVariableType = null, m
   WA.state.mapActionVariables = JSON.stringify(currentValue)
 }
 
-onInit().then(() => {
+WA.onInit().then(() => {
   oldValue = WA.state.mapActionVariables != undefined ? JSON.parse(WA.state.mapActionVariables as string) : {};
   WA.state.onVariableChange('mapActionVariables').subscribe((value) => {
     let currentValue = JSON.parse(value as string)

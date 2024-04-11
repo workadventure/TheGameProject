@@ -20,7 +20,9 @@ const resetCamera = async () => {
   )
 }
 
-onInit().then(async () => {
+const STEP_GAME = "bomb";
+
+onInit(STEP_GAME).then(async () => {
 
   disableMapEditor();
   disableMouseWheel();
@@ -46,7 +48,7 @@ onInit().then(async () => {
 
   const bombSound = WA.sound.loadSound(`${rootLink}/sounds/bomb.mp3`)
   bombSound.play({
-    volume: 0.3,
+    volume: 0.1,
     loop: true,
     rate: 1,
     detune: 1,

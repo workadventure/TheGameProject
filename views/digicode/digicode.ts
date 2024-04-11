@@ -1,10 +1,9 @@
 
 import * as modules from '../../src/modules/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
   let currentCode = ''
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     const urlParams = new URLSearchParams(window.location.search)
     const id = urlParams.get('id')
 
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (validateButton) {
       validateButton.addEventListener('click', () => {
-        modules.digicode.askForCode(id, currentCode)
+        modules.digicode.askForCode(id as string, currentCode)
       })
     }
 

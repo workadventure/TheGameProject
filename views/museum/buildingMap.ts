@@ -3,7 +3,7 @@
 import { onInit } from "../../src/utils/init"
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     const askForDeactivateCamera = (value: string | null) => {
       WA.player.state.askForDeactivateCamera = value ? 'cameraZones/' + value : null
     }

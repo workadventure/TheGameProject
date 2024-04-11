@@ -1,7 +1,6 @@
 
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 const getTitle = (params:string|null) => {
   console.log(params)
@@ -22,7 +21,7 @@ const closeDiscussionWebsite = () => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const title = document.getElementById('title')

@@ -2,7 +2,6 @@
 import * as modules from '../../src/modules/index.js'
 import * as utils from '../../src/utils/index.js'
 import {RemotePlayerInterface} from "@workadventure/iframe-api-typings/front/Api/Iframe/Players/RemotePlayer";
-import { onInit } from '../../src/utils/init.ts';
 
 // Generate players list
 const generatePlayersListButtons = async (element: HTMLElement) => {
@@ -85,7 +84,7 @@ const closePlayersListWebsite = () => {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     // Get HTML elements
     const playerList = document.getElementById('playerList')
     const closeButton = document.getElementById('close')

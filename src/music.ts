@@ -5,8 +5,11 @@ import { sounds, workadventureFeatures } from './modules'
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
+import { saveGameStep } from './utils/firebase';
 
-onInit().then(async () => {
+const STEP_GAME = "music";
+
+onInit(STEP_GAME).then(async () => {
     // Jobs initialisation
     await initiateJob();
 
@@ -19,7 +22,7 @@ onInit().then(async () => {
 
     const caveSound = WA.sound.loadSound(`${rootLink}/sounds/cavewater.mp3`)
     let soundConfig = {
-        volume: 0.3,
+        volume: 0.1,
         loop: true,
         rate: 1,
         detune: 1,
@@ -92,9 +95,10 @@ onInit().then(async () => {
             [
                 ['fa', 'si', 'do', 're', 'mi', 'fa', 're', 'fa', 're', 'fa', 'si', 're', 'si', 'sol', 're', 'si']
             ],
-            () => {
+            async () => {
                 if (enableRedirect) {
                     sounds.playSoundForAll('failureSound')
+                    await saveGameStep(STEP_GAME);
                     WA.nav.goToRoom('./music.tmj')
                 }
             },

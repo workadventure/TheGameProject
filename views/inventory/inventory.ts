@@ -1,10 +1,9 @@
 
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
-import { onInit } from '../../src/utils/init.ts'
 
 document.addEventListener("DOMContentLoaded", () => {
-  onInit().then(async () => {
+  WA.onInit().then(async () => {
     // Get html parts
     const inventoryTitle = document.getElementById('title')
     const inventoryContent = document.getElementById('inventoryContent')

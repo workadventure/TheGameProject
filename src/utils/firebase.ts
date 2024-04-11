@@ -53,4 +53,31 @@ export const getGem = async (gem: string): Promise<{find: boolean}> => {
     return await response.json();
 };
 
+// Save game step of the user in firebase
+export const saveGameStep = async (step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music"): Promise<void> => {
+    const url = `${FIREBASE_URL}/gameStep/${WA.room.id.split('/')[4]}/${WA.player.uuid}.json`;
+    const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({step})
+    });
+    console.log('saveGameStep => res', res);
+};
+
+// Get game step of the user from firebase
+export const getGameStep = async (): Promise<{step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music"}|undefined> => {
+    const url = `${FIREBASE_URL}/gameStep/${WA.room.id.split('/')[4]}/${WA.player.uuid}.json`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
+};
+
 export{};

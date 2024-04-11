@@ -1,9 +1,11 @@
+/// <reference types="@workadventure/iframe-api-typings" />
+
 import { onInit } from "../../src/utils/init";
 import { setArchaeologistJob, unclaimArchaeologistJob } from "../../src/modules/job";
 import { checkAllPlayersGotJob } from "../../src/choice";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await onInit();
+  await WA.onInit();
 
   const acceptedSection = document.getElementById('accepted');
   const askSection = document.getElementById('ask');

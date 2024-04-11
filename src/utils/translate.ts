@@ -1,6 +1,5 @@
 import * as translationFR from '../translations/fr-FR/index'
 import * as translationEN from '../translations/en-US/index'
-import { onInit } from './init'
 
 const acceptedPlayerLanguages = {
     'fr-FR': translationFR,
@@ -11,7 +10,7 @@ const acceptedPlayerLanguages = {
 let playerLanguage = 'fr-FR'
 
 // NOTE : Here playerLanguage is set at the begining but we should perhaps calculate it every time translate function is called in order to manage user changing language on the map ?
-onInit().then(() => {
+WA.onInit().then(() => {
     playerLanguage = WA.player.language
 
     // Default playerLanguage if not in accepted

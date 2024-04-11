@@ -1,3 +1,5 @@
+/// <reference types="@workadventure/iframe-api-typings" />
+
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
 import { onInit } from "../../src/utils/init";
@@ -21,7 +23,7 @@ const getDescription = () => {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await onInit();
+  await WA.onInit();
 
   const acceptedSection = document.getElementById('accepted');
   const askSection = document.getElementById('ask');
