@@ -3,12 +3,10 @@ import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
 
 const getTitle = (params:string|null) => {
-  console.log(params)
   return utils.translations.translate(params)
 }
 
 const getText = (params:string|null) => {
-  console.log(params)
   return utils.translations.translate(params)
 }
 
