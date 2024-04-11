@@ -7,7 +7,7 @@ import * as utils from "./utils";
 import { rootLink } from "./config";
 import { RemotePlayerInterface } from '@workadventure/iframe-api-typings';
 import { onInit } from './utils/init';
-import { saveGameStep } from './utils/firebase';
+import { saveGameStep, saveStartGameTimestamp } from './utils/firebase';
 
 const bannerInviteUser = () => {
     WA.ui.banner.closeBanner();
@@ -210,6 +210,7 @@ onInit(STEP_GAME).then(async () => {
         if(value) {
             choiceSound.stop();
             await saveGameStep(STEP_GAME);
+            saveStartGameTimestamp();
             WA.nav.goToRoom('./museum.tmj');
         }
     });

@@ -15,6 +15,7 @@ import {
 import {env, rootLink} from "./config";
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableScreenSharing } from "./utils/ui";
+import { endStartGameTimestamp } from "./utils/firebase";
 
 const STEP_GAME = "escape";
 
@@ -62,6 +63,9 @@ onInit(STEP_GAME).then(async () => {
                 width: "100vw",
             },
         })
+
+        // save timestamp for finish game
+        endStartGameTimestamp();
     }
 
     if(env === 'dev'){

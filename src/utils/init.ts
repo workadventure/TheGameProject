@@ -2,7 +2,7 @@
 
 import { getGameStep, saveGameStep } from "./firebase";
 
-const GAME_STEPS = ["choice", "museum", "maze", "escape", "treasureEnigma", "bomb", "music"];
+const GAME_STEPS = ["choice", "museum", "maze", "music", "treasureEnigma", "bomb", "escape"];
 
 export const onInit = async (step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music") => {
     await WA.onInit();

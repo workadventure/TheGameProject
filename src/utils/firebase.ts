@@ -80,4 +80,28 @@ export const getGameStep = async (): Promise<{step: "choice" | "museum" | "escap
     return await response.json();
 };
 
+export const saveStartGameTimestamp = async (): Promise<void> => {
+    const url = `${FIREBASE_URL}/startGameTimestamp/${WA.room.id.split('/')[4]}/${WA.player.uuid}.json`;
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({timestamp: Date.now()})
+    });
+};
+
+export const endStartGameTimestamp = async (): Promise<void> => {
+    const url = `${FIREBASE_URL}/startGameTimestamp/${WA.room.id.split('/')[4]}/${WA.player.uuid}.json`;
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({timestamp: Date.now()})
+    });
+};
+
 export{};

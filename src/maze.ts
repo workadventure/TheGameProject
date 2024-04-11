@@ -6,7 +6,7 @@ import * as utils from './utils'
 import {ActionMessage} from "@workadventure/iframe-api-typings";
 import {env, rootLink} from "./config"
 import { onInit } from './utils/init';
-import { getGem, saveGem } from './utils/firebase';
+import { getGem, saveGameStep, saveGem } from './utils/firebase';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 const STEP_GAME = "maze";
@@ -389,6 +389,7 @@ const redFireOn = () => {
 
 const checkIfAllFireIsOn = () => {
     if(WA.state.blueFire && WA.state.redFire && WA.state.greenFire) {
+        saveGameStep(STEP_GAME);
         sounds.playSound('successSound')
         WA.room.showLayer('dragonTopLight')
         WA.room.showLayer('dragonLight')
