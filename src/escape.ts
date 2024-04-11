@@ -80,7 +80,7 @@ onInit(STEP_GAME).then(async () => {
 
     secretPassages.initiateSecretPassages(
         ['secretPassage'],
-        [() => {console.log('secret passage discovered !')}],
+        [() => {console.info('secret passage discovered !')}],
         [
           [
             {x: 38, y: 6},

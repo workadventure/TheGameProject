@@ -56,7 +56,7 @@ export const getGem = async (gem: string): Promise<{find: boolean}> => {
 // Save game step of the user in firebase
 export const saveGameStep = async (step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music"): Promise<void> => {
     const url = `${FIREBASE_URL}/gameStep/${WA.room.id.split('/')[4]}/${WA.player.uuid}.json`;
-    const res = await fetch(url, {
+    await fetch(url, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -64,7 +64,6 @@ export const saveGameStep = async (step: "choice" | "museum" | "escape" | "treas
         },
         body: JSON.stringify({step})
     });
-    console.log('saveGameStep => res', res);
 };
 
 // Get game step of the user from firebase

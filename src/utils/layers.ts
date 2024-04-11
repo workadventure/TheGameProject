@@ -32,7 +32,6 @@ const triggerAnimationWithLayers = async (layers: any, time=300) => {
 }
 
 const getTileCoordinate = (x: number, y: number)=> {
-    console.log('GET TILE COORDINATE', x, y)
     return {
         x: Math.floor(x/32),
         y: Math.floor(y/32),

@@ -46,7 +46,7 @@ export const checkAllPlayersGotJob = () => {
     WA.state.saveVariable('allPlayersGotJob', false);
     const spyPlayer = WA.state.loadVariable(JobPlayerVaraible.spyPlayer) as {name: string, uuid: string} | false;
     const archaeologistPlayer = WA.state.loadVariable(JobPlayerVaraible.archaeologistPlayer) as {name: string, uuid: string} | false;
-    if(spyPlayer != undefined && archaeologistPlayer != undefined) {
+    if(spyPlayer != undefined && spyPlayer != false && archaeologistPlayer != undefined && archaeologistPlayer != false) {
         WA.state.saveVariable('allPlayersGotJob', true);
     }
 }
@@ -180,7 +180,7 @@ onInit(STEP_GAME).then(async () => {
     // Get players
     await WA.players.configureTracking()
     WA.players.onPlayerEnters.subscribe(async (player: RemotePlayerInterface) => {
-        console.log(`Player ${player.name} entered your nearby zone`);
+        console.info(`Player ${player.name} entered your nearby zone`);
         if([...WA.players.list()].length === 1) {
             bannerTheTeamIsComplete();
         }else{
@@ -189,7 +189,7 @@ onInit(STEP_GAME).then(async () => {
     });
 
     WA.players.onPlayerLeaves.subscribe(async (player: RemotePlayerInterface) => {
-        console.log(`Player ${player.name} leave your nearby zone`);
+        console.info(`Player ${player.name} leave your nearby zone`);
         if([...WA.players.list()].length === 1) {
             bannerTheTeamIsComplete();
         }else{

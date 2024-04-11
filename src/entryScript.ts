@@ -10,22 +10,21 @@ WA.onInit().then(() => {
     disableMouseWheel();
     disableScreenSharing();
 
-    console.log('INITIALISATION')
+    console.info('INITIALISATION')
     job.initiateJob()
 
-    console.log('HERE')
-    excavations.initiateExcavations(['excavation'], [() => {console.log('test callback after excavation')}])
-    secretPassages.initiateSecretPassages(['secretPassage'], [() => {console.log('test callback after finding secret passage')}])
+    excavations.initiateExcavations(['excavation'], [() => {console.info('test callback after excavation')}])
+    secretPassages.initiateSecretPassages(['secretPassage'], [() => {console.info('test callback after finding secret passage')}])
     hiddenZone.initiateHiddenZones([{stepIn: 'hiddenZoneFloor', hide: 'hiddenZoneTop'}])
 
-    console.log('Initiate switching tiles')
-    switchingTiles.setSwitchingTile('switchingTiles', () => console.log('OK !'), true, 'test')
+    console.info('Initiate switching tiles')
+    switchingTiles.setSwitchingTile('switchingTiles', () => console.info('OK !'), true, 'test')
 
-    console.log('Initiate runes reading !')
+    console.info('Initiate runes reading !')
     readRunes.initiateRunesReading()
     readRunes.setRunesReadingZone('runeZone', {content : 'Il était une fois, dans une royaume lointain, une magnifique princesse. Il était une fois, dans une royaume lointain, une magnifique princesse. Il était une fois, dans une royaume lointain, une magnifique princesse. Il était une fois, dans une royaume lointain, une magnifique princesse. Il était une fois, dans une royaume lointain, une magnifique princesse. Il était une fois, dans une royaume lointain, une magnifique princesse. ', title: 'Cendrillon'})
 
-    console.log('Initiate inventory !')
+    console.info('Initiate inventory !')
     inventory.initiateInventory()
     inventory.addToInventory({
         id: 'test',
@@ -39,17 +38,17 @@ WA.onInit().then(() => {
         description: 'Ma super description de test2'
     })
 
-    console.log('Initiate Hooking')
-    hooking.setHooking('hooking', () => { console.log('Crochetage effectué !')})
+    console.info('Initiate Hooking')
+    hooking.setHooking('hooking', () => { console.info('Crochetage effectué !')})
 
-    console.log('NOTIFY')
+    console.info('NOTIFY')
     notifications.notify('Ceci est le contenu de ma notification d\'info', 'Mon super titre', 'info')
     setTimeout(() => {
         notifications.notify('Ceci est le contenu de ma notification d\'erreur', 'Erreur', 'error')
     }, 1000)
 
-    console.log('ARRAY FILLING')
-    arrayFilling.setArrayFilling('test', [['test', 'test', 'test']], () => console.log('WRONG'), () => console.log('RIGHT'))
+    console.info('ARRAY FILLING')
+    arrayFilling.setArrayFilling('test', [['test', 'test', 'test']], () => console.info('WRONG'), () => console.info('RIGHT'))
     arrayFilling.testArrayFilling('test', 'test')
     arrayFilling.testArrayFilling('test', 'test2')
 
@@ -57,15 +56,15 @@ WA.onInit().then(() => {
     arrayFilling.testArrayFilling('test', 'test')
     arrayFilling.testArrayFilling('test', 'test2')
 
-    console.log('HERE')
+    console.info('HERE')
     arrayFilling.testArrayFilling('test', 'test')
     arrayFilling.testArrayFilling('test', 'test')
     arrayFilling.testArrayFilling('test', 'test')
 
-    console.log('JAMBON')
+    console.info('JAMBON')
     arrayFilling.testArrayFilling('test', 'jambon')
 
-    console.log('LOBBY INITIALISATION')
+    console.info('LOBBY INITIALISATION')
     lobby.initiateLobby()
 }).catch(e => console.error(e))
 

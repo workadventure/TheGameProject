@@ -69,9 +69,7 @@ const setSypJob = () => {
 
   // Reset play archaelogist job if the player has it
   const archaeologistPlayer = WA.state.loadVariable(JobPlayerVaraible.archaeologistPlayer) as JobPlayer
-  console.log('archaeologistPlayer', archaeologistPlayer);
   const spyPlayer = WA.state.loadVariable(JobPlayerVaraible.spyPlayer) as JobPlayer;
-  console.log('spyPlayer', spyPlayer);
 
   if(archaeologistPlayer == undefined || (archaeologistPlayer !== false && archaeologistPlayer.uuid === WA.player.uuid))
     WA.state.saveVariable(JobPlayerVaraible.archaeologistPlayer, false);
@@ -204,7 +202,7 @@ const initiateJob = async () => {
 
   WA.player.state.onVariableChange(JOB_VARIABLE).subscribe((value) => {
     if (value) {
-      console.log(utils.translations.translate('modules.job.jobChanged', {
+      console.info(utils.translations.translate('modules.job.jobChanged', {
         job: utils.translations.translate(`modules.job.jobs.${value}`)
       }))
       showJobWallet();

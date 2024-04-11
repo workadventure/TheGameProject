@@ -67,7 +67,6 @@ onInit(STEP_GAME).then(async () => {
 
     // Check if the map has been retrieved
     WA.state.onVariableChange('mapRetrieved').subscribe((value) => {
-        console.log('WA.state.onVariableChange("mapRetrieved") => value', value);
         if(!value)return;
         endOfTheRoom(electroLow);
     });

@@ -173,7 +173,6 @@ onInit(STEP_GAME).then( async () => {
 
 
     WA.player.state.onVariableChange("hasFoundRedSeed").subscribe(()=> {
-        console.log('todo')
     });
 
     WA.player.state.onVariableChange("hasFoundGreenSeed").subscribe(()=> {
@@ -196,7 +195,7 @@ onInit(STEP_GAME).then( async () => {
     excavations.initiateExcavations(
         ['excavations/exca1', 'excavations/exca2', 'excavations/exca3', 'excavations/exca4', 'excavations/exca5'], // List of your excavationGroups names
         [() => {
-            console.log('Excavation has been made !')} // List of callbacks for your excavationGroups
+            console.info('Excavation has been made !')} // List of callbacks for your excavationGroups
     ])
 
     let findSeed: ActionMessage|null = null

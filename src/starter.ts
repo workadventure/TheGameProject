@@ -62,7 +62,7 @@ WA.onInit().then(() => {
     let players: Array<string> = []
     WA.state.onVariableChange('playersInSelectionZone').subscribe((value) => {
       if (value) {
-        console.log('NEW PLAYER', value)
+        console.info('NEW PLAYER', value)
         players.push(value as string)
       }
     })
@@ -116,7 +116,6 @@ WA.onInit().then(() => {
 
   // On enter selection zone
   WA.room.onEnterLayer('selection_zone').subscribe(async () => {
-    console.log('WA.player.uuid', WA.player.uuid);
     if (!(WA.player.uuid as string).match(emailRegex)) {
       WA.controls.disablePlayerControls()
       await WA.player.moveTo(5*32, 15*32)

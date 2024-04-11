@@ -102,7 +102,7 @@ onInit(STEP_GAME).then(async () => {
   // secret passages initialisation
   secretPassages.initiateSecretPassages(
     ['secretPassage'],
-    [() => {console.log('secret passage discovered !')}
+    [() => {console.info('secret passage discovered !')}
   ]);
 
   // FREE SPY ACTION

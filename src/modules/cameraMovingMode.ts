@@ -95,7 +95,6 @@ const moveTo = (x: number, y: number) => {
 
 let cameraMovingWebsite: UIWebsite|null = null
 const openCameraMovingWebsite = async () => {
-  console.log('OPEN WEBSITE')
   /*cameraMovingWebsite = await WA.ui.website.open({
     url: `${rootLink}/views/cameraMoving/cameraMoving.html`,
     allowApi: true,
