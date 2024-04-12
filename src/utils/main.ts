@@ -9,7 +9,12 @@ const selectRandomItemInArray = (array: Array<unknown>) => {
     return array[random]
 }
 
+const myGameName = () : string => {
+    return WA.room.id.split('/')[4];
+};
+
 export {
     wait,
-    selectRandomItemInArray
+    selectRandomItemInArray,
+    myGameName
 }

@@ -53,6 +53,24 @@ export const checkAllPlayersGotJob = () => {
 
 const STEP_GAME = "choice";
 
+let rankingModalIsOpened = false;
+const openRankingModal = async () => {
+    WA.ui.modal.openModal({
+        allowApi: true,
+        position: "center",
+        allow: "fullscreen",
+        title: "ranking",
+        src : `${rootLink}/views/ranking/ranking.html`,
+    }, () => {
+        rankingModalIsOpened = false;
+    });
+    rankingModalIsOpened = true;
+};
+const closeRankingModal = async () => {
+    WA.ui.modal.closeModal();
+    rankingModalIsOpened = false;
+};
+
 // Waiting for the API to be ready
 onInit(STEP_GAME).then(async () => {
 
@@ -81,7 +99,15 @@ onInit(STEP_GAME).then(async () => {
     // Display scenario
     discussion.openDiscussionWebsite(
       'utils.voiceOver',
-      'choice.scenario'
+      'choice.scenario',
+      undefined,
+      undefined,
+      () => {
+            console.log('Discussion closed')
+            setTimeout(() => {
+                openRankingModal();
+            }, 1000);
+        }
     )
 
     // Talk to the NPC
@@ -224,6 +250,34 @@ onInit(STEP_GAME).then(async () => {
         console.info('onVariableChange => archaeologistPlayer', value);
         bannerTheTeamIsComplete();
     });
+
+    // Add ranking button
+    WA.ui.actionBar.addButton({
+        id: "ranking",
+        label: utils.translations.translate('modules.job.myJobWallet.label'),
+        callback: async () => {
+            WA.ui.modal.openModal({
+                allowApi: true,
+                position: "center",
+                allow: "fullscreen",
+                title: "ranking",
+                src : `${rootLink}/views/ranking/ranking.html`,
+            });
+        }
+    });
+    WA.ui.actionBar.addButton({
+        id: 'ranking',
+        type: 'action',
+        imageSrc: `${rootLink}/images/ranking/ranking.svg`,
+        toolTip: utils.translations.translate('views.ranking.start.title'),
+        callback: async () => {
+          if (!rankingModalIsOpened) {
+            await openRankingModal()
+          } else {
+            closeRankingModal()
+          }
+        }
+      });
 
 }).catch(e => console.error(e))
 
