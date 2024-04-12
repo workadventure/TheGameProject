@@ -1,1 +1,0 @@
-const r=o=>{for(let e=0;e<o.length;e++)WA.room.onEnterLayer(o[e].stepIn).subscribe(()=>{console.log("caché"),WA.room.hideLayer(o[e].hide)}),WA.room.onLeaveLayer(o[e].stepIn).subscribe(()=>{console.log("pas caché"),WA.room.showLayer(o[e].hide)})};export{r as i};

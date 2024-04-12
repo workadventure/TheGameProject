@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="title" content="My job wallet">
+
+    <title>Ranking</title>
+    
+    <style lang="scss">
+        body, main{
+            width: 100vw;
+            height: 100vh!important;
+            padding: 0;
+            margin: 0;
+        }
+        .ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow-y: auto!important;
+        }
+        .rank{
+            padding: 16px;
+            background-color: #7d7d84e3;
+            border-radius: 14px;
+            min-width: 170px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.1);
+            }
+            &#myGame{
+                background-color: #95defd;
+                color: #000;
+            }
+        }
+    </style>
+
+    
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    
+  <script type="module" crossorigin src="../../assets/view_ranking-7df87fb5.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/main-531b8551.js">
+  <link rel="modulepreload" crossorigin href="../../assets/firebase-a8cde200.js">
+  <link rel="modulepreload" crossorigin href="../../assets/translate-df78904b.js">
+  <link rel="stylesheet" href="../../assets/main-83c918d8.css">
+</head>
+<main class="bg-main d-flex align-items-center hidden align-items-center justify-content-center text-white">
+    <h1 id="title">
+        Félicitation 🏆
+    </h1>
+    <div id="ranking" class="ranking">
+    </div>
+</main>
+</body>
+</html>

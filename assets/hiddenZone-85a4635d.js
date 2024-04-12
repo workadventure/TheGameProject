@@ -1,0 +1,1 @@
+const i=r=>{for(let e=0;e<r.length;e++){const a=r[e].hide,o=`${r[e].stepIn.replace("eyes/","")}Activated`,t=r[e].stepIn;WA.state.onVariableChange(o).subscribe(s=>{s===!0?WA.room.hideLayer(a):WA.room.showLayer(a)}),WA.room.onEnterLayer(t).subscribe(()=>{WA.room.hideLayer(a),WA.state[o]=!0}),WA.room.onLeaveLayer(t).subscribe(()=>{WA.room.showLayer(a),WA.state[o]=!1})}};export{i};

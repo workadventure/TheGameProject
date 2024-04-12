@@ -1,0 +1,1 @@
+const e=()=>{window.parent.postMessage({type:"disableWheelZoom"},"*")},s=()=>{window.parent.postMessage({type:"disableMapEditor"},"*")},a=()=>{window.parent.postMessage({type:"disableScreenSharing"},"*")};export{e as a,a as b,s as d};
