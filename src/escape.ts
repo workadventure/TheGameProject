@@ -16,6 +16,7 @@ import {env, rootLink} from "./config";
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableScreenSharing } from "./utils/ui";
 import { endStartGameTimestamp } from "./utils/firebase";
+import { addRankingButton } from "./utils/ranking";
 
 const STEP_GAME = "escape";
 
@@ -66,6 +67,9 @@ onInit(STEP_GAME).then(async () => {
 
         // save timestamp for finish game
         endStartGameTimestamp();
+
+        // Add ranking button
+        addRankingButton();
     }
 
     if(env === 'dev'){
