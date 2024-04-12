@@ -7,7 +7,6 @@ bootstrapExtra();
 import * as utils from "./utils";
 import { discussion } from './modules'
 import {rootLink} from "./config";
-import { onInit } from "./utils/init";
 
 const shuffle: (array: Array<unknown>) => Array<unknown> = (array: Array<unknown>) => {
   let currentIndex = array.length,  randomIndex;

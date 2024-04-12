@@ -1,7 +1,7 @@
 // Lobby initialisation : must be called in main.ts only
 import { rootLink } from "../config";
 
-import {RemotePlayerInterface, PlayerVariableChanged} from "@workadventure/iframe-api-typings";
+import {RemotePlayerInterface} from "@workadventure/iframe-api-typings";
 import {UIWebsite} from "@workadventure/iframe-api-typings";
 
 const initiateLobby = async () => {
@@ -13,7 +13,7 @@ const initiateLobby = async () => {
   await WA.players.configureTracking()
 
   // Receive invitations from other players
-  WA.players.onVariableChange('isInviting').subscribe((event: PlayerVariableChanged) => {
+  WA.players.onVariableChange('isInviting').subscribe((event: any) => {
     if (event.value === WA.player.uuid) { // Works better than player id, but player MUST be logged
       console.info('vous avez été invité par :' + event.player.name)
       WA.player.state.hasBeenInvited = event.value
@@ -22,7 +22,7 @@ const initiateLobby = async () => {
   })
 
   // Receive invitation refuse from other players
-  WA.players.onVariableChange('hasBeenInvited').subscribe((event: PlayerVariableChanged) => {
+  WA.players.onVariableChange('hasBeenInvited').subscribe((event: any) => {
     if (!event.value && WA.player.state.isInviting === event.player.uuid) { // Works better than player id, but player MUST be logged
       console.info(event.player.name + 'a refusé votre invitation')
       WA.player.state.isInviting = null // Reset is inviting so that other users can invite current
@@ -31,7 +31,7 @@ const initiateLobby = async () => {
   })
 
   // Receive invitation cancel from invitor
-  WA.players.onVariableChange('isInviting').subscribe((event: PlayerVariableChanged) => {
+  WA.players.onVariableChange('isInviting').subscribe((event: any) => {
     if (!event.value && WA.player.state.hasBeenInvited === event.player.uuid) { // Works better than player id, but player MUST be logged
       console.info(event.player.name + 'a annulé son invitation') // TODO : visual notification module
       WA.player.state.hasBeenInvited = null // Reset so that other users can invite current
@@ -41,7 +41,7 @@ const initiateLobby = async () => {
   })
 
   // Receive invitation acceptation
-  WA.players.onVariableChange('hasAcceptedInvitation').subscribe((event: PlayerVariableChanged) => {
+  WA.players.onVariableChange('hasAcceptedInvitation').subscribe((event: any) => {
     console.info('Someone accepted en invitation', event.player.uuid)
     if (event.value === WA.player.uuid) { // Works better than player id, but player MUST be logged
       openYouAreGoingToBeRedirectedWebsite()

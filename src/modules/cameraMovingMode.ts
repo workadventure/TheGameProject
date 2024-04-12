@@ -1,7 +1,6 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import {Position} from "@workadventure/iframe-api-typings/front/Api/Iframe/player";
-import {UIWebsite} from "@workadventure/iframe-api-typings";
+import {UIWebsite, Position} from "@workadventure/iframe-api-typings";
 
 type directionType = 'right' | 'left' | 'down' | 'up'
 
