@@ -100,7 +100,7 @@ const renderRanking = (ranking: Array<[string, number]>, myGameName?: string) =>
         const timeString = `${timeInMinutes}min ${timeInSeconds}s`;
         const p = document.createElement('p');
         p.classList.add('rank');
-        p.textContent = `#${index + 1} ${gameName} : ${timeString}`;
+        p.textContent = `#${index + 1} ${atob(gameName)} : ${timeString}`;
         rankingElement?.appendChild(p);
 
         myIndexNameShowed = myIndexNameShowed || gameName === myGameName;

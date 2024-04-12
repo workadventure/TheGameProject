@@ -3,7 +3,7 @@
 import {rootLink} from "../config";
 import {UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from '../utils/index'
-import { notifications, sounds } from '../modules/index'
+import { inventory, notifications, sounds } from '../modules/index'
 
 export type InventoryItem = {
   id: string,
@@ -59,7 +59,11 @@ const addToInventory = (item: InventoryItem) => {
         'modules.inventory.objectTaken',
         {
           object: utils.translations.translate(item.name)
-        }), null, 'success')
+        }), null, 'success');
+        setTimeout(() => {
+          // open inventory
+          inventory.openInventory()
+        }, 500);
       return true
     } else {
       notifications.notify('modules.inventory.cannotTakeThis', null, 'error')

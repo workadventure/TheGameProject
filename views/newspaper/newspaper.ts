@@ -1,5 +1,6 @@
 
 import * as utils from '../../src/utils/index.js'
+import { openRankingModal } from '../../src/utils/ranking';
 
 document.addEventListener("DOMContentLoaded", () => {
   WA.onInit().then(async () => {
@@ -7,8 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     const date = document.getElementById('date');
-
-    console.log('WA.player', utils.translations);
+    const rankingButton = document.getElementById('ranking');
 
     if (content) {
       content.innerText = utils.translations.translate('views.newspaper.text');
@@ -27,5 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (date) {
       date.innerText = new Date().toDateString()
     }
+
+    rankingButton?.addEventListener('click', async () => {
+      openRankingModal();
+    });
   })
 })
