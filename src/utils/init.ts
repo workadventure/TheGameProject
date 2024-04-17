@@ -7,6 +7,10 @@ const GAME_STEPS = ["choice", "museum", "maze", "music", "treasureEnigma", "bomb
 export const onInit = async (step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music") => {
     await WA.onInit();
 
+    // Disable the webcam
+    WA.controls.disableWebcam();
+    // Disable the microphone
+    WA.controls.disableMicrophone();
     // Initialise the game control for the experience
     // @ts-ignore
     WA.controls.disableInviteButton();

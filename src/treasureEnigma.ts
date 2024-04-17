@@ -20,14 +20,13 @@ onInit(STEP_GAME).then(async () => {
   const treasureSound = WA.sound.loadSound(`${rootLink}/sounds/treasure.mp3`)
   let soundConfig = {
     volume: 0.1,
-    loop: true,
+    loop: false,
     rate: 1,
     detune: 1,
     delay: 0,
     seek: 0,
     mute: false
   }
-
   treasureSound.play(soundConfig)
 
   // Initialize sounds

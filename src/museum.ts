@@ -46,7 +46,7 @@ onInit(STEP_GAME).then(async () => {
     const electroLow = WA.sound.loadSound(`${rootLink}/sounds/electroLow.mp3`)
     let soundConfigLow = {
         volume: 0.1,
-        loop: true,
+        loop: false,
         rate: 1,
         detune: 1,
         delay: 0,
@@ -55,7 +55,7 @@ onInit(STEP_GAME).then(async () => {
     }
     let soundConfig = {
         volume: 0.1,
-        loop: true,
+        loop: false,
         rate: 1,
         detune: 1,
         delay: 0,

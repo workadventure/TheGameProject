@@ -138,7 +138,7 @@ onInit(STEP_GAME).then( async () => {
     const forestSound = WA.sound.loadSound(`${rootLink}/sounds/forest.mp3`)
     let soundConfig = {
         volume: 0.1,
-        loop: true,
+        loop: false,
         rate: 1,
         detune: 1,
         delay: 0,

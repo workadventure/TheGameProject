@@ -28,7 +28,7 @@ onInit(STEP_GAME).then(async () => {
     const cave = WA.sound.loadSound(`${rootLink}/sounds/cavedark.mp3`)
     cave.play({
         volume: 0.1,
-        loop: true,
+        loop: false,
         rate: 1,
         detune: 1,
         delay: 0,

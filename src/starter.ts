@@ -43,7 +43,7 @@ WA.onInit().then(() => {
   const starterSound = WA.sound.loadSound(`${rootLink}/sounds/starter.mp3`)
   let soundConfig = {
     volume: 0.1,
-    loop: true,
+    loop: false,
     rate: 1,
     detune: 1,
     delay: 0,

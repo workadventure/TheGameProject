@@ -23,7 +23,7 @@ onInit(STEP_GAME).then(async () => {
     const caveSound = WA.sound.loadSound(`${rootLink}/sounds/cavewater.mp3`)
     let soundConfig = {
         volume: 0.1,
-        loop: true,
+        loop: false,
         rate: 1,
         detune: 1,
         delay: 0,

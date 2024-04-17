@@ -49,7 +49,7 @@ onInit(STEP_GAME).then(async () => {
   const bombSound = WA.sound.loadSound(`${rootLink}/sounds/bomb.mp3`)
   bombSound.play({
     volume: 0.1,
-    loop: true,
+    loop: false,
     rate: 1,
     detune: 1,
     delay: 0,
