@@ -1,0 +1,1 @@
+import{b as r}from"./init-e2054226.js";import"./translate-da45fed2.js";import"./sounds-fa9583ac.js";import"./config-adf52b6e.js";r();WA.onInit().then(()=>{const o=WA.room.id;WA.nav.goToRoom(o.replace("starter","choice"))});
