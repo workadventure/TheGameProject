@@ -1,5 +1,5 @@
 export default {
-    go: 'GO !',
+    go: 'GO!',
     doorClosed : "This door seems to be locked",
     search : "To rummage",
     idCardTitle: "Identity card",
@@ -10,7 +10,7 @@ export default {
     pickpocketEmpty: "mmmh... no, nothing interresting",
     accessCard: "Golden key",
     accessCardDescription: "Golden key that looks very important",
-    desktopOpenMsg: "*Clic clac* that's opened !",
+    desktopOpenMsg: "*Clic clac* that's opened!",
     desktopOpen: "Try the golden key",
     desktopItems0: "A book that looks interesting",
     desktopItems1: "I think I know this person... ah! it's a mirror",
