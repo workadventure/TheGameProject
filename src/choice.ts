@@ -72,20 +72,6 @@ onInit(STEP_GAME).then(async () => {
     // Hide pricing
     workadventureFeatures.hidePricingButton();
 
-    // Display scenario
-    discussion.openDiscussionWebsite(
-      titleEnum.voiceOver,
-      'choice.scenario',
-      undefined,
-      undefined,
-      () => {
-            console.log('Discussion closed')
-            setTimeout(() => {
-                openRankingModal();
-            }, 1000);
-        }
-    )
-
     // Talk to the NPC
     let messageSent = false;
     WA.room.onEnterLayer('talk').subscribe(() => {
@@ -199,13 +185,6 @@ onInit(STEP_GAME).then(async () => {
         }
     });
 
-    const list = WA.players.list()
-    if([...list].length === 1) {
-        bannerTheTeamIsComplete();
-    }else{
-        bannerInviteUser();   
-    }
-
     // When all players have a job, send them to next map
     WA.state.onVariableChange('allPlayersGotJob').subscribe(async (value) => {
         bannerTheTeamIsComplete();
@@ -226,6 +205,34 @@ onInit(STEP_GAME).then(async () => {
     WA.state.onVariableChange(JobPlayerVaraible.archaeologistPlayer).subscribe((value) => {
         console.info('onVariableChange => archaeologistPlayer', value);
         bannerTheTeamIsComplete();
+    });
+
+    WA.player.state.playingModeSelected = false;
+    WA.player.state.onVariableChange('playingModeSelected').subscribe((value) => {
+        console.log('onVariableChange => playingModeSelected', value);
+        if(!value) return;
+        // Display scenario
+        discussion.openDiscussionWebsite(
+            titleEnum.voiceOver,
+            'choice.scenario',
+            undefined,
+            undefined,
+            () => {
+                console.log('Discussion closed')
+                setTimeout(() => {
+                    openRankingModal();
+                }, 500);
+            }
+        );
+
+        setTimeout(() => {
+            const list = WA.players.list()
+            if([...list].length === 1) {
+                bannerTheTeamIsComplete();
+            }else{
+                bannerInviteUser();   
+            }
+        }, 50000);
     });
 
 }).catch(e => console.error(e))

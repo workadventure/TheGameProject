@@ -1,6 +1,8 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import { getGameStep, saveGameStep } from "./firebase";
+import { CoWebsite } from "@workadventure/iframe-api-typings";
+import { rootLink } from "../config";
+import { getChoiceInFirebase, getGameStep, saveGameStep } from "./firebase";
 
 const GAME_STEPS = ["choice", "museum", "maze", "music", "treasureEnigma", "bomb", "escape"];
 
@@ -28,6 +30,25 @@ export const onInit = async (step: "choice" | "museum" | "escape" | "treasureEni
     // Check the last finish game by user
     const currentStepGameRes = await getGameStep();
     console.info('Your current step in the game is: ', currentStepGameRes?.step);
+
+    // Check playing choice for the game
+    const playingChoice = await getChoiceInFirebase();
+    const cowebsites = await WA.nav.getCoWebSites();
+
+    if(playingChoice == undefined || playingChoice.choice == undefined){
+        // Open the modal for the playing choice
+        WA.ui.modal.openModal({
+            allowApi: true,
+            position: "center",
+            allow: "fullscreen",
+            title: "become spy",
+            src : `${rootLink}/views/playing/playing.html`,
+        });
+    }
+    if(playingChoice?.choice == 'onlive'){
+        // Close the jitsi cowebsite
+        closeJitsiCoWebSite(cowebsites);
+    }
     
     // Check if the user is already in the step
     if(currentStepGameRes?.step == step) return;
@@ -59,3 +80,10 @@ export const onInit = async (step: "choice" | "museum" | "escape" | "treasureEni
         await saveGameStep(step);
     }
 }
+
+const closeJitsiCoWebSite = (cowebsites: CoWebsite[]) => {
+    // Close the jitsi layer
+    cowebsites.forEach((cowebsite: CoWebsite) => {
+        cowebsite.close();
+    });
+};
