@@ -1,36 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
-import {ActionMessage} from "@workadventure/iframe-api-typings";
 bootstrapExtra();
-
-import * as utils from "./utils";
-import { discussionv2 as discussion } from './modules'
-import {rootLink} from "./config";
-
-const shuffle: (array: Array<unknown>) => Array<unknown> = (array: Array<unknown>) => {
-  let currentIndex = array.length,  randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex > 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-
-  return array;
-}
-
-const hash = (message: string) => {
-  return window.btoa(message)
-}
-
-const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 
 WA.onInit().then(() => {
 
