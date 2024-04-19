@@ -237,6 +237,16 @@ const getUserPermissions = () => {
   return null
 }
 
+// Function to determine if all players already have a job
+const checkAllPlayersGotJob = () => {
+  WA.state.saveVariable('allPlayersGotJob', false);
+  const spyPlayer = WA.state.loadVariable(JobPlayerVaraible.spyPlayer) as {name: string, uuid: string} | false;
+  const archaeologistPlayer = WA.state.loadVariable(JobPlayerVaraible.archaeologistPlayer) as {name: string, uuid: string} | false;
+  if(spyPlayer != undefined && spyPlayer != false && archaeologistPlayer != undefined && archaeologistPlayer != false) {
+      WA.state.saveVariable('allPlayersGotJob', true);
+  }
+}
+
 export {
   initiateJob,
   setPlayerJob,
@@ -248,5 +258,6 @@ export {
   setSypJob,
   setArchaeologistJob,
   unclaimSpyJob,
-  unclaimArchaeologistJob
+  unclaimArchaeologistJob,
+  checkAllPlayersGotJob
 }

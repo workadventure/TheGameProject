@@ -72,11 +72,13 @@ WA.onInit().then(() => {
     let currentValue = JSON.parse(value as string)
     Object.keys(currentValue).forEach((key) => {
        if (oldValue[key] !== currentValue[key]) {
-         if (currentValue[key] !== null) {
-           callbacks[key](currentValue[key])
-         } else {
-           callbacks[key]()
-         }
+          try{
+          if (currentValue[key] !== null) {
+            callbacks[key](currentValue[key])
+          } else {
+            callbacks[key]()
+          }
+          }catch(e){}
          oldValue[key] = currentValue[key]
        }
     })

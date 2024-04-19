@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="title" content="My job wallet">
+
+    <title>Orientation Choice</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <script src="discussion.ts" type="module"></script>
+</head>
+    <body style="max-height: 110px; overflow: hidden;">
+        <div style="
+                background: black; 
+                color: white;
+                display: grid;
+                grid-template-columns: 150px 1fr 150px;
+                overflow: hidden;
+                height: 100%;
+                flex-direction: column;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                border-radius: 14px;
+                border: solid 2px black;
+            "
+            >
+            <div style="border: solid 1px white; border-radius: 14px; height: fit-content; width: fit-content; display: flex; align-items: center; justify-content: center; padding: 10px;">
+                <img id="avatar" width="80px" src="/images/discussions/content.png" />
+            </div>
+            <div style=" padding: 10px; font-size: 16px; max-height: 80px; overflow: scroll;">
+                <p id="title" style="font-style: italic; font-size: 12px; margin: 0px;">Voix OFF:</p>
+                <p id="text" style="margin: 0px;">Bienvenue dans la nouvelle partie, l'archéologue est un rôle majeur dans ce jeu d\'évasion. Prépare-toi et attends ton collègue pour commencer la partie.</p>
+            </div>
+            <div class="text-align-right" style="display: flex; justify-content: center;">
+                <button class="btn cursor-pointer" 
+                    id="closeButton"
+                    style="
+                        background: none;
+                        border: solid 1px white;
+                        border-radius: 12px;
+                        color: white;
+                        padding: 14px 28px;
+                        height: fit-content;
+                    "
+                >
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </body>
+</html>

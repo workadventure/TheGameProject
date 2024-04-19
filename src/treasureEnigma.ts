@@ -1,4 +1,4 @@
-import { readRunes, inventory, switchingTiles, actionForAllPlayers, discussion, notifications, sounds } from './modules'
+import { readRunes, inventory, switchingTiles, actionForAllPlayers, discussionv2 as discussion, notifications, sounds } from './modules'
 import * as utils from './utils'
 import {ActionMessage} from "@workadventure/iframe-api-typings";
 import {getPlayerJob, initiateJob} from "./modules/job";
@@ -6,6 +6,7 @@ import {rootLink} from "./config";
 import { onInit } from './utils/init';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 import { saveGameStep } from './utils/firebase';
+import { titleEnum } from './modules/discussionv2';
 
 const STEP_GAME = "treasureEnigma";
 
@@ -183,7 +184,7 @@ onInit(STEP_GAME).then(async () => {
   setTimeout(() => {
     // Bad guy monologue
     discussion.openDiscussionWebsite(
-      'treasureEnigma.badGuy.name',
+      titleEnum.badGuy,
       'treasureEnigma.badGuy.monologue',
       'views.choice.close',
       "discussion",
@@ -214,4 +215,6 @@ onInit(STEP_GAME).then(async () => {
     treasureActionMessage?.remove()
     treasureActionMessage = null
   })
-})
+});
+
+export{};

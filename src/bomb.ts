@@ -1,11 +1,12 @@
 import {ActionMessage, UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "./config";
 import {initiateJob, getPlayerJob, setPlayerJob, Job} from "./modules/job";
-import { actionForAllPlayers, discussion, notifications, secretPassages, sounds, workadventureFeatures } from './modules'
+import { actionForAllPlayers, discussionv2 as discussion, notifications, secretPassages, sounds, workadventureFeatures } from './modules'
 import * as utils from './utils'
 import {env} from "./config"
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from "./utils/ui";
+import { titleEnum } from "./modules/discussionv2";
 
 let bombWebsite:UIWebsite|null = null
 let cheatSheetWebsite:UIWebsite|null = null
@@ -68,8 +69,8 @@ onInit(STEP_GAME).then(async () => {
   const myJob = await getPlayerJob();
   // Speech at arriving
   discussion.openDiscussionWebsite(
-    utils.translations.translate('utils.mySelf'),
-    utils.translations.translate(`bomb.story.${myJob}`),
+    titleEnum.mySelf,
+    `bomb.story.${myJob}`,
     'views.choice.close',
     "discussion",
     () => {
@@ -127,8 +128,8 @@ onInit(STEP_GAME).then(async () => {
       WA.ui.actionBar.removeButton('cheatSheetButton');
       sounds.playSound('evilGuySound');
       discussion.openDiscussionWebsite(
-        utils.translations.translate('bomb.bomb.failure.name'),
-        utils.translations.translate('bomb.bomb.failure.message'),
+        titleEnum.bombFailure,
+        'bomb.bomb.failure.message',
         'views.choice.close',
         "discussion",
         async () => {
@@ -187,8 +188,8 @@ onInit(STEP_GAME).then(async () => {
     // If bomb has not been defused, cannot free spy
     if (!actionForAllPlayers.hasBeenTriggered('boom') && !actionForAllPlayers.hasBeenTriggered('defuseBomb')) {
       discussion.openDiscussionWebsite(
-        utils.translations.translate('utils.mySelf'),
-        utils.translations.translate('bomb.freeSpy.noTime'),
+        titleEnum.mySelf,
+        'bomb.freeSpy.noTime',
         'views.choice.close',
         "discussion",
       )
@@ -291,3 +292,5 @@ const closeBombWebsite = () => {
   }
   WA.controls.restorePlayerControls();
 }
+
+export {};

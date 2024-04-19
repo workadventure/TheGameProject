@@ -1,14 +1,15 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { ActionMessage } from '@workadventure/iframe-api-typings';
-import { discussion, inventory, workadventureFeatures } from './modules'
-import { JobPlayerVaraible, initiateJob } from "./modules/job";
+import { discussionv2 as discussion, inventory, workadventureFeatures } from './modules'
+import { JobPlayerVaraible, checkAllPlayersGotJob, initiateJob } from "./modules/job";
 import * as utils from "./utils";
 import { rootLink } from "./config";
 import { RemotePlayerInterface } from '@workadventure/iframe-api-typings';
 import { onInit } from './utils/init';
 import { saveGameStep, saveStartGameTimestamp } from './utils/firebase';
 import { openRankingModal } from './utils/ranking';
+import { titleEnum } from './modules/discussionv2';
 
 const bannerInviteUser = () => {
     WA.ui.banner.closeBanner();
@@ -42,16 +43,6 @@ const bannerTheTeamIsComplete = () => {
     });
 };
 
-// Function to determine if all players already have a job
-export const checkAllPlayersGotJob = () => {
-    WA.state.saveVariable('allPlayersGotJob', false);
-    const spyPlayer = WA.state.loadVariable(JobPlayerVaraible.spyPlayer) as {name: string, uuid: string} | false;
-    const archaeologistPlayer = WA.state.loadVariable(JobPlayerVaraible.archaeologistPlayer) as {name: string, uuid: string} | false;
-    if(spyPlayer != undefined && spyPlayer != false && archaeologistPlayer != undefined && archaeologistPlayer != false) {
-        WA.state.saveVariable('allPlayersGotJob', true);
-    }
-}
-
 const STEP_GAME = "choice";
 
 
@@ -83,7 +74,7 @@ onInit(STEP_GAME).then(async () => {
 
     // Display scenario
     discussion.openDiscussionWebsite(
-      'utils.voiceOver',
+      titleEnum.voiceOver,
       'choice.scenario',
       undefined,
       undefined,
@@ -222,6 +213,7 @@ onInit(STEP_GAME).then(async () => {
             choiceSound.stop();
             await saveGameStep(STEP_GAME);
             saveStartGameTimestamp();
+            WA.ui.modal.closeModal();
             WA.nav.goToRoom('./museum.tmj');
         }
     });

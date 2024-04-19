@@ -17,7 +17,7 @@ export default {
     wrong: 'FAUX : - {number} secondes',
     failure: {
       name: 'Micro dans la bombe',
-      message: 'BOUM ! HAHA non, je n\'allais quand même pas utiliser une vraie bombe sur vous. De toute façon, vous ne pourrez jamais sortir d\'ici vivants. Prevez-ça comme un cadeau d\'adieu!',
+      message: 'BOUM ! HAHA non, je n\'allais quand même pas utiliser une vraie bombe sur vous. De toute façon, vous ne pourrez jamais sortir d\'ici vivants. Prenez-ça comme un cadeau d\'adieu!',
     }
   },
   cheatSheet: 'Antisèche'

@@ -5,7 +5,7 @@ import {ActionMessage} from "@workadventure/iframe-api-typings";
 bootstrapExtra();
 
 import * as utils from "./utils";
-import { discussion } from './modules'
+import { discussionv2 as discussion } from './modules'
 import {rootLink} from "./config";
 
 const shuffle: (array: Array<unknown>) => Array<unknown> = (array: Array<unknown>) => {
@@ -35,7 +35,7 @@ const emailRegex = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 WA.onInit().then(() => {
 
   // Get Room id and redirect user to choice map
-  const roomId = WA.room.id;
+  /*const roomId = WA.room.id;
   WA.nav.goToRoom(roomId.replace('starter', 'choice'));
   return;
 
@@ -119,7 +119,10 @@ WA.onInit().then(() => {
       WA.controls.disablePlayerControls()
       await WA.player.moveTo(5*32, 15*32)
       WA.controls.restorePlayerControls()
-      discussion.openDiscussionWebsite('lobby.admin', 'lobby.connectToParticipate')
+      discussion.openDiscussionWebsite(
+        'lobby.admin',
+        'lobby.connectToParticipate'
+      );
     } else {
       // Set variable to detect player is in selection zone
       WA.player.state.isInSelectionZone = true
@@ -176,7 +179,10 @@ WA.onInit().then(() => {
         action: utils.translations.translate('lobby.displayInfos')
       }),
       callback: () => {
-        discussion.openDiscussionWebsite('lobby.infoPanel', 'lobby.whatIsThat')
+        discussion.openDiscussionWebsite(
+          'lobby.infoPanel',
+          'lobby.whatIsThat'
+        );
       }
     })
   })
@@ -184,5 +190,7 @@ WA.onInit().then(() => {
   WA.room.onLeaveLayer('infos_zone').subscribe(() => {
     infosMessage?.remove()
     infosMessage = null
-  })
+  })*/
 })
+
+export {};

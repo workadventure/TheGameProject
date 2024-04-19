@@ -4,7 +4,7 @@ import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 bootstrapExtra();
 
-import {discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, workadventureFeatures, cameraMovingMode, digicode } from './modules'
+import {discussionv2 as discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, workadventureFeatures, cameraMovingMode, digicode } from './modules'
 import {Job, canUser, getPlayerJob, initiateJob, setPlayerJob} from "./modules/job";
 import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
@@ -13,6 +13,7 @@ import {toggleLayersVisibility} from "./utils/layers";
 import { HasPlayerMovedEvent } from "@workadventure/iframe-api-typings";
 import { onInit } from "./utils/init";
 import { saveGameStep } from "./utils/firebase";
+import { titleEnum } from "./modules/discussionv2";
 
 let moveCameraTimeout: NodeJS.Timeout|undefined = undefined;
 let smothCameraUpdate = 0;
@@ -27,12 +28,18 @@ const endOfTheRoom = async (electroLow?: Sound) => {
 
     // Open tutorial discussion
     setTimeout(() => {
-        discussion.openDiscussionWebsite( 'museum.mapRetrieved', 'museum.goToTheNextRoom', "museum.go", "discussion", async () => {
-            electroLow?.stop()
-            removePlanButton()
-            await saveGameStep(STEP_GAME);
-            WA.nav.goToRoom('maze.tmj');
-        });
+        discussion.openDiscussionWebsite(
+            titleEnum.mapRetrieved, 
+            'museum.goToTheNextRoom',
+            "museum.go",
+            "discussion",
+            async () => {
+                electroLow?.stop()
+                removePlanButton()
+                await saveGameStep(STEP_GAME);
+                WA.nav.goToRoom('maze.tmj');
+            }
+        );
     }, 1000);
 }
 
@@ -159,12 +166,18 @@ onInit(STEP_GAME).then(async () => {
 
     const openPlan = () => {
         removePlanButton()
-        discussion.openDiscussionWebsite(WA.player.name, 'views.museum.beginDiscussion', 'views.choice.close', 'discussion', () => {
-            // Restore player controls
-            WA.controls.restorePlayerControls()
-            // Add plan button
-            addPlanButton()
-        })
+        discussion.openDiscussionWebsite(
+            titleEnum.mySelf,
+            'views.museum.beginDiscussion', 
+            'views.choice.close', 
+            'discussion', 
+            () => {
+                // Restore player controls
+                WA.controls.restorePlayerControls()
+                // Add plan button
+                addPlanButton()
+            }
+        );
     }
 
     const launchTutorial = () => {
@@ -172,9 +185,15 @@ onInit(STEP_GAME).then(async () => {
         WA.controls.disablePlayerControls()
 
         // Open tutorial discussion
-        discussion.openDiscussionWebsite( 'utils.voiceOver', 'views.museum.beginText', "museum.go", "discussion", () => {
-            openPlan()
-        })
+        discussion.openDiscussionWebsite(
+            titleEnum.voiceOver, 
+            'views.museum.beginText', 
+            "museum.go", 
+            "discussion", 
+            () => {
+                openPlan()
+            }
+        );
     }
 
     // Open tutorial at launch
@@ -259,10 +278,16 @@ onInit(STEP_GAME).then(async () => {
                 }),
                 callback: () => {
                     if(inventory.hasItem('id-card')) {
-                        discussion.openDiscussionWebsite('views.museum.keeperName', 'views.museum.bigRoomAccess')
+                        discussion.openDiscussionWebsite(
+                            titleEnum.keeperName, 
+                            'views.museum.bigRoomAccess'
+                        );
                         actionForAllPlayers.activateActionForAllPlayer('keeperDoorOpen')
                     } else {
-                        discussion.openDiscussionWebsite('views.museum.keeperName', 'views.museum.bigRoomNoAccess')
+                        discussion.openDiscussionWebsite(
+                            titleEnum.keeperName, 
+                            'views.museum.bigRoomNoAccess'
+                        );
                     }
                 }
             })
@@ -341,14 +366,14 @@ onInit(STEP_GAME).then(async () => {
                             }
                         } else {
                             discussion.openDiscussionWebsite(
-                              utils.translations.translate('museum.guest'),
-                              utils.translations.translate('museum.cannotPickPocket'),
-                              'views.choice.close',
-                              "discussion",
+                                titleEnum.museumGuest,
+                                'museum.cannotPickPocket',
+                                'views.choice.close',
+                                "discussion",
                               () => {
                                   discussion.openDiscussionWebsite(
-                                    utils.translations.translate('utils.mySelf'),
-                                    utils.translations.translate('museum.needDistraction'),
+                                    titleEnum.mySelf,
+                                    'museum.needDistraction',
                                     'views.choice.close',
                                     "discussion")
                               }
@@ -411,7 +436,10 @@ onInit(STEP_GAME).then(async () => {
                 }),
                 callback: () => {
                     if (i === 0) {
-                        discussion.openDiscussionWebsite('views.museum.annuaryTitle', 'views.museum.annuaryContent')
+                        discussion.openDiscussionWebsite(
+                            titleEnum.annuaryTitle, 
+                            'views.museum.annuaryContent'
+                        );
                     } else {
                         desktopSearchZone = WA.ui.displayActionMessage({
                             message: utils.translations.translate(`museum.desktopItems${i}`),
@@ -595,33 +623,33 @@ onInit(STEP_GAME).then(async () => {
             if (actionForAllPlayers.currentValue('deactivateCamera') !== cameras[i]) {
                 if (myJob === 'spy') {
                     discussion.openDiscussionWebsite(
-                      'utils.mySelf',
-                      'museum.cantStayInCamera',
-                      'utils.close',
-                      "discussion",
-                      async () => {
+                        titleEnum.mySelf,
+                        'museum.cantStayInCamera',
+                        'utils.close',
+                        "discussion",
+                        async () => {
                           // Disable player controls
                           WA.controls.disablePlayerControls()
                           await WA.player.moveTo(cameraReturnPosition[i].x, cameraReturnPosition[i].y)
                           WA.controls.restorePlayerControls()
-                      }
+                        }
                     )
                 } else {
                     // Save wich camera is blocking user
                     userIsBlockedByCamera = cameras[i]
                     // Show message
                     discussion.openDiscussionWebsite(
-                      'utils.mySelf',
-                      'museum.cannotWalkInCameras',
-                      'utils.close',
-                      "discussion",
-                      () => {
-                          // IMPORTANT : REPEAT THE IF HERE IN CASE USER CLICK ON OK WHEN CAMERA HAS BEEN DEACTIVATED
-                          if (actionForAllPlayers.currentValue('deactivateCamera') !== userIsBlockedByCamera) {
-                              // Disable player controls
-                              WA.controls.disablePlayerControls()
-                          }
-                      }
+                        titleEnum.mySelf,
+                        'museum.cannotWalkInCameras',
+                        'utils.close',
+                        "discussion",
+                        () => {
+                            // IMPORTANT : REPEAT THE IF HERE IN CASE USER CLICK ON OK WHEN CAMERA HAS BEEN DEACTIVATED
+                            if (actionForAllPlayers.currentValue('deactivateCamera') !== userIsBlockedByCamera) {
+                                // Disable player controls
+                                WA.controls.disablePlayerControls()
+                            }
+                        }
                     )
                 }
             }
@@ -672,10 +700,10 @@ onInit(STEP_GAME).then(async () => {
             callback: () => {
                 if (!canUser('useComputers')) {
                     discussion.openDiscussionWebsite(
-                      'utils.mySelf',
-                      'museum.cannotUseComputers',
-                      'utils.close',
-                      "discussion"
+                        titleEnum.mySelf,
+                        'museum.cannotUseComputers',
+                        'utils.close',
+                        "discussion"
                     )
                 } else {
                     openComputerWebsite()
