@@ -1,7 +1,6 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import { setArchaeologistJob, unclaimArchaeologistJob } from "../../src/modules/job";
-import { checkAllPlayersGotJob } from "../../src/choice";
+import { checkAllPlayersGotJob, setArchaeologistJob, unclaimArchaeologistJob } from "../../src/modules/job";
 import * as utils from '../../src/utils/index.js'
 
 const translate = async () => {

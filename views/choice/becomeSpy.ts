@@ -3,8 +3,7 @@
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
 import { onInit } from "../../src/utils/init";
-import { setSypJob, unclaimSpyJob } from "../../src/modules/job";
-import { checkAllPlayersGotJob } from "../../src/choice";
+import { checkAllPlayersGotJob, setSypJob, unclaimSpyJob } from "../../src/modules/job";
 
 const translate = async () => {
   const title = document.getElementById('title');

@@ -47,11 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
             isHacking = true;
             hackingWindow.classList.add('show')
             setTimeout(() => {
+              askForDeactivateCamera(cameras[i].getAttribute('id'));
               for (let i = 0; i < cameras.length; i++) {
                 cameras[i].classList.remove('deactivated')
               }
               cameras[i].classList.add('deactivated')
-              askForDeactivateCamera(cameras[i].getAttribute('id'))
               hackingWindow.classList.remove('show')
               isHacking = false
             }, 2000)
@@ -93,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         wokaCircle = document.getElementById('WokaCircle') as SVGCircleElement | null;
       }
       if(wokaCircle){
-        console.log('wokaCircle', wokaCircle, x, y);
         wokaCircle.setAttribute('cx', `${x + 100}`);
         wokaCircle.setAttribute('cy', `${y + 200}`);
       }

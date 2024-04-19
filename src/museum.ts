@@ -96,24 +96,6 @@ onInit(STEP_GAME).then(async () => {
         electroLow.play(soundConfigLow)
     })
 
-    actionForAllPlayers.initializeActionForAllPlayers('retrieveMap', () => {
-        // Get map
-        inventory.addToInventory({
-            id: 'secret-map',
-            name: 'museum.secretMap.title',
-            image: 'secret-map.png',
-            description: 'museum.secretMap.description'
-        })
-
-        notifications.notify('museum.mapRetrieved', 'utils.success', 'success')
-
-        // Show chest open state
-        utils.layers.toggleLayersVisibility(['chestOpened'], true)
-
-        // Close digicode
-        digicode.closeDigicode()
-    })
-
     // Create digicode for chest
     digicode.createDigicode('chestDigicode', [{
         code: '160616',
@@ -268,7 +250,7 @@ onInit(STEP_GAME).then(async () => {
         tiles.push({ x: 26, y: 44, tile: null, layer: `bigRoomAccess/bigRoomCollides` });
         WA.room.setTiles(tiles)
         WA.room.hideLayer('doorsClosed/dc6')
-    })
+    }, false)
 
     let keeperZone: ActionMessage|null = null
     WA.room.onEnterLayer(`bigRoomAccess/keeperZone`).subscribe(() => {
@@ -389,15 +371,6 @@ onInit(STEP_GAME).then(async () => {
     for (let i = 1; i < 13; i++) {
         pickPocket(i)
     }
-
-    // When the door opens it must open for every player
-    actionForAllPlayers.initializeActionForAllPlayers('desktopDoorOpen', () => {
-        const tiles = []
-        tiles.push({ x: 38, y: 11, tile: null, layer: `desktopCollides` });
-        tiles.push({ x: 39, y: 11, tile: null, layer: `desktopCollides` });
-        WA.room.setTiles(tiles)
-        WA.room.hideLayer('doorsClosed/dc4')
-    })
 
     let desktopZone: ActionMessage|null = null
     WA.room.onEnterLayer(`desktopAccessZone`).subscribe(() => {
@@ -543,6 +516,33 @@ onInit(STEP_GAME).then(async () => {
         },
     }
 
+    actionForAllPlayers.initializeActionForAllPlayers('retrieveMap', () => {
+        // Get map
+        inventory.addToInventory({
+            id: 'secret-map',
+            name: 'museum.secretMap.title',
+            image: 'secret-map.png',
+            description: 'museum.secretMap.description'
+        })
+
+        notifications.notify('museum.mapRetrieved', 'utils.success', 'success')
+
+        // Show chest open state
+        utils.layers.toggleLayersVisibility(['chestOpened'], true)
+
+        // Close digicode
+        digicode.closeDigicode()
+    }, false)
+
+    // When the door opens it must open for every player
+    actionForAllPlayers.initializeActionForAllPlayers('desktopDoorOpen', () => {
+        const tiles = []
+        tiles.push({ x: 38, y: 11, tile: null, layer: `desktopCollides` });
+        tiles.push({ x: 39, y: 11, tile: null, layer: `desktopCollides` });
+        WA.room.setTiles(tiles)
+        WA.room.hideLayer('doorsClosed/dc4')
+    }, false)
+
     let userIsBlockedByCamera: null|string = null;
     actionForAllPlayers.initializeActionForAllPlayers(`deactivateCamera`, (value: string) => {
         // Show all cameras zone
@@ -557,7 +557,7 @@ onInit(STEP_GAME).then(async () => {
         if (userIsBlockedByCamera === value) {
             WA.controls.restorePlayerControls()
         }
-    })
+    }, "")
 
     actionForAllPlayers.initializeActionForAllPlayers('switchLights', (value: boolean) => {
         if (value) {
@@ -576,21 +576,10 @@ onInit(STEP_GAME).then(async () => {
         }
     }, 200)
 
-    if (WA.player.state.askForSwitchLights === undefined) {
-        WA.player.state.askForSwitchLights = true
-    }
-
-    if (WA.player.state.askForDeactivateCamera === undefined) {
-        WA.player.state.askForDeactivateCamera = false
-    }
-
-    if (WA.player.state.askForCloseComputerWebsite === undefined) {
-        WA.player.state.askForCloseComputerWebsite = false
-    }
-
-    if (WA.player.state.askForSeeRoom === undefined) {
-        WA.player.state.askForSeeRoom = false
-    }
+    WA.player.state.askForSwitchLights = true
+    WA.player.state.askForDeactivateCamera = false
+    WA.player.state.askForCloseComputerWebsite = false
+    WA.player.state.askForSeeRoom = false
 
     WA.player.state.onVariableChange('askForDeactivateCamera').subscribe((value) => {
         if (value) {

@@ -20,7 +20,7 @@ const initializeActionForAllPlayers = (id: string, callback: Function, defaultVa
     }
     defaultValues[id] = defaultValue
     callbacks[id] = callback
-  }, 11) // Timeout here because workadventure will put a time limit in the future
+  }, 1000) // Timeout here because workadventure will put a time limit in the future
 }
 const allItemsHaveChanged = (idList: Array<string>) => {
   let currentValue = JSON.parse(WA.state.mapActionVariables as string)
@@ -57,7 +57,7 @@ const initializeRelativeActionForAllPlayers = (id: string, idList: Array<string>
 }
 
 const activateActionForAllPlayer = (id: string, value: mapVariableType = null, must_be_null: boolean = false) => {
-  let currentValue = JSON.parse(WA.state.mapActionVariables as string)
+  let currentValue = JSON.parse(WA.state.mapActionVariables as string);
   if (value === null) {
     currentValue[id] = must_be_null ? null : true
   } else {
@@ -69,16 +69,18 @@ const activateActionForAllPlayer = (id: string, value: mapVariableType = null, m
 WA.onInit().then(() => {
   oldValue = WA.state.mapActionVariables != undefined ? JSON.parse(WA.state.mapActionVariables as string) : {};
   WA.state.onVariableChange('mapActionVariables').subscribe((value) => {
-    let currentValue = JSON.parse(value as string)
+    let currentValue = JSON.parse(value as string);
     Object.keys(currentValue).forEach((key) => {
-       if (oldValue[key] !== currentValue[key]) {
+       if (oldValue[key] != currentValue[key]) {
           try{
-          if (currentValue[key] !== null) {
+          if (currentValue[key] != undefined) {
             callbacks[key](currentValue[key])
           } else {
             callbacks[key]()
           }
-          }catch(e){}
+          }catch(e){
+            console.error("WA.state.onVariableChange => e", e);
+          }
          oldValue[key] = currentValue[key]
        }
     })
