@@ -207,34 +207,41 @@ onInit(STEP_GAME).then(async () => {
         bannerTheTeamIsComplete();
     });
 
-    WA.player.state.playingModeSelected = false;
-    WA.player.state.onVariableChange('playingModeSelected').subscribe((value) => {
-        console.log('onVariableChange => playingModeSelected', value);
-        if(!value) return;
-        // Display scenario
-        discussion.openDiscussionWebsite(
-            titleEnum.voiceOver,
-            'choice.scenario',
-            undefined,
-            undefined,
-            () => {
-                console.log('Discussion closed')
-                setTimeout(() => {
-                    openRankingModal();
-                }, 500);
-            }
-        );
-
-        setTimeout(() => {
-            const list = WA.players.list()
-            if([...list].length === 1) {
-                bannerTheTeamIsComplete();
-            }else{
-                bannerInviteUser();   
-            }
-        }, 50000);
-    });
+    if(WA.player.state.playingModeSelected != undefined){
+        startHistory();
+    }else{
+        WA.player.state.playingModeSelected = false;
+        WA.player.state.onVariableChange('playingModeSelected').subscribe((value) => {
+            if(!value) return;
+            startHistory();
+        });
+    }
 
 }).catch(e => console.error(e))
+
+const startHistory = () => {
+    // Display scenario
+    discussion.openDiscussionWebsite(
+        titleEnum.voiceOver,
+        'choice.scenario',
+        undefined,
+        undefined,
+        () => {
+            console.log('Discussion closed')
+            setTimeout(() => {
+                openRankingModal();
+            }, 500);
+        }
+    );
+
+    setTimeout(() => {
+        const list = WA.players.list()
+        if([...list].length === 1) {
+            bannerTheTeamIsComplete();
+        }else{
+            bannerInviteUser();   
+        }
+    }, 50000);
+}
 
 export {};
