@@ -1,9 +1,9 @@
-import { myGameName } from "./main";
+import { myGameName, myPlayerId } from "./main";
 
 const FIREBASE_URL = "https://thegameproject-c216d-default-rtdb.europe-west1.firebasedatabase.app";
 
 const getFirebaseUserRoleUrl = () => {
-    return `${FIREBASE_URL}/${myGameName()}/userRole/${WA.player.uuid}.json`;
+    return `${FIREBASE_URL}/${myGameName()}/userRole/${myPlayerId()}.json`;
 }
 
 export const savePlayerJob = async (job: string): Promise<void> => {
@@ -57,7 +57,7 @@ export const getGem = async (gem: string): Promise<{find: boolean}> => {
 
 // Save game step of the user in firebase
 export const saveGameStep = async (step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music"): Promise<void> => {
-    const url = `${FIREBASE_URL}/${myGameName()}/gameStep/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/${myGameName()}/gameStep/${myPlayerId()}.json`;
     await fetch(url, {
         method: 'PUT',
         headers: {
@@ -70,7 +70,7 @@ export const saveGameStep = async (step: "choice" | "museum" | "escape" | "treas
 
 // Get game step of the user from firebase
 export const getGameStep = async (): Promise<{step: "choice" | "museum" | "escape" | "treasureEnigma" | "bomb" | "maze" | "music"}|undefined> => {
-    const url = `${FIREBASE_URL}/${myGameName()}/gameStep/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/${myGameName()}/gameStep/${myPlayerId()}.json`;
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -82,7 +82,7 @@ export const getGameStep = async (): Promise<{step: "choice" | "museum" | "escap
 };
 
 export const saveStartGameTimestamp = async (): Promise<void> => {
-    const url = `${FIREBASE_URL}/startGameTimestamp/${myGameName()}/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/startGameTimestamp/${myGameName()}/${myPlayerId()}.json`;
     await fetch(url, {
         method: 'PUT',
         headers: {
@@ -94,7 +94,7 @@ export const saveStartGameTimestamp = async (): Promise<void> => {
 };
 
 export const endStartGameTimestamp = async (): Promise<void> => {
-    const url = `${FIREBASE_URL}/endGameTimestamp/${myGameName()}/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/endGameTimestamp/${myGameName()}/${myPlayerId()}.json`;
     await fetch(url, {
         method: 'PUT',
         headers: {
@@ -107,7 +107,7 @@ export const endStartGameTimestamp = async (): Promise<void> => {
 
 // Get start game timestamp of the user from firebase
 export const getStartGameTimestamp = async (): Promise<unknown> => {
-    const url = `${FIREBASE_URL}/startGameTimestamp/${myGameName()}/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/startGameTimestamp/${myGameName()}/${myPlayerId()}.json`;
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -120,7 +120,7 @@ export const getStartGameTimestamp = async (): Promise<unknown> => {
 
 // Get end game timestamp of the user from firebase
 export const getEndGameTimestamp = async (): Promise<unknown> => {
-    const url = `${FIREBASE_URL}/endGameTimestamp/${myGameName()}/${WA.player.uuid}.json`;
+    const url = `${FIREBASE_URL}/endGameTimestamp/${myGameName()}/${myPlayerId()}.json`;
     const response = await fetch(url, {
         method: 'GET',
         headers: {

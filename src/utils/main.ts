@@ -13,8 +13,14 @@ const myGameName = () : string => {
     return WA.room.id.split('/')[4];
 };
 
+const myPlayerId = () : string => {
+    if(!WA.player.uuid) throw new Error('Player UUID not found');
+    return window.btoa(WA.player.uuid);
+};
+
 export {
     wait,
     selectRandomItemInArray,
-    myGameName
+    myGameName,
+    myPlayerId
 }
