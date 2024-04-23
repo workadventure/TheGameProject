@@ -100,9 +100,9 @@ const renderRanking = async (ranking: Array<[string, number]>, myGameName?: stri
         const timeString = `${timeInMinutes}min ${timeInSeconds}s`;
         const p = document.createElement('p');
         p.classList.add('rank');
-        p.textContent = `#${index + 1} ${atob(gameName)} : ${timeString}`;
+        p.textContent = `#${index + 1} : ${timeString}`;
+        if(gameName === myGameName) p.id = "myGame";
         rankingElement?.appendChild(p);
-
         myIndexNameShowed = myIndexNameShowed || gameName === myGameName;
     }
 
@@ -128,7 +128,7 @@ const renderRanking = async (ranking: Array<[string, number]>, myGameName?: stri
     const myGameElement = document.createElement('p');
     myGameElement.classList.add('rank');
     myGameElement.id = "myGame";
-    myGameElement.textContent = `#${myIndexGame + 1} ${myGameName} : ${myGameTimeString}`;
+    myGameElement.textContent = `#${myIndexGame + 1} : ${myGameTimeString}`;
     
     rankingElement?.appendChild(p);
     rankingElement?.appendChild(myGameElement);
