@@ -3,10 +3,10 @@
 import {hiddenZone, excavations, inventory, switchingTiles, hooking, sounds, workadventureFeatures} from './modules'
 import {initiateJob} from "./modules/job";
 import * as utils from './utils'
-import {ActionMessage} from "@workadventure/iframe-api-typings";
+import {ActionMessage, Sound} from "@workadventure/iframe-api-typings";
 import {env, rootLink} from "./config"
 import { onInit } from './utils/init';
-import { getGem, saveGameStep, saveGem } from './utils/firebase';
+import { getChoiceInFirebase, getGem, saveGameStep, saveGem } from './utils/firebase';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
 
 const STEP_GAME = "maze";
@@ -132,21 +132,24 @@ onInit(STEP_GAME).then( async () => {
 
     // Init variable change for exit map
     WA.room.onEnterLayer('exit').subscribe(() => {
-        forestSound.stop()
+        forestSound?.stop()
     });
 
-    const forestSound = WA.sound.loadSound(`${rootLink}/sounds/forest.mp3`)
-    let soundConfig = {
-        volume: 0.1,
-        loop: false,
-        rate: 1,
-        detune: 1,
-        delay: 0,
-        seek: 0,
-        mute: false
-    }
-
-    forestSound.play(soundConfig)
+    let forestSound: Sound|undefined;
+    getChoiceInFirebase().then((choice) => {
+        if(choice?.choice == 'online') return;
+        forestSound = WA.sound.loadSound(`${rootLink}/sounds/forest.mp3`)
+        let soundConfig = {
+            volume: 0.1,
+            loop: false,
+            rate: 1,
+            detune: 1,
+            delay: 0,
+            seek: 0,
+            mute: false
+        }
+        forestSound.play(soundConfig)
+    });
 
     for (let i = 1; i < 10; i++) {
         hiddenZone.initiateHiddenZones([{stepIn: `fogFloor/fog${[i]}`, hide: `fog/fog${[i]}`}])

@@ -1,11 +1,11 @@
 import { readRunes, inventory, switchingTiles, actionForAllPlayers, discussionv2 as discussion, notifications, sounds } from './modules'
 import * as utils from './utils'
-import {ActionMessage} from "@workadventure/iframe-api-typings";
+import {ActionMessage, Sound} from "@workadventure/iframe-api-typings";
 import {getPlayerJob, initiateJob} from "./modules/job";
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
-import { saveGameStep } from './utils/firebase';
+import { getChoiceInFirebase, saveGameStep } from './utils/firebase';
 import { titleEnum } from './modules/discussionv2';
 
 const STEP_GAME = "treasureEnigma";
@@ -18,17 +18,21 @@ onInit(STEP_GAME).then(async () => {
   disableMouseWheel();
   disableScreenSharing();
 
-  const treasureSound = WA.sound.loadSound(`${rootLink}/sounds/treasure.mp3`)
-  let soundConfig = {
-    volume: 0.1,
-    loop: false,
-    rate: 1,
-    detune: 1,
-    delay: 0,
-    seek: 0,
-    mute: false
-  }
-  treasureSound.play(soundConfig)
+  let treasureSound: Sound|undefined;
+  getChoiceInFirebase().then((choice) => {
+    if(choice?.choice == 'online') return;
+    treasureSound = WA.sound.loadSound(`${rootLink}/sounds/treasure.mp3`);
+    let soundConfig = {
+      volume: 0.1,
+      loop: false,
+      rate: 1,
+      detune: 1,
+      delay: 0,
+      seek: 0,
+      mute: false
+    };
+    treasureSound.play(soundConfig);
+  });
 
   // Initialize sounds
   sounds.initiateSounds([
@@ -190,7 +194,7 @@ onInit(STEP_GAME).then(async () => {
       "discussion",
       async () => {
         // Redirect to next map
-        treasureSound.stop()
+        treasureSound?.stop()
 
         await saveGameStep(STEP_GAME);
         WA.nav.goToRoom(`./bomb.tmj#${myjob}-entry`)

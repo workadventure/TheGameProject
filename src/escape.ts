@@ -5,7 +5,7 @@ bootstrapExtra();
 
 import {hiddenZone, actionForAllPlayers, secretPassages, readRunes, arrayFilling, sounds, workadventureFeatures} from './modules'
 import { Job, initiateJob, setPlayerJob} from "./modules/job";
-import {ActionMessage } from "@workadventure/iframe-api-typings";
+import {ActionMessage, Sound } from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
 import {
     activateActionForAllPlayer,
@@ -15,7 +15,7 @@ import {
 import {env, rootLink} from "./config";
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableScreenSharing } from "./utils/ui";
-import { endStartGameTimestamp } from "./utils/firebase";
+import { endStartGameTimestamp, getChoiceInFirebase } from "./utils/firebase";
 import { addRankingButton } from "./utils/ranking";
 
 const STEP_GAME = "escape";
@@ -25,16 +25,20 @@ onInit(STEP_GAME).then(async () => {
     disableMapEditor();
     disableScreenSharing();
 
-    const cave = WA.sound.loadSound(`${rootLink}/sounds/cavedark.mp3`)
-    cave.play({
-        volume: 0.1,
-        loop: false,
-        rate: 1,
-        detune: 1,
-        delay: 0,
-        seek: 0,
-        mute: false
-    })
+    let cave: Sound|undefined;
+    getChoiceInFirebase().then((choice) => {
+        if(choice?.choice == 'online') return;
+        cave = WA.sound.loadSound(`${rootLink}/sounds/cavedark.mp3`)
+        cave.play({
+            volume: 0.1,
+            loop: false,
+            rate: 1,
+            detune: 1,
+            delay: 0,
+            seek: 0,
+            mute: false
+        })
+    });
     // Initiate jobs
     await initiateJob()
 
@@ -50,7 +54,7 @@ onInit(STEP_GAME).then(async () => {
     workadventureFeatures.hidePricingButton()
 
     const openFinalWebsite = async () => {
-        cave.stop()
+        cave?.stop()
         await WA.ui.website.open({
             url: `${rootLink}/views/newspaper/newspaper.html`,
             allowApi: true,

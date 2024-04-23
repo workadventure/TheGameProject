@@ -1,4 +1,4 @@
-import {ActionMessage, UIWebsite} from "@workadventure/iframe-api-typings";
+import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "./config";
 import {initiateJob, getPlayerJob, setPlayerJob, Job} from "./modules/job";
 import { actionForAllPlayers, discussionv2 as discussion, notifications, secretPassages, sounds, workadventureFeatures } from './modules'
@@ -7,6 +7,7 @@ import {env} from "./config"
 import { onInit } from "./utils/init";
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from "./utils/ui";
 import { titleEnum } from "./modules/discussionv2";
+import { getChoiceInFirebase } from "./utils/firebase";
 
 let bombWebsite:UIWebsite|null = null
 let cheatSheetWebsite:UIWebsite|null = null
@@ -47,16 +48,20 @@ onInit(STEP_GAME).then(async () => {
     }
   ])
 
-  const bombSound = WA.sound.loadSound(`${rootLink}/sounds/bomb.mp3`)
-  bombSound.play({
-    volume: 0.1,
-    loop: false,
-    rate: 1,
-    detune: 1,
-    delay: 0,
-    seek: 0,
-    mute: false
-  })
+  let bombSound : Sound|undefined;
+  getChoiceInFirebase().then((choice) => {
+    if(choice?.choice == 'online') return;
+    bombSound = WA.sound.loadSound(`${rootLink}/sounds/bomb.mp3`)
+    bombSound.play({
+      volume: 0.1,
+      loop: false,
+      rate: 1,
+      detune: 1,
+      delay: 0,
+      seek: 0,
+      mute: false
+    })
+  });
 
   // Reset zoom
   resetCamera()
@@ -124,7 +129,7 @@ onInit(STEP_GAME).then(async () => {
   // BOMB EXPLODES ACTION
   actionForAllPlayers.initializeActionForAllPlayers('boom', () => {
       // Play evil guy sound
-      bombSound.stop()
+      bombSound?.stop()
       WA.ui.actionBar.removeButton('cheatSheetButton');
       sounds.playSound('evilGuySound');
       discussion.openDiscussionWebsite(
@@ -149,7 +154,7 @@ onInit(STEP_GAME).then(async () => {
     closeBombWebsite()
 
     // Success sound
-    bombSound.stop()
+    bombSound?.stop()
     WA.ui.actionBar.removeButton('cheatSheetButton');
     sounds.playSound('successSound');
     notifications.notify(

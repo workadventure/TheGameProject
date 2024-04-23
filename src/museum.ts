@@ -12,7 +12,7 @@ import {env, rootLink} from "./config";
 import {toggleLayersVisibility} from "./utils/layers";
 import { HasPlayerMovedEvent } from "@workadventure/iframe-api-typings";
 import { onInit } from "./utils/init";
-import { saveGameStep } from "./utils/firebase";
+import { getChoiceInFirebase, saveGameStep } from "./utils/firebase";
 import { titleEnum } from "./modules/discussionv2";
 
 let moveCameraTimeout: NodeJS.Timeout|undefined = undefined;
@@ -49,17 +49,8 @@ onInit(STEP_GAME).then(async () => {
     await initiateJob();
     WA.state.mapRetrieved = false;
 
-    const electro = WA.sound.loadSound(`${rootLink}/sounds/electro.mp3`)
-    const electroLow = WA.sound.loadSound(`${rootLink}/sounds/electroLow.mp3`)
-    let soundConfigLow = {
-        volume: 0.1,
-        loop: false,
-        rate: 1,
-        detune: 1,
-        delay: 0,
-        seek: 0,
-        mute: false
-    }
+    let electro : Sound|undefined;
+    let electroLow : Sound|undefined;
     let soundConfig = {
         volume: 0.1,
         loop: false,
@@ -69,8 +60,21 @@ onInit(STEP_GAME).then(async () => {
         seek: 0,
         mute: false
     }
-
-    electroLow.play(soundConfigLow)
+    let soundConfigLow = {
+        volume: 0.1,
+        loop: false,
+        rate: 1,
+        detune: 1,
+        delay: 0,
+        seek: 0,
+        mute: false
+    }
+    getChoiceInFirebase().then((choice) => {
+        if(choice?.choice == 'online') return;
+        electro = WA.sound.loadSound(`${rootLink}/sounds/electro.mp3`)
+        electroLow = WA.sound.loadSound(`${rootLink}/sounds/electroLow.mp3`)
+        electroLow.play(soundConfigLow);
+    });
 
     // Check if the map has been retrieved
     WA.state.onVariableChange('mapRetrieved').subscribe((value) => {
@@ -87,13 +91,13 @@ onInit(STEP_GAME).then(async () => {
 
     // Open digicode when walking on chest zone
     WA.room.onEnterLayer('electroH').subscribe(() => {
-        electroLow.stop()
-        electro.play(soundConfig)
+        electroLow?.stop()
+        electro?.play(soundConfig)
     })
 
     WA.room.onLeaveLayer('electroH').subscribe(() => {
-        electro.stop()
-        electroLow.play(soundConfigLow)
+        electro?.stop()
+        electroLow?.play(soundConfigLow)
     })
 
     // Create digicode for chest
