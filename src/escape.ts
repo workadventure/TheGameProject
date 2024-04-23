@@ -3,7 +3,7 @@
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 bootstrapExtra();
 
-import {hiddenZone, actionForAllPlayers, secretPassages, readRunes, arrayFilling, sounds, workadventureFeatures} from './modules'
+import {hiddenZone, actionForAllPlayers, secretPassages, readRunes, arrayFilling, sounds} from './modules'
 import { Job, initiateJob, setPlayerJob} from "./modules/job";
 import {ActionMessage, Sound } from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
@@ -49,9 +49,6 @@ onInit(STEP_GAME).then(async () => {
             path: 'final.mp3'
         }
     ])
-
-    // Hide pricing button
-    workadventureFeatures.hidePricingButton()
 
     const openFinalWebsite = async () => {
         cave?.stop()

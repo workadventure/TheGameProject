@@ -4,7 +4,7 @@ import { } from "https://unpkg.com/@workadventure/scripting-api-extra@^1";
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 bootstrapExtra();
 
-import {discussionv2 as discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, workadventureFeatures, cameraMovingMode, digicode } from './modules'
+import {discussionv2 as discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, cameraMovingMode, digicode } from './modules'
 import {Job, canUser, getPlayerJob, initiateJob, setPlayerJob} from "./modules/job";
 import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
@@ -131,15 +131,6 @@ onInit(STEP_GAME).then(async () => {
         chestMessage?.remove()
         chestMessage = null
     })
-
-    // Hide pricing button
-    workadventureFeatures.hidePricingButton()
-
-    // Hide invite Button
-    workadventureFeatures.hideInviteButton()
-
-    // Hide premium banner
-    workadventureFeatures.hidePremiumBanner()
 
     // Camera moving mode
     cameraMovingMode.initializeCameraMovingMode()

@@ -1,7 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 import {arrayFilling, readRunes} from './modules'
 import {initiateJob} from "./modules/job";
-import { sounds, workadventureFeatures } from './modules'
+import { sounds } from './modules'
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
 import { disableMapEditor, disableMouseWheel, disableScreenSharing } from './utils/ui';
@@ -16,9 +16,6 @@ onInit(STEP_GAME).then(async () => {
     disableMapEditor();
     disableMouseWheel();
     disableScreenSharing();
-
-    // Hide pricing button
-    workadventureFeatures.hidePricingButton()
 
     const caveSound = WA.sound.loadSound(`${rootLink}/sounds/cavewater.mp3`)
     let soundConfig = {

@@ -1,6 +1,6 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import {hiddenZone, excavations, inventory, switchingTiles, hooking, sounds, workadventureFeatures} from './modules'
+import {hiddenZone, excavations, inventory, switchingTiles, hooking, sounds} from './modules'
 import {initiateJob} from "./modules/job";
 import * as utils from './utils'
 import {ActionMessage, Sound} from "@workadventure/iframe-api-typings";
@@ -170,9 +170,6 @@ onInit(STEP_GAME).then( async () => {
 
     // Initiate job
     await initiateJob();
-
-    // Hide pricing button
-    workadventureFeatures.hidePricingButton();
 
 
     WA.player.state.onVariableChange("hasFoundRedSeed").subscribe(()=> {

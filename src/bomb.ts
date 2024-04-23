@@ -1,7 +1,7 @@
 import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "./config";
 import {initiateJob, getPlayerJob, setPlayerJob, Job} from "./modules/job";
-import { actionForAllPlayers, discussionv2 as discussion, notifications, secretPassages, sounds, workadventureFeatures } from './modules'
+import { actionForAllPlayers, discussionv2 as discussion, notifications, secretPassages, sounds } from './modules'
 import * as utils from './utils'
 import {env} from "./config"
 import { onInit } from "./utils/init";
@@ -36,9 +36,6 @@ onInit(STEP_GAME).then(async () => {
 
   // Initiate jobs
   await initiateJob()
-
-  // Hide pricing button
-  workadventureFeatures.hidePricingButton()
 
   // Initialize sounds
   sounds.initiateSounds([

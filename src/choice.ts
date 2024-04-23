@@ -1,7 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { ActionMessage, Sound } from '@workadventure/iframe-api-typings';
-import { discussionv2 as discussion, inventory, workadventureFeatures } from './modules'
+import { discussionv2 as discussion, inventory } from './modules'
 import { JobPlayerVaraible, checkAllPlayersGotJob, initiateJob } from "./modules/job";
 import * as utils from "./utils";
 import { rootLink } from "./config";
@@ -50,6 +50,11 @@ const STEP_GAME = "choice";
 // Waiting for the API to be ready
 onInit(STEP_GAME).then(async () => {
 
+    // Enable invite button
+    // Initialise the game control for the experience
+    // @ts-ignore
+    WA.controls.restoreInviteButton();
+
     // Load and play sound of the room
     let choiceSound: Sound|undefined;
     getChoiceInFirebase().then((choice) => {
@@ -72,9 +77,6 @@ onInit(STEP_GAME).then(async () => {
 
     // Initiate job
     await initiateJob()
-
-    // Hide pricing
-    workadventureFeatures.hidePricingButton();
 
     // Talk to the NPC
     let messageSent = false;
@@ -197,6 +199,7 @@ onInit(STEP_GAME).then(async () => {
             await saveGameStep(STEP_GAME);
             saveStartGameTimestamp();
             WA.ui.modal.closeModal();
+            WA.ui.banner.closeBanner();
             WA.nav.goToRoom('./museum.tmj');
         }
     });

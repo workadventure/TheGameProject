@@ -1,7 +1,7 @@
 
 import * as modules from '../../src/modules/index.js'
 import * as utils from '../../src/utils/index.js'
-import {RemotePlayerInterface} from "@workadventure/iframe-api-typings/front/Api/Iframe/Players/RemotePlayer";
+import {RemotePlayerInterface} from "@workadventure/iframe-api-typings";
 
 // Generate players list
 const generatePlayersListButtons = async (element: HTMLElement) => {
