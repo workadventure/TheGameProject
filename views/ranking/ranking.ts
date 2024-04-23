@@ -87,7 +87,7 @@ const globalRanking = async () : Promise<Array<[string, number]>|undefined> => {
 };
 
 // Renderer for the ranking
-const renderRanking = (ranking: Array<[string, number]>, myGameName?: string) => {
+const renderRanking = async (ranking: Array<[string, number]>, myGameName?: string) => {
     const rankingElement = document.getElementById('ranking');
     rankingElement?.childNodes.forEach(child => child.remove());
 
@@ -106,7 +106,12 @@ const renderRanking = (ranking: Array<[string, number]>, myGameName?: string) =>
         myIndexNameShowed = myIndexNameShowed || gameName === myGameName;
     }
 
-    if(myGameName == undefined) return translateForNewGame();
+    try{
+        const gameStep = await utils.firebase.getGameStep();
+        if(gameStep?.step == undefined || gameStep?.step == "choice") return await translateForNewGame();
+    }catch(e){
+        return await translateForNewGame();
+    }
     if(myIndexNameShowed) return;
     // Get my game index in the ranking
     const myIndexGame = ranking.findIndex(([name]) => myGameName === name);

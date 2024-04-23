@@ -1,3 +1,5 @@
+/// <reference types="@workadventure/iframe-api-typings" />
+
 import * as translationFR from '../translations/fr-FR/index'
 import * as translationEN from '../translations/en-US/index'
 
