@@ -2,6 +2,7 @@
 import * as utils from '../../src/utils/index.js'
 import * as modules from '../../src/modules/index.js'
 import { titleEnum } from '../../src/modules/discussionv2.js'
+import { rootLink } from '../../src/config.js'
 
 const getTitle = (params:string|null) => {
   return utils.translations.translate(params)
@@ -39,25 +40,25 @@ document.addEventListener("DOMContentLoaded", () => {
             pictureElement.src = await WA.player.getWokaPicture();
           break;
           case titleEnum.museumGuest:
-            pictureElement.src = "/images/discussions/museumGuest.png";
+            pictureElement.src = rootLink + "/images/discussions/museumGuest.png";
           break;
           case titleEnum.keeperName:
-            pictureElement.src = "/images/discussions/museumGay.png";
+            pictureElement.src = rootLink + "/images/discussions/museumGay.png";
           break;
           case titleEnum.bombFailure:
-            pictureElement.src = "/images/discussions/bomb.png";
+            pictureElement.src = rootLink + "/images/discussions/bomb.png";
           break;
           case titleEnum.annuaryTitle:
-            pictureElement.src = "/images/discussions/secretBook.png";
+            pictureElement.src = rootLink + "/images/discussions/secretBook.png";
           break;
           case titleEnum.badGuy:
-            pictureElement.src = "/images/discussions/badGuy.png";
+            pictureElement.src = rootLink + "/images/discussions/badGuy.png";
           break;
 
           case titleEnum.mapRetrieved:
           case titleEnum.voiceOver:
           default:
-            pictureElement.src = "/images/discussions/content.png";
+            pictureElement.src = rootLink + "/images/discussions/content.png";
         }
       }
     }
