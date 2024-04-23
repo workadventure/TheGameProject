@@ -53,7 +53,7 @@ onInit(STEP_GAME).then(async () => {
     // Load and play sound of the room
     let choiceSound: Sound|undefined;
     getChoiceInFirebase().then((choice) => {
-        if(choice?.choice == 'online') return;
+        if(choice?.choice == undefined || choice?.choice == 'online') return;
         choiceSound = WA.sound.loadSound(`${rootLink}/sounds/choice.mp3`)
         let soundConfig = {
             volume: 0.1,
