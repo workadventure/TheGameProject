@@ -4,16 +4,16 @@ import { CoWebsite } from '@workadventure/iframe-api-typings';
 import * as utils from '../../src/utils/index.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-    await translatePage();
-
-    // Get the playing choice of the user
-    const playingChoice = await utils.firebase.getChoiceInFirebase();
-    if(playingChoice != undefined && playingChoice.choice != undefined){
-        // Show the online playing
-        WA.ui.modal.closeModal();
-    }
-
     WA.onInit().then(async () => {
+        await translatePage();
+
+        // Get the playing choice of the user
+        const playingChoice = await utils.firebase.getChoiceInFirebase();
+        if(playingChoice != undefined && playingChoice.choice != undefined){
+            // Show the online playing
+            WA.ui.modal.closeModal();
+        }
+
         const onlineElement = document.getElementById('online');
         const notonlineElement = document.getElementById('notonline');
 
