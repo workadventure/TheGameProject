@@ -1,34 +1,32 @@
 export default {
   talk: "Talk",
-  spyMessage: 'Become a spy (ATTENTION DEFINITIVE CHOICE)',
-  archeoMessage: 'Become an archaeologist (ATTENTION DEFINITIVE CHOICE)',
+  spyMessage: 'Become a spy (FINAL DECISION)',
+  archeoMessage: 'Become an archaeologist (FINAL DECISION)',
   takeCroissantMessage: 'Take a croissant',
   looksDelicious: 'This croissant looks delicious, but it\'s not good for my figure',
-  scenario: 'This is the story of two childhood friends. They grew up together, went to school together.' +
-    ' But now it\'s time for them to go their separate ways. Here they are in the guidance counselor\'s office...' +
-    ' Ready to choose their future careers.',
+  scenario: 'This is the story of two childhood friends. They grew up side by side, attending the same school. But now, it\'s time for them to chart their own paths. Here they sit in the guidance counselor\'s office, ready to decide their future careers.',
   spy:{
     title: 'The "SPY" job!',
-    text1: 'Become the spy of the game 😈',
-    text2: 'This is a major role and the first skill is... NOT BE SHY!',
-    text3: 'Could you think to be a great spy?',
+    text1: 'Embark on the adventure as the spy of the game! 😈',
+    text2: 'This is a crucial role, and the first skill needed is... to NOT BE SHY!',
+    text3: 'Could you imagine being a great spy?',
     startGameButton: 'Spy 😍... Let\'s go 💪',
     closeButton: 'Not sure yet 🤔',
-    cancelButton: 'Finaly... It\'s not for me... 😱',
+    cancelButton: 'At the end, it\'s not for me ... 😱',
     validateTitle: 'You are the "SPY" 😍',
-    validateText1: 'Welcome to the new game, the spy is a major role in this escape game. Prepare yourself and wait your colleague to start the game.',
-    validateText2: 'Not sure? No problem, you can cancel it and back to choose the other job!'
+    validateText1: 'Welcome to the new game, where the spy plays a major role in this escape game. Get ready and await your colleague to start the game.',
+    validateText2: 'Not sure? No problem, you can cancel it and choose another job instead!'
   },
   archaeologist:{
-    title: 'The "ARCHAEOLOGIST" job!',
-    text1: 'Become the archaeologist of the game 🏺',
-    text2: 'This is a major role and the first skill is... HAVE THE SENSE OF OBSERVATION!',
-    text3: 'Could you think to be a great archaeologist?',
-    startGameButton: 'Archaeologist 😍... Let\'s go 💪',
+    title: 'The "archaeologist" job',
+    text1: 'Embark on the adventure as the archaeologist of the game! 🏺',
+    text2: 'This is a crucial role, and the first skill required is... HAVING A KEEN SENSE OF OBSERVATION!',
+    text3: 'Could you imagine yourself as a great archaeologist?',
+    startGameButton: 'archaeologist 😍... Let\'s go 💪',
     closeButton: 'Not sure yet 🤔',
-    cancelButton: 'Finaly... It\'s not for me... 😱',
-    validateTitle: 'You are the "ARCHAEOLOGIST" 😍',
-    validateText1: 'Welcome to the new game, the archaeologist is a major role in this escape game. Prepare yourself and wait your colleague to start the game.',
-    validateText2: 'Not sure? No problem, you can cancel it and back to choose the other job!'
+    cancelButton: 'At the end, it\'s not for me ... 😱',
+    validateTitle: 'You are the "archaeologist" 😍',
+    validateText1: 'Welcome to the new game, where the archaeologist plays a major role in this escape game. Get ready and await your colleague to start the game.',
+    validateText2: 'Not sure? No problem, you can cancel it and choose another job instead!'
   }
 }

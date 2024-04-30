@@ -1,10 +1,10 @@
 export default {
     keeperName: "Security guard",
     bigRoomAccess: "I didn't recognize you! Go ahead, enter please",
-    bigRoomNoAccess: "Who are you?! You can't come in if you're not invited, let's go!",
+    bigRoomNoAccess: "Who are you?! You can't come in if you're not invited, so beat it!",
     annuaryTitle : "Super secret book",
-    annuaryContent: "Personal notes for May 23\n" +
-      "Horses exist, horns can be found, so why shouldn't unicorns exist! One day I'll find them.\n" +
+    annuaryContent: "Personal notes from May 23rd\n" +
+      "Horses exist, horns can be found, so why unicorns shouldn't exist? One day I'll find them.\n" +
       "\n" +
       "Shopping list\n" +
       "Villain's cape, black or red\n" +
@@ -15,11 +15,11 @@ export default {
       "Birthday dates (NOT TO BE FORGOTTEN THIS TIME!!) :\n" +
       "Mummy : 11/04/48\n" +
       "Daddy : 28/12/51\n" +
-      "Cerbere (Bibou loving cat) : 16/06/16 ",
-    beginText : "After so many years, our two friends have reunited in a quest to find a cure that could help all of humanity.\n\n" +
-      "They have only one lead: a map to the artefact is believed to be in the office of one of the elite.\n\n" +
-      "After many months of planning, it's time to act: here they are in the mansion where the precious map is believed to be..." + "code name of the operation.\n\n" +
-      "codename of the operation: Project Weasley",
+      "Cerbere (Bibou loving cat) : 16/06/16",
+    beginText : "After years apart, our two friends have reunited with a shared mission: finding a cure to benefit all humanity.\n\n"+
+      "They possess just one lead—a map to the artifact, rumored to be hidden in the office of one of the elite.\n\n"+
+      "After months of meticulous planning, the time for action has arrived. Now, they stand at the gates of the mansion where the precious map is believed to be located,\n\n"+
+      "under the code name of Operation Weasley.",
     beginDiscussion: "At last we've managed to get inside !" +
       "Let me remind you of the plan:\n" +
       "1 - Find the control room to deactivate the cameras. If we've aimed correctly, it should be the door right there.\n" +

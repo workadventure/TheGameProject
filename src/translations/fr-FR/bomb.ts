@@ -1,10 +1,10 @@
 export default {
   story: {
-    spy: 'ARF ! Lorsqu\il s\'est enfui, ça a déclenché un tremblement de terre qui m\'a coincé sous une pierre... Et cette bombe qui va bientôt exploser... Heureusement que j\'ai toujours mon antisèche pour désamorcer les bombes sur moi !',
+    spy: '😱 Mince ! L\'espion est coincé sous une pierre... Il faut trouver un moyen de partir d\'ici, mais je n\'aurai jamais le temps de le décoincer avant que cette bombe n\'explose...',
     archaeologist: 'Mince! l\'espion est coincé sous une pierre... Il faut trouver un moyen de partir d\'ici, mais je n\'aurais jamais le temps de le décoincer avant que cette bombe n\'explose...'
   },
   freeSpy: {
-    noTime: 'Mais qu\'est-ce que je fais ?!? On a pas le temps !!! la bombe va exploser !!! Je dois vite aller la désactiver',
+    noTime: 'Mais qu\'est-ce que je fais ?!? On n\'a pas le temps !!! la bombe va exploser !!! Je dois vite aller la désactiver',
     free: 'Libérer',
     success: {
       mySelf: 'Vous avez été libéré',

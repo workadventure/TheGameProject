@@ -1,18 +1,16 @@
 export default {
-    content : 'ONCE UPON A TIME, WHEN THE WORLD WAS ENVELOPED IN DARKNESS AND DESPAIR, A GREAT AND NOBLE KNIGHT WAS CHOSEN TO PROTECT THE LIGHT, THE ONLY THING THAT STOOD IN THE WAY OF A COMPLETE VICTORY BY THE FORCES OF DARKNESS.\n' +
-        '\n' +
-        'THE KNIGHT WAS BRAVE AND COURAGEOUS, AND HAD STUDIED THE ART OF WAR FOR MANY YEARS, PREPARING HIMSELF FOR THIS BATTLE. WITH CHIVALRY AND JUSTICE AS HIS GUIDE, HE FACED THE DEMONIC HORDE WITH COURAGE AND COURAGE.\n' +
-        '\n' +
-        'AT FIRST, THE KNIGHT\'S COURAGE SEEMED TO HAVE DONE HIM LITTLE GOOD AGAINST THE VAST ARMY OF DEMONS. IN LESS THAN A DAY, IT SEEMED AS IF THE KNIGHT WOULD BE OVERWHELMED BY THE SEEMINGLY NEVER-ENDING HORDE OF MONSTERS. BUT THEN, A MIRACLE HAPPENED.\n' +
-        '\n' +
-        'WHEN THE KNIGHT\'S SWORD SEEMED ABOUT TO BE CRUSHED BY A MIGHTY DEMON, AN ANGEL DESCENDED FROM THE HEAVENS, SHINING WITH BLINDING WHITE LIGHT. IN ITS HAND WAS A FLAMING SWORD, BLAZING WITH AN UNHOLY FLAME, AND THE aNGEL BROUGHT IT DOWN UPON THE DEMON\'S HEAD, INCINERATING IT.\n' +
-        '\n' +
-        'THIS ANGEL WAS NO MERE MESSENGER, BUT A SERVANT OF DIVINE JUSTICE. THE ANGEL HAD BEEN SENT BY GOD HIMSELF, TO BRING JUSTICE AND LIGHT TO THE WORLD. IN A BLINDING FLASH, THE ANGEL DISAPPEARED, LEAVING ONLY ITS FLAMING SWORD BEHIND.\n' +
-        '\n' +
-        'THE kNIGHT, INSPIRED BY THIS DIVINE INTERVENTION, FOUGHT WITH A NEWFOUND STRENGTH AND RALLIED HIS ARMY. WITH THE ANGEL\'S GIFT IN HAND, THE KNIGHT CHARGED INTO BATTLE, WIELDING THE FLAMING SWORD AND STRIKING DOWN THE DEMONIC ARMY WITH SUPERNATURAL PRECISION. IN THE END, THE KNIGHT EMERGED FROM THE BATTLE VICTORIOUS, STANDING AMIDST THE FALLEN BODIES OF THE dEMONIC HORDE.\n' +
-        '\n' +
-        'FROM THAT DAY FORWARD, IT BECAME A LEGEND AMONG THE KNIGHT\'S PEOPLE: THAT IN TIMES OF DARKNESS AND DESPAIR, THERE WILL ALWAYS BE A KNIGHT CHOSEN TO PROTECT THE LIGHT, AND THAT THESE CHOSEN WARRIORS NEED NOT FIGHT ALONE, FOR IN TIMES OF DESPERATION, AN ANGEL WILL COME TO SAVE THEM.',
-    title : 'Ancient text',
-    active : 'Touch the status 🤩',
+    content : "The knight was valiant and courageous, having delved into the art of war for many years, preparing himself for this epic clash. With chivalry and justice as his compass, he confronted the demonic horde with unwavering bravery."
+            + "\n" +
+            "Initially, it seemed the knight's valor would avail him little against the vast army of demons. In less than a day, it appeared as though he would be overwhelmed by the seemingly unending swarm of monsters. But then, a miracle unfolded."
+            + "\n" +
+            "Just when the knight's sword was on the verge of being shattered by a mighty demon, an angel descended from the heavens, radiating with blinding white light. In its hand was a flaming sword, blazing with an unholy fire, and the angel brought it down upon the demon's head, incinerating it."
+            + "\n" +
+            "This angel was not a mere messenger, but a servant of divine justice. Sent by God Himself to bring light and justice to the world, the angel vanished in a blinding flash, leaving only its flaming sword behind."
+            + "\n" +
+            "Inspired by this divine intervention, the knight fought with newfound strength and rallied his army. With the angel's gift in hand, he charged into battle, wielding the flaming sword and striking down the demonic army with supernatural precision. In the end, the knight emerged victorious, standing amidst the fallen bodies of the demonic horde."
+            + "\n" +
+            "From that day forward, it became a legend among the knight's people: that in times of darkness and despair, there will always be a chosen knight to protect the light, and that these chosen warriors need not fight alone, for in times of desperation, an angel will come to their rescue.",
+    title : 'Ancient manuscript',
+    active : 'Touch the statue 🤩',
     artifact : "[TOUCH] How beautiful, I can't resist to touch it... 😍"
 }

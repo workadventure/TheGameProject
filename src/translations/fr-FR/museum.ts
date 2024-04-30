@@ -15,7 +15,7 @@ export default {
     desktopItems0 : "Un livre qui semble être intéressant",
     desktopItems1 : "Je crois que je connais cette personne... ah ! c'est un mirroir",
     desktopItems2 : "L'australie ! Oh non encore ? Et oui c'est le jeu ma pauvre Lucette...",
-    desktopItems3 : "Ce livre a pour titre 'NECRONOMICON', ça à l'air sympa",
+    desktopItems3 : "Ce livre a pour titre 'NECRONOMICON', ça a l'air sympa",
     desktopItems4 : "Un coffre fort... La carte doit être à l'intérieur ! Mais... quel est le code ? Il doit y avoir un indice quelque part...",
     desktopItems5 : "Tiens c'est marrant, on dirait Narnia au fond de cette armoire ! Dommage qu'elle soit fermée à clé...",
     desktopItems6 :  "Pas mal l'armure",
@@ -26,7 +26,7 @@ export default {
     guest: 'Invité',
     cannotPickPocket: 'Non mais dites ! Faut pas vous gêner ! Vous avez de la chance que je n\'appelle pas immédiatement la sécurité !',
     needDistraction: 'Mince ! Il me faudrait une distraction pour pouvoir fouiller les poches des invités...',
-    cantStayInCamera: 'Mince ! je suis dans le champs de vision d\'une caméra... Je ne dois pas rester ici ! Je dois vite m\'en aller avant qu\'elle me repère !',
+    cantStayInCamera: 'Mince ! je suis dans le champs de vision d\'une caméra... Je ne dois pas rester ici ! Je dois vite m\'en aller avant qu\'elle ne me repère !',
     secretMap: {
         title: 'Carte top secrète',
         description: 'Une carte qui permet de trouver le remède à tous les maux de l\'humanité'

@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = document.getElementById('title');
     const content = document.getElementById('content');
     const date = document.getElementById('date');
-    const rankingButton = document.getElementById('ranking');
+    const rankingButton = document.getElementById('ranking') as HTMLButtonElement;
+    const linkedInButton = document.getElementById('linkedin') as HTMLButtonElement;
 
     if (content) {
       content.innerText = utils.translations.translate('views.newspaper.text');
@@ -28,8 +29,25 @@ document.addEventListener("DOMContentLoaded", () => {
       date.innerText = new Date().toDateString()
     }
 
-    rankingButton?.addEventListener('click', async () => {
-      openRankingModal();
-    });
-  })
-})
+    if (rankingButton) {
+      rankingButton.innerText = utils.translations.translate('views.newspaper.rankingButton');
+      rankingButton?.addEventListener('click', async () => {
+        openRankingModal();
+      });
+    }
+
+    if (linkedInButton) {
+      linkedInButton.innerText = utils.translations.translate('views.newspaper.linkedind.button');
+        linkedInButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        const articleUrl = "https://workadventu.re/explore-escape-workadventure-experiences/";
+        const articleTitle = utils.translations.translate('views.newspaper.linkedind.title');
+        const articleSummary = utils.translations.translate('views.newspaper.linkedind.summary');
+        const articleSource = "https://workadventu.re";
+        
+        window.open(`https://www.linkedin.com/shareArticle?mini=false&url=${articleUrl}&title=${articleTitle}&summary=${articleSummary}&source=${articleSource}`, '_blank');
+      });
+    }
+    
+  });
+});

@@ -1,18 +1,18 @@
 export default {
   takeSeed: "Take the seed",
   seed: "Seed",
-  seedDescription : "This seed seems to be different, aïe! It stings!",
+  seedDescription : "This seed feels different, ouch! It stings!",
   takeSeedMsg : '[SPACE] Take the seed',
 
   takePowder: "Take the powder",
   powder: "Powder",
   takePowderMsg : '[SPACE] Take the moon shard',
-  powderDescription : "It looks like stardust... Atchoum, oops...",
+  powderDescription : "It looks like stardust ...Achoo! Oops...",
 
   takeGem: "Take the gem",
   gem: "gem",
-  takeGemMsg : '[SPACE] Take the gem of fire',
-  gemDescription : "It looks like burning... ouch, it's hot!",
+  takeGemMsg : "[SPACE] Take the fire gem",
+  gemDescription : "It looks like it's burning... Ouch, it's hot!",
 
   triggerBlue : '[SPACE] Drop the moon shard',
   triggerGreen : '[SPACE] Drop the magical seed',

@@ -6,11 +6,11 @@ export default {
     archaeologist: {
       name: 'Archaeologist',
       attributes: 'Name : {name}<br> Level: Advanced',
-      description: 'Congratulations, you are now a member of the Budding Archaeologists. We certify by the issuance of this card that you can :',
+      description: 'Congratulations, you are now a member of the Budding Archaeologists. We certify, by issuing this card, that you can:',
       permissions: {
-        speakAncienLanguages: 'Speak the old languages',
+        speakAncienLanguages: "Speak the ancient languages.",
         readRunes: 'Read the runes',
-        makeExcavation: 'Make excavation'
+        makeExcavation: 'Do excavations'
       }
     },
     spy: {
@@ -19,7 +19,7 @@ export default {
       description: 'Special state agent. Specialized in :',
       permissions: {
         useComputers: 'computer hacking',
-        findSecretPassages: 'find and use the secret passages',
+        findSecretPassages: 'find and use secret passages',
         makeHooking: 'Hook'
       }
     }

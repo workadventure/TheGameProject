@@ -13,6 +13,6 @@ export default {
         '\n' +
         'DEPUIS CE JOUR, UNE LÉGENDE S\'EST RÉPANDUE PARMI LE PEUPLE DU CHEVALIER : DANS LES PÉRIODES D\'OBSCURITÉ ET DE DÉSESPOIR, IL Y AURA TOUJOURS UN CHEVALIER CHOISI POUR PROTÉGER LA LUMIÈRE, ET CES GUERRIERS ÉLUS N\'ONT PAS BESOIN DE SE BATTRE SEULS, CAR DANS LES MOMENTS DE DÉSESPOIR, UN ANGE VIENDRA LES SAUVER.',
     title : 'Texte ancien',
-    active : 'Toucher la statut 🤩',
+    active : 'Toucher la statue 🤩',
     artifact : "[TOUCHER] Comme c'est beau, je ne peux pas resister à l'envie d'y toucher... 😍"
 }

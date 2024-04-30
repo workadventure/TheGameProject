@@ -16,7 +16,7 @@ export default {
     spy: {
       name: 'Espion',
       attributes: 'Nom : {name}<br> Matricule: 007',
-      description: 'Agent spécial d\'état. Spacialisé dans :',
+      description: 'Agent spécial d\'état. Spécialisé dans :',
       permissions: {
         useComputers: 'le piratage informatique',
         findSecretPassages: 'trouver et emprunter les passages secrets',
