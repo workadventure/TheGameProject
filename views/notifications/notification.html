@@ -17,6 +17,13 @@
             backdrop-filter: blur(5px);
             color: white;
             border-radius: 15px;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        #notificationContainer::-webkit-scrollbar {
+            display: none;
         }
 
         #notificationContainer.hidden {

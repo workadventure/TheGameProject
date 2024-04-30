@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="../styles/main.css">
     <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
     <script src="discussion.ts" type="module"></script>
+    <style>
+        .no-scroll-bar{
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
     <body style="max-height: 110px; overflow: hidden;">
         <div style="
@@ -31,7 +42,7 @@
             <div style="border: solid 1px white; border-radius: 14px; height: fit-content; width: fit-content; display: flex; align-items: center; justify-content: center; padding: 10px;">
                 <img id="avatar" height="80px" src="" />
             </div>
-            <div style=" padding: 10px; font-size: 16px; max-height: 80px; overflow: scroll;">
+            <div class="no-scroll-bar" style="padding: 10px; font-size: 16px; max-height: 80px; overflow: scroll;">
                 <p id="title" style="font-style: italic; font-size: 12px; margin: 0px;"></p>
                 <p id="text" style="margin: 0px;"></p>
             </div>
