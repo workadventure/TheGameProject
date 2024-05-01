@@ -323,12 +323,22 @@ onInit(STEP_GAME).then(async () => {
                 y: 15
             }
         ])
-        WA.room.hideLayer('finishedWall1')
-        WA.room.showLayer('finishedDoor/openedDoor1')
-        WA.room.hideLayer('finishedWall2')
-        WA.room.showLayer('finishedDoor/openedDoor2')
-        WA.room.hideLayer('templeDoorEmpty')
-        WA.room.showLayer('templeDoorLight')
+        WA.room.hideLayer('finishedWall1');
+        WA.room.hideLayer('finishedWall2');
+        WA.room.showLayer('finishedDoor/openedDoor2');
+        WA.room.hideLayer('templeDoorEmpty');
+        WA.room.showLayer('templeDoorLight');
+
+        WA.room.hideLayer('blackFogs/blackFog1');
+        WA.room.hideLayer('blackFogs/blackFog2');
+        WA.room.hideLayer('blackFogs/blackFog3');
+        WA.room.hideLayer('blackFogs/blackFog4'); 
+        WA.room.hideLayer('blackFogs/blackFog5');
+        WA.room.hideLayer('blackFogs/blackFog6');
+        WA.room.hideLayer('blackFogs/blackFog7');
+        WA.room.hideLayer('blackFogs/blackFog8');
+        WA.room.hideLayer('blackFogs/blackFog9');
+        WA.room.hideLayer('blackFogs/blackFog10');
     })
     let artifact: ActionMessage|null = null
     WA.room.onEnterLayer('artifactZone').subscribe(() => {

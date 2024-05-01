@@ -27,6 +27,13 @@ export const onInit = async (step: "choice" | "museum" | "escape" | "treasureEni
     WA.controls.disableMapEditor();
     console.info('During this game, the map editor is disabled');
 
+    // @ts-ignore
+    WA.controls.disableRoomList();
+    console.info('During this game, the room list is disabled');
+
+    const positionCurentPlayer = await WA.player.getPosition();
+    WA.camera.set(positionCurentPlayer.x, positionCurentPlayer.y, 400, 400);
+
     // Check the last finish game by user
     const currentStepGameRes = await getGameStep();
     console.info('Your current step in the game is: ', currentStepGameRes?.step);

@@ -1,5 +1,5 @@
 export default {
-    executeAction: '[Espace] {action}',
+    executeAction: '[ESPACE] {action}',
     shoot: 'Tirer',
     see: 'Consulter',
     hack: 'Pirater',

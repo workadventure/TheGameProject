@@ -564,11 +564,8 @@ onInit(STEP_GAME).then(async () => {
 
     // Lights are on at launch (Wait 200 for initialization)
     setTimeout(() => {
-        if (!actionForAllPlayers.currentValue('switchLights')) {
-            turnOffLights()
-        } else {
-            turnOnLights()
-        }
+        actionForAllPlayers.activateActionForAllPlayer('switchLights', true);
+        turnOnLights()
     }, 200)
 
     WA.player.state.askForSwitchLights = true
@@ -640,7 +637,8 @@ onInit(STEP_GAME).then(async () => {
         })
     }
 
-    let computerWebsite: UIWebsite|null = null
+    let computerWebsite: UIWebsite|null = null;
+    let computerOpened = false;
     const openComputerWebsite = async () => {
         // Open modal
         WA.ui.modal.openModal({
@@ -653,6 +651,7 @@ onInit(STEP_GAME).then(async () => {
             closeComputerWebsite();
         })
 
+        computerOpened = true;
         const position = WA.state.loadVariable('currentCameraPosition');
         if (position) {
             const {x, y} = position as {x: number, y: number};
@@ -663,15 +662,15 @@ onInit(STEP_GAME).then(async () => {
         WA.player.state.askForCloseComputerWebsite = false;
         cameraMovingMode.setCameraPositionToPlayerPosition();
         cameraMovingMode.openCameraMovingWebsite();
-
     }
 
     const closeComputerWebsite = () => {
-        computerWebsite?.close()
-        computerWebsite = null
-        cameraMovingMode.closeCameraMovingWebsite()
-        WA.controls.restorePlayerControls()
-        WA.camera.followPlayer(true)
+        computerWebsite?.close();
+        computerWebsite = null;
+        cameraMovingMode.closeCameraMovingWebsite();
+        WA.controls.restorePlayerControls();
+        WA.camera.followPlayer(true);
+        computerOpened = false;
     }
 
     // Hack computer
@@ -701,17 +700,18 @@ onInit(STEP_GAME).then(async () => {
         computerMessage = null
     });
 
-    WA.state.saveVariable('currentCameraPosition', {
-        x: 0,
-        y: 0
-    }).catch(e => console.error('Something went wrong while saving variable', e));
-
     if(canUser('useComputers')) {
         WA.state.onVariableChange('currentCameraPosition').subscribe((value) => {
+            if(!computerOpened) return;
             const {x, y} = value as {x: number, y: number};
             moveCamera(x, y);
         });
     }else{
+        const initialPosition = await WA.player.getPosition();
+        WA.state.saveVariable('currentCameraPosition', {
+            x: initialPosition.x,
+            y: initialPosition.y
+        }).catch(e => console.error('Something went wrong while saving variable', e));    
         WA.player.onPlayerMove((event: HasPlayerMovedEvent) => {
             savePositionEverySecond(event);
         });

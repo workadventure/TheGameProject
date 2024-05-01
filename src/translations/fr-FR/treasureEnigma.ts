@@ -6,8 +6,8 @@ export default {
   makeTurn: 'Faire pivoter',
   takeTheTreasure: 'Prendre le trésor',
   badGuy: {
-    name: 'Le méchant',
-    monologue: 'Mouahahahahaha ! J\'ai enfin trouvé cet endroit ! Merci pour votre aide ! Tout cet or est pour moi. Quant à ce remède, il disparaîtra avec vous ! ... Ah, tiens ! Quelle jolie statue ! Elle ira bien dans mon entrée... Bref! Adieu !'
+    name: 'Le capitaine de la première expédition',
+    monologue: 'Mouahahahahaha ! J\'ai enfin trouvé cet endroit grâce à vous ! Merci pour votre aide ! Vous pensiez sincèrement sauver l\`humanité... Nous sommes tous perdus et vous allez rester coincé à tout jamais avec ce remède. Jamais vous ne sortirez et jamais vous ne ramènerez ce remède... Tic tac... Tic tac... Adieu !'
   },
   hammer: {
     name: 'Marteau',

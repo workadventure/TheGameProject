@@ -6,8 +6,8 @@ export default {
   makeTurn: 'Rotate',
   takeTheTreasure: 'Take the treasure',
   badGuy: {
-    name: 'The bad guy',
-    monologue: "Mwahahahaha! I finally found this place! Thanks for your help! All this gold is for me. As for this remedy, it will disappear with you! Oh! What a beautiful statue! It will look great in the hall! ... Anyway, farewell!",
+    name: 'The captain of the first expedition',
+    monologue: "Mwahahahahaha! I've finally found this place thanks to you! Thank you for your help! You really thought you could save humanity... We're all doomed, and you'll be stuck here forever with this cure. You'll never get out, and you'll never bring back this cure... Tic tac... Tic tac... Farewell!",
   },
   hammer: {
     name: 'Hammer',

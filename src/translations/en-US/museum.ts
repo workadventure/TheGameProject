@@ -20,7 +20,7 @@ export default {
     desktopItems5: "Funny, it looks like Narnia in this cabinet! It's a shame it's locked...",
     desktopItems6: "Nice armor",
     desktopItems7: "Honestly... my little nephew could have painted this... with his feet... and blindfolded!",
-    desktopItems8: "A map! Oh, but it seems to be the one from Super Mario. I'll have to look again.",
+    desktopItems8: "A map! Oh, but it seems not complete... Maybe we need find!",
     beginBtn: "Start the adventure",
     cannotUseComputers: "I don't understand anything about computers.",
     guest: 'Guest',

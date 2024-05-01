@@ -1,5 +1,5 @@
 export default {
-    executeAction: '[Space] {action}',
+    executeAction: '[SPACE] {action}',
     shoot: 'Shoot',
     see: 'See',
     hack: 'Hack',

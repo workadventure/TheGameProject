@@ -20,7 +20,7 @@ export default {
     desktopItems5 : "Tiens c'est marrant, on dirait Narnia au fond de cette armoire ! Dommage qu'elle soit fermée à clé...",
     desktopItems6 :  "Pas mal l'armure",
     desktopItems7 : "Franchement... mon petit neveu aurait pu faire ce tableau... avec ses pieds... et les yeux bandés !",
-    desktopItems8 :  "Une carte ! Ah, par contre ça semble être celle de super mario. Je dois chercher encore",
+    desktopItems8 :  "Génial, une carte ! Il manque un bout... Surement ce que nous devont retrouver !",
     beginBtn: "Commencer l'aventure",
     cannotUseComputers: 'Je n\'ai jamais rien compris aux ordinateurs...',
     guest: 'Invité',

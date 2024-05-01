@@ -6923,7 +6923,7 @@
                  "name":"lights2",
                  "opacity":1,
                  "type":"tilelayer",
-                 "visible":false,
+                 "visible":true,
                  "width":50,
                  "x":0,
                  "y":0
@@ -6931,7 +6931,7 @@
          "name":"lights",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -7103,7 +7103,7 @@
          "name":"noLights",
          "opacity":1,
          "type":"group",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

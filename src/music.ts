@@ -94,9 +94,12 @@ onInit(STEP_GAME).then(async () => {
             ],
             async () => {
                 if (enableRedirect) {
-                    sounds.playSoundForAll('failureSound')
+                    sounds.playSoundForAll('failureSound');
+                    WA.controls.disablePlayerControls();
                     await saveGameStep(STEP_GAME);
-                    WA.nav.goToRoom('./music.tmj')
+                    WA.player.moveTo(6*32, 26*32).then(({cancelled}: any) => {
+                        if(cancelled == false) WA.controls.restorePlayerControls();
+                    });
                 }
             },
             () => {
