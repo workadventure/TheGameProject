@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Discussion text
     if (text) {
-      text.innerText = getText(urlParams.get('text'))
+      playText(text as HTMLParagraphElement, getText(urlParams.get('text')));
     }
 
     // Close button event
@@ -45,6 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }).catch(e => console.error(e))
 })
+
+const playText = (textElement: HTMLParagraphElement, text: string) => {
+  const texts = text.split(" ");
+  playTexts(textElement, texts);
+}
+const playTexts = (textElement: HTMLParagraphElement, texts: string[], index = 0) => {
+  setTimeout(() => {
+    textElement.innerText += " " + texts[index];
+    if (index < texts.length - 1) {
+      playTexts(textElement, texts, index + 1);
+    }
+  }, 100);
+}
 
 export {
   getTitle,
