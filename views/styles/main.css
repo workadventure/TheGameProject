@@ -1,3 +1,6 @@
+*{
+    font-family: Roboto, ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
 body {
     /* COLORS */
     --bg-color-info: rgb(86 234 255);
@@ -7,16 +10,12 @@ body {
 
     --bg-color-alert-error: rgb(255, 186, 195);
     --bg-color-alert-success: rgb(144, 216, 126);
-    font-family: "roboto";
 }
 main{
     border-radius: 20px;
     background-color: #1b1b29e0;
     backdrop-filter: blur(4px);
     color: white;
-}
-* {
-    font-family: "roboto";
 }
 
 .text-align-center {
