@@ -6,7 +6,7 @@ bootstrapExtra();
 
 import {discussionv2 as discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, cameraMovingMode, digicode } from './modules'
 import {Job, canUser, getPlayerJob, initiateJob, setPlayerJob} from "./modules/job";
-import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
+import {PlayerMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
 import {env, rootLink} from "./config";
 import {toggleLayersVisibility} from "./utils/layers";
@@ -112,11 +112,11 @@ onInit(STEP_GAME).then(async () => {
     // Digicodes initialisation
     digicode.initiateDigicodes()
 
-    let chestMessage: ActionMessage | null = null
+    let chestMessage: PlayerMessage | null = null
     // Open digicode when walking on chest zone
     WA.room.onEnterLayer('chestZone').subscribe(() => {
         if (!actionForAllPlayers.hasBeenTriggered('retrieveMap')) {
-            chestMessage = WA.ui.displayActionMessage({
+            chestMessage = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.inspect')
                 }),
@@ -206,6 +206,8 @@ onInit(STEP_GAME).then(async () => {
 
     const turnOnLights = () => {
         launchLightLoop()
+        toggleLayersVisibility('lights/lights1', true)
+        toggleLayersVisibility('lights/lights2', true)
         toggleLayersVisibility('noLights/noLights', false)
         toggleLayersVisibility('noLights/conversations', false)
         toggleLayersVisibility('lights/conversations', true)
@@ -226,10 +228,10 @@ onInit(STEP_GAME).then(async () => {
         WA.room.setTiles(tiles)
     })
 
-    let closeDoor: ActionMessage|null = null
+    let closeDoor: PlayerMessage|null = null
     WA.room.onEnterLayer('closeDoorMessage').subscribe(() => {
 
-            closeDoor = WA.ui.displayActionMessage({
+            closeDoor = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('museum.doorClosed'),
                 callback: () => {}
             })
@@ -247,9 +249,9 @@ onInit(STEP_GAME).then(async () => {
         WA.room.hideLayer('doorsClosed/dc6')
     }, false)
 
-    let keeperZone: ActionMessage|null = null
+    let keeperZone: PlayerMessage|null = null
     WA.room.onEnterLayer(`bigRoomAccess/keeperZone`).subscribe(() => {
-            keeperZone = WA.ui.displayActionMessage({
+            keeperZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.speakToKeeper')
                 }),
@@ -278,10 +280,10 @@ onInit(STEP_GAME).then(async () => {
     }
 
     const searchWear = (i: number) => {
-        let searchZone: ActionMessage|null = null
+        let searchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`search/s${i}`).subscribe(() => {
             if(i === 5 && !inventory.hasItem('id-card')) {
-                searchZone = WA.ui.displayActionMessage({
+                searchZone = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('utils.executeAction', {
                         action: utils.translations.translate('museum.search')
                     }),
@@ -295,12 +297,12 @@ onInit(STEP_GAME).then(async () => {
                         }
                 })
             } else {
-                searchZone = WA.ui.displayActionMessage({
+                searchZone = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('utils.executeAction', {
                         action: utils.translations.translate('museum.search')
                     }),
                     callback: () => {
-                        searchZone = WA.ui.displayActionMessage({
+                        searchZone = WA.ui.displayPlayerMessage({
                             message: utils.translations.translate('museum.searchEmpty'),
                             callback: () => {
                             }
@@ -319,9 +321,9 @@ onInit(STEP_GAME).then(async () => {
     }
 
     const pickPocket = (i: number) => {
-        let searchZone: ActionMessage|null = null
+        let searchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`pickPocketInvited/i${i}`).subscribe(() => {
-                searchZone = WA.ui.displayActionMessage({
+                searchZone = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('utils.executeAction', {
                         action: utils.translations.translate('museum.pickpocket')
                     }),
@@ -335,7 +337,7 @@ onInit(STEP_GAME).then(async () => {
                                     description: 'museum.accessCardDescription'
                                 })
                             } else {
-                                searchZone = WA.ui.displayActionMessage({
+                                searchZone = WA.ui.displayPlayerMessage({
                                     message: utils.translations.translate('museum.pickpocketEmpty'),
                                     callback: () => {
                                     }
@@ -367,22 +369,22 @@ onInit(STEP_GAME).then(async () => {
         pickPocket(i)
     }
 
-    let desktopZone: ActionMessage|null = null
+    let desktopZone: PlayerMessage|null = null
     WA.room.onEnterLayer(`desktopAccessZone`).subscribe(() => {
         if(!inventory.hasItem('access-card')) {
-            desktopZone = WA.ui.displayActionMessage({
+            desktopZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('museum.doorClosed'),
                 callback: () => {
 
                 }
             })
         } else {
-            desktopZone = WA.ui.displayActionMessage({
+            desktopZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.desktopOpen')
                 }),
                 callback: () => {
-                    desktopZone = WA.ui.displayActionMessage({
+                    desktopZone = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('museum.desktopOpenMsg'),
                         callback: () => {
                             actionForAllPlayers.activateActionForAllPlayer('desktopDoorOpen')
@@ -396,9 +398,9 @@ onInit(STEP_GAME).then(async () => {
         desktopZone?.remove()
     })
     for (let i = 0; i < 9; i++) {
-        let desktopSearchZone: ActionMessage|null = null
+        let desktopSearchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`desktopItems/i${i}`).subscribe(() => {
-            desktopSearchZone = WA.ui.displayActionMessage({
+            desktopSearchZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.search')
                 }),
@@ -409,7 +411,7 @@ onInit(STEP_GAME).then(async () => {
                             'views.museum.annuaryContent'
                         );
                     } else {
-                        desktopSearchZone = WA.ui.displayActionMessage({
+                        desktopSearchZone = WA.ui.displayPlayerMessage({
                             message: utils.translations.translate(`museum.desktopItems${i}`),
                             callback: () => {
                             }
@@ -674,9 +676,9 @@ onInit(STEP_GAME).then(async () => {
     }
 
     // Hack computer
-    let computerMessage: ActionMessage|null = null
+    let computerMessage: PlayerMessage|null = null
     WA.room.onEnterLayer('computerZone').subscribe(() => {
-        computerMessage = WA.ui.displayActionMessage({
+        computerMessage = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {
                 action: utils.translations.translate('utils.hack')
             }),

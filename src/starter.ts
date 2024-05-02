@@ -67,9 +67,9 @@ WA.onInit().then(() => {
   }
 
   // Random launch activation
-  let randomMessage: ActionMessage | null = null
+  let randomMessage: PlayerMessage | null = null
   WA.room.onEnterLayer('random_zone').subscribe(() => {
-    randomMessage = WA.ui.displayActionMessage({
+    randomMessage = WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {
         action: utils.translations.translate('lobby.activateRandom')
       }),
@@ -143,9 +143,9 @@ WA.onInit().then(() => {
   })
 
   // INFOS
-  let infosMessage: ActionMessage | null = null
+  let infosMessage: PlayerMessage | null = null
   WA.room.onEnterLayer('infos_zone').subscribe(() => {
-    infosMessage = WA.ui.displayActionMessage({
+    infosMessage = WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {
         action: utils.translations.translate('lobby.displayInfos')
       }),

@@ -1,6 +1,6 @@
 import { readRunes, inventory, switchingTiles, actionForAllPlayers, discussionv2 as discussion, notifications, sounds } from './modules'
 import * as utils from './utils'
-import {ActionMessage, Sound} from "@workadventure/iframe-api-typings";
+import {PlayerMessage, Sound} from "@workadventure/iframe-api-typings";
 import {getPlayerJob, initiateJob} from "./modules/job";
 import {rootLink} from "./config";
 import { onInit } from './utils/init';
@@ -50,7 +50,7 @@ onInit(STEP_GAME).then(async () => {
   readRunes.setRunesReadingZone('runesReading', {content : 'treasureEnigma.runes.content'})
 
   // Satues enigma setup
-  let canTakeHammerActionMessage: ActionMessage | null = null
+  let canTakeHammerPlayerMessage: PlayerMessage | null = null
   switchingTiles.setSwitchingTile(
     'rotatingStatues',
     () => {
@@ -59,7 +59,7 @@ onInit(STEP_GAME).then(async () => {
       utils.layers.toggleLayersVisibility('hammerZoneTop', false)
       WA.room.onEnterLayer('hammerZone').subscribe(() => {
         if (!inventory.hasItem('hammer')) {
-          canTakeHammerActionMessage = WA.ui.displayActionMessage({
+          canTakeHammerPlayerMessage = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {
               action: utils.translations.translate('treasureEnigma.hammer.action')
             }),
@@ -77,8 +77,8 @@ onInit(STEP_GAME).then(async () => {
       })
 
       WA.room.onLeaveLayer('hammerZone').subscribe(() => {
-        canTakeHammerActionMessage?.remove()
-        canTakeHammerActionMessage = null
+        canTakeHammerPlayerMessage?.remove()
+        canTakeHammerPlayerMessage = null
       })
     },
     true,
@@ -86,7 +86,7 @@ onInit(STEP_GAME).then(async () => {
   )
 
   // // HOURGLASSES
-  let breakHourglassAction: ActionMessage|null = null
+  let breakHourglassAction: PlayerMessage|null = null
 
   actionForAllPlayers.initializeRelativeActionForAllPlayers('openTreasureDoor', ['breakHourglass1', 'breakHourglass2'], () => {
     // Plays success sound
@@ -117,7 +117,7 @@ onInit(STEP_GAME).then(async () => {
 
   WA.room.onEnterLayer('breakHourglass1Zone').subscribe(() => {
     if (inventory.hasItem('hammer') && !actionForAllPlayers.hasBeenTriggered('breakHourglass1')) {
-      breakHourglassAction = WA.ui.displayActionMessage({
+      breakHourglassAction = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('treasureEnigma.breakHourglass')
         }),
@@ -143,7 +143,7 @@ onInit(STEP_GAME).then(async () => {
 
   WA.room.onEnterLayer('breakHourglass2Zone').subscribe(() => {
     if (inventory.hasItem('hammer') && !actionForAllPlayers.hasBeenTriggered('breakHourglass2')) {
-      breakHourglassAction = WA.ui.displayActionMessage({
+      breakHourglassAction = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('treasureEnigma.breakHourglass')
         }),
@@ -203,9 +203,9 @@ onInit(STEP_GAME).then(async () => {
   }, 300) // Let time to understand what happen
   })
 
-  let treasureActionMessage: ActionMessage|null = null
+  let treasurePlayerMessage: PlayerMessage|null = null
   WA.room.onEnterLayer('treasure').subscribe(() => {
-    treasureActionMessage =WA.ui.displayActionMessage({
+    treasurePlayerMessage =WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {
         action: utils.translations.translate('treasureEnigma.takeTheTreasure')
       }),
@@ -216,8 +216,8 @@ onInit(STEP_GAME).then(async () => {
   })
 
   WA.room.onLeaveLayer('treasure').subscribe(() => {
-    treasureActionMessage?.remove()
-    treasureActionMessage = null
+    treasurePlayerMessage?.remove()
+    treasurePlayerMessage = null
   })
 });
 

@@ -2,10 +2,10 @@
 
 import * as utils from '../utils'
 import { canUser } from "./job";
-import {ActionMessage} from "@workadventure/iframe-api-typings";
+import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
-let makeHookingAction: ActionMessage|null = null
+let makeHookingAction: PlayerMessage|null = null
 
 // initiateExcavationZones
 const setHooking = (hookingZone: string, callback: Function|null = null) => {
@@ -20,7 +20,7 @@ const setHooking = (hookingZone: string, callback: Function|null = null) => {
         if (!WA.state[`${hookingZone}Discovered`]) {
 
           // Shoow hooking message
-          makeHookingAction = WA.ui.displayActionMessage({
+          makeHookingAction = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {
               action: utils.translations.translate('modules.hooking.hook') // TODO : translation in files
             }),

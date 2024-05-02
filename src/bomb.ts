@@ -1,4 +1,4 @@
-import {ActionMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
+import {PlayerMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "./config";
 import {initiateJob, getPlayerJob, setPlayerJob, Job} from "./modules/job";
 import { actionForAllPlayers, discussionv2 as discussion, notifications, secretPassages, sounds } from './modules'
@@ -185,7 +185,7 @@ onInit(STEP_GAME).then(async () => {
   }
 
   // On enter free spy layer
-  let displayFreeSpyActionMessage: ActionMessage | null = null
+  let displayFreeSpyPlayerMessage: PlayerMessage | null = null
   WA.room.onEnterLayer('saveSpyZone').subscribe(() => {
     // If bomb has not been defused, cannot free spy
     if (!actionForAllPlayers.hasBeenTriggered('boom') && !actionForAllPlayers.hasBeenTriggered('defuseBomb')) {
@@ -196,7 +196,7 @@ onInit(STEP_GAME).then(async () => {
         "discussion",
       )
     } else if(!actionForAllPlayers.hasBeenTriggered('freeSpy')) {
-      displayFreeSpyActionMessage = WA.ui.displayActionMessage({
+      displayFreeSpyPlayerMessage = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('bomb.freeSpy.free')
         }),
@@ -206,17 +206,17 @@ onInit(STEP_GAME).then(async () => {
       })
 
       WA.room.onLeaveLayer('saveSpyZone').subscribe(() => {
-        displayFreeSpyActionMessage?.remove()
-        displayFreeSpyActionMessage = null
+        displayFreeSpyPlayerMessage?.remove()
+        displayFreeSpyPlayerMessage = null
       })
     }
   })
 
   // On enter bomb layer
-  let displayDefuseBombActionMessage: ActionMessage | null = null
+  let displayDefuseBombPlayerMessage: PlayerMessage | null = null
   WA.room.onEnterLayer('bombZone').subscribe( () => {
     if (!actionForAllPlayers.hasBeenTriggered('boom') && !actionForAllPlayers.hasBeenTriggered('defuseBomb')) {
-      displayDefuseBombActionMessage = WA.ui.displayActionMessage({
+      displayDefuseBombPlayerMessage = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('bomb.bomb.defuse')
         }),
@@ -244,8 +244,8 @@ onInit(STEP_GAME).then(async () => {
     }
 
     WA.room.onLeaveLayer('bombZone').subscribe(() => {
-      displayDefuseBombActionMessage?.remove()
-      displayDefuseBombActionMessage = null
+      displayDefuseBombPlayerMessage?.remove()
+      displayDefuseBombPlayerMessage = null
     })
   })
 

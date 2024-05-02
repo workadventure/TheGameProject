@@ -243,7 +243,7 @@ You must at first initialize the runes with **initiateRunesReading** function.
 Then, you can call the **setRunesReadingZone** as many time as you want for each runes zone. It takes 4 parameters :
 - **layer :** the name of the layer on wich the player must enter to see read message
 - **params :** a record containing all the query params you want to pass to your view
-- **customActionMessage :** The translation key of the custom message that must be displayed when user steps on layer
+- **customPlayerMessage :** The translation key of the custom message that must be displayed when user steps on layer
 - **view :** the name of the view to call (by default **base** wich take "content" (translation key of text to display) and "title" (translation key of text to display / optional) as parameter)
 
 In your map's script :
@@ -338,9 +338,9 @@ In your map's script, you have to add openDiscussionWebsite() with parameters :
 
 ```typescript
 WA.onInit().then(() => {
-  let talk: ActionMessage;
+  let talk: PlayerMessage;
   WA.room.onEnterLayer("YOUR MAP LAYER").subscribe(() => {
-    talk = WA.ui.displayActionMessage({
+    talk = WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {action : utils.translations.translate('choice.talk')}),
       callback: () => {
         discussion.openDiscussionWebsite('YOUR TITLE, EX : views.choice.title', 'YOUR TEXT, EX : views.choice.text')

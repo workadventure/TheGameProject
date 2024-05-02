@@ -1,6 +1,6 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
-import { ActionMessage, Sound } from '@workadventure/iframe-api-typings';
+import { PlayerMessage, Sound } from '@workadventure/iframe-api-typings';
 import { discussionv2 as discussion, inventory } from './modules'
 import { JobPlayerVaraible, checkAllPlayersGotJob, initiateJob } from "./modules/job";
 import * as utils from "./utils";
@@ -132,9 +132,9 @@ onInit(STEP_GAME).then(async () => {
     });
 
     // Take a croissant (useless, but funny)
-    let takeCroissant: ActionMessage
+    let takeCroissant: PlayerMessage
     WA.room.onEnterLayer('croissants').subscribe(() => {
-        takeCroissant = WA.ui.displayActionMessage({
+        takeCroissant = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {action : utils.translations.translate('choice.takeCroissantMessage')}),
             callback: () => {
                 const inventorySize = inventory.getInventory().length
