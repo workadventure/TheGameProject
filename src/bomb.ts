@@ -1,3 +1,4 @@
+// @ts-ignore
 import {PlayerMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import {rootLink} from "./config";
 import {initiateJob, getPlayerJob, setPlayerJob, Job} from "./modules/job";
@@ -196,6 +197,7 @@ onInit(STEP_GAME).then(async () => {
         "discussion",
       )
     } else if(!actionForAllPlayers.hasBeenTriggered('freeSpy')) {
+      // @ts-ignore
       displayFreeSpyPlayerMessage = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('bomb.freeSpy.free')
@@ -216,6 +218,7 @@ onInit(STEP_GAME).then(async () => {
   let displayDefuseBombPlayerMessage: PlayerMessage | null = null
   WA.room.onEnterLayer('bombZone').subscribe( () => {
     if (!actionForAllPlayers.hasBeenTriggered('boom') && !actionForAllPlayers.hasBeenTriggered('defuseBomb')) {
+      // @ts-ignore
       displayDefuseBombPlayerMessage = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('bomb.bomb.defuse')

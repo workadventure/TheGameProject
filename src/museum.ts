@@ -6,6 +6,7 @@ bootstrapExtra();
 
 import {discussionv2 as discussion, hiddenZone, hooking, inventory, actionForAllPlayers, notifications, cameraMovingMode, digicode } from './modules'
 import {Job, canUser, getPlayerJob, initiateJob, setPlayerJob} from "./modules/job";
+// @ts-ignore
 import {PlayerMessage, Sound, UIWebsite} from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
 import {env, rootLink} from "./config";
@@ -116,6 +117,7 @@ onInit(STEP_GAME).then(async () => {
     // Open digicode when walking on chest zone
     WA.room.onEnterLayer('chestZone').subscribe(() => {
         if (!actionForAllPlayers.hasBeenTriggered('retrieveMap')) {
+            // @ts-ignore
             chestMessage = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.inspect')
@@ -230,11 +232,11 @@ onInit(STEP_GAME).then(async () => {
 
     let closeDoor: PlayerMessage|null = null
     WA.room.onEnterLayer('closeDoorMessage').subscribe(() => {
-
-            closeDoor = WA.ui.displayPlayerMessage({
-                message: utils.translations.translate('museum.doorClosed'),
-                callback: () => {}
-            })
+        // @ts-ignore
+        closeDoor = WA.ui.displayPlayerMessage({
+            message: utils.translations.translate('museum.doorClosed'),
+            callback: () => {}
+        })
     })
     WA.room.onLeaveLayer(`closeDoorMessage`).subscribe(() => {
         closeDoor?.remove()
@@ -251,25 +253,26 @@ onInit(STEP_GAME).then(async () => {
 
     let keeperZone: PlayerMessage|null = null
     WA.room.onEnterLayer(`bigRoomAccess/keeperZone`).subscribe(() => {
-            keeperZone = WA.ui.displayPlayerMessage({
-                message: utils.translations.translate('utils.executeAction', {
-                    action: utils.translations.translate('museum.speakToKeeper')
-                }),
-                callback: () => {
-                    if(inventory.hasItem('id-card')) {
-                        discussion.openDiscussionWebsite(
-                            titleEnum.keeperName, 
-                            'views.museum.bigRoomAccess'
-                        );
-                        actionForAllPlayers.activateActionForAllPlayer('keeperDoorOpen')
-                    } else {
-                        discussion.openDiscussionWebsite(
-                            titleEnum.keeperName, 
-                            'views.museum.bigRoomNoAccess'
-                        );
-                    }
+        // @ts-ignore
+        keeperZone = WA.ui.displayPlayerMessage({
+            message: utils.translations.translate('utils.executeAction', {
+                action: utils.translations.translate('museum.speakToKeeper')
+            }),
+            callback: () => {
+                if(inventory.hasItem('id-card')) {
+                    discussion.openDiscussionWebsite(
+                        titleEnum.keeperName, 
+                        'views.museum.bigRoomAccess'
+                    );
+                    actionForAllPlayers.activateActionForAllPlayer('keeperDoorOpen')
+                } else {
+                    discussion.openDiscussionWebsite(
+                        titleEnum.keeperName, 
+                        'views.museum.bigRoomNoAccess'
+                    );
                 }
-            })
+            }
+        })
     })
     WA.room.onLeaveLayer(`bigRoomAccess/keeperZone`).subscribe(() => {
         keeperZone?.remove()
@@ -283,6 +286,7 @@ onInit(STEP_GAME).then(async () => {
         let searchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`search/s${i}`).subscribe(() => {
             if(i === 5 && !inventory.hasItem('id-card')) {
+                // @ts-ignore
                 searchZone = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('utils.executeAction', {
                         action: utils.translations.translate('museum.search')
@@ -297,11 +301,13 @@ onInit(STEP_GAME).then(async () => {
                         }
                 })
             } else {
+                // @ts-ignore
                 searchZone = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('utils.executeAction', {
                         action: utils.translations.translate('museum.search')
                     }),
                     callback: () => {
+                        // @ts-ignore
                         searchZone = WA.ui.displayPlayerMessage({
                             message: utils.translations.translate('museum.searchEmpty'),
                             callback: () => {
@@ -323,43 +329,45 @@ onInit(STEP_GAME).then(async () => {
     const pickPocket = (i: number) => {
         let searchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`pickPocketInvited/i${i}`).subscribe(() => {
-                searchZone = WA.ui.displayPlayerMessage({
-                    message: utils.translations.translate('utils.executeAction', {
-                        action: utils.translations.translate('museum.pickpocket')
-                    }),
-                    callback: () => {
-                        if (!actionForAllPlayers.currentValue('switchLights')) {
-                            if(i === 8 && !inventory.hasItem('access-card')) {
-                                inventory.addToInventory({
-                                    id: 'access-card',
-                                    name: 'museum.accessCard',
-                                    image: 'gold-key.png',
-                                    description: 'museum.accessCardDescription'
-                                })
-                            } else {
-                                searchZone = WA.ui.displayPlayerMessage({
-                                    message: utils.translations.translate('museum.pickpocketEmpty'),
-                                    callback: () => {
-                                    }
-                                })
-                            }
+            // @ts-ignore
+            searchZone = WA.ui.displayPlayerMessage({
+                message: utils.translations.translate('utils.executeAction', {
+                    action: utils.translations.translate('museum.pickpocket')
+                }),
+                callback: () => {
+                    if (!actionForAllPlayers.currentValue('switchLights')) {
+                        if(i === 8 && !inventory.hasItem('access-card')) {
+                            inventory.addToInventory({
+                                id: 'access-card',
+                                name: 'museum.accessCard',
+                                image: 'gold-key.png',
+                                description: 'museum.accessCardDescription'
+                            })
                         } else {
-                            discussion.openDiscussionWebsite(
-                                titleEnum.museumGuest,
-                                'museum.cannotPickPocket',
-                                'views.choice.close',
-                                "discussion",
-                              () => {
-                                  discussion.openDiscussionWebsite(
-                                    titleEnum.mySelf,
-                                    'museum.needDistraction',
-                                    'views.choice.close',
-                                    "discussion")
-                              }
-                            )
+                            // @ts-ignore
+                            searchZone = WA.ui.displayPlayerMessage({
+                                message: utils.translations.translate('museum.pickpocketEmpty'),
+                                callback: () => {
+                                }
+                            })
                         }
+                    } else {
+                        discussion.openDiscussionWebsite(
+                            titleEnum.museumGuest,
+                            'museum.cannotPickPocket',
+                            'views.choice.close',
+                            "discussion",
+                            () => {
+                                discussion.openDiscussionWebsite(
+                                titleEnum.mySelf,
+                                'museum.needDistraction',
+                                'views.choice.close',
+                                "discussion")
+                            }
+                        )
                     }
-                })
+                }
+            })
         })
         WA.room.onLeaveLayer(`pickPocketInvited/i${i}`).subscribe(() => {
             searchZone?.remove()
@@ -372,6 +380,7 @@ onInit(STEP_GAME).then(async () => {
     let desktopZone: PlayerMessage|null = null
     WA.room.onEnterLayer(`desktopAccessZone`).subscribe(() => {
         if(!inventory.hasItem('access-card')) {
+            // @ts-ignore
             desktopZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('museum.doorClosed'),
                 callback: () => {
@@ -379,11 +388,13 @@ onInit(STEP_GAME).then(async () => {
                 }
             })
         } else {
+            // @ts-ignore
             desktopZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.desktopOpen')
                 }),
                 callback: () => {
+                    // @ts-ignore
                     desktopZone = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('museum.desktopOpenMsg'),
                         callback: () => {
@@ -400,6 +411,7 @@ onInit(STEP_GAME).then(async () => {
     for (let i = 0; i < 9; i++) {
         let desktopSearchZone: PlayerMessage|null = null
         WA.room.onEnterLayer(`desktopItems/i${i}`).subscribe(() => {
+            // @ts-ignore
             desktopSearchZone = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                     action: utils.translations.translate('museum.search')
@@ -411,6 +423,7 @@ onInit(STEP_GAME).then(async () => {
                             'views.museum.annuaryContent'
                         );
                     } else {
+                        // @ts-ignore
                         desktopSearchZone = WA.ui.displayPlayerMessage({
                             message: utils.translations.translate(`museum.desktopItems${i}`),
                             callback: () => {
@@ -678,6 +691,7 @@ onInit(STEP_GAME).then(async () => {
     // Hack computer
     let computerMessage: PlayerMessage|null = null
     WA.room.onEnterLayer('computerZone').subscribe(() => {
+        // @ts-ignore
         computerMessage = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {
                 action: utils.translations.translate('utils.hack')

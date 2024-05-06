@@ -3,6 +3,7 @@
 import {hiddenZone, excavations, inventory, switchingTiles, hooking, sounds} from './modules'
 import {initiateJob} from "./modules/job";
 import * as utils from './utils'
+// @ts-ignore
 import {PlayerMessage, Sound} from "@workadventure/iframe-api-typings";
 import {env, rootLink} from "./config"
 import { onInit } from './utils/init';
@@ -21,6 +22,7 @@ onInit(STEP_GAME).then( async () => {
     WA.room.onEnterLayer(`triggerBlue`).subscribe(() => {
         if(!WA.state.blueFire){
             if(WA.player.state.hasFoundBlueSeed) {
+                // @ts-ignore
                 triggerBlue = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerBlue'),
                     callback: () => {
@@ -30,6 +32,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
+                // @ts-ignore
                 triggerBlue = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
@@ -37,6 +40,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
         } else {
+            // @ts-ignore
             triggerBlue = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
@@ -52,6 +56,7 @@ onInit(STEP_GAME).then( async () => {
     WA.room.onEnterLayer(`triggerRed`).subscribe(() => {
         if(!WA.state.redFire){
             if(WA.player.state.hasFoundRedSeed) {
+                // @ts-ignore
                 triggerRed = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerRed'),
                     callback: () => {
@@ -61,6 +66,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
+                // @ts-ignore
                 triggerRed = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
@@ -68,6 +74,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
         } else {
+            // @ts-ignore
             triggerRed = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
@@ -83,6 +90,7 @@ onInit(STEP_GAME).then( async () => {
     WA.room.onEnterLayer(`triggerGreen`).subscribe(() => {
         if(!WA.state.greenFire){
             if(WA.player.state.hasFoundGreenSeed) {
+                // @ts-ignore
                 triggerGreen = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerGreen'),
                     callback: () => {
@@ -92,6 +100,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
+                // @ts-ignore
                 triggerGreen = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
@@ -99,6 +108,7 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
         } else {
+            // @ts-ignore
             triggerGreen = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
@@ -205,6 +215,7 @@ onInit(STEP_GAME).then( async () => {
         [() => {
             WA.room.onEnterLayer(`excavations/exca6/found`).subscribe(() => {
                 if(!WA.player.state.hasFoundGreenSeed){
+                    // @ts-ignore
                     findSeed = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('maze.takeSeedMsg'),
                         callback: async () => {
@@ -229,6 +240,7 @@ onInit(STEP_GAME).then( async () => {
             WA.room.showLayer('switchTileVictory')
             WA.room.onEnterLayer(`blueSeed`).subscribe(() => {
                 if(!WA.player.state.hasFoundBlueSeed) {
+                    // @ts-ignore
                     findSeed = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('maze.takePowderMsg'),
                         callback: async () => {

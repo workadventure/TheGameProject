@@ -3,6 +3,7 @@
 import * as utils from '../utils'
 import { canUser } from "./job";
 import {rootLink} from "../config";
+// @ts-ignore
 import {PlayerMessage, UIWebsite} from "@workadventure/iframe-api-typings";
 
 let runeWebsite: UIWebsite|null = null
@@ -26,6 +27,7 @@ const initiateRunesReading = () => {
   // view : the name of the view to call (by default base wich take "content" and "title" (optional) as parameter. You must put translation key in both)
 const setRunesReadingZone = (layer: string, params: Record<string, string> = {}, customPlayerMessage: string ='modules.runes.see', view: string = 'base') => {
   WA.room.onEnterLayer(layer).subscribe(() => {
+    // @ts-ignore
     readRunesAction = WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {
         action: utils.translations.translate(customPlayerMessage)

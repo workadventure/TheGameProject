@@ -1,5 +1,6 @@
 import { readRunes, inventory, switchingTiles, actionForAllPlayers, discussionv2 as discussion, notifications, sounds } from './modules'
 import * as utils from './utils'
+// @ts-ignore
 import {PlayerMessage, Sound} from "@workadventure/iframe-api-typings";
 import {getPlayerJob, initiateJob} from "./modules/job";
 import {rootLink} from "./config";
@@ -59,6 +60,7 @@ onInit(STEP_GAME).then(async () => {
       utils.layers.toggleLayersVisibility('hammerZoneTop', false)
       WA.room.onEnterLayer('hammerZone').subscribe(() => {
         if (!inventory.hasItem('hammer')) {
+          // @ts-ignore
           canTakeHammerPlayerMessage = WA.ui.displayPlayerMessage({
             message: utils.translations.translate('utils.executeAction', {
               action: utils.translations.translate('treasureEnigma.hammer.action')
@@ -117,6 +119,7 @@ onInit(STEP_GAME).then(async () => {
 
   WA.room.onEnterLayer('breakHourglass1Zone').subscribe(() => {
     if (inventory.hasItem('hammer') && !actionForAllPlayers.hasBeenTriggered('breakHourglass1')) {
+      // @ts-ignore
       breakHourglassAction = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('treasureEnigma.breakHourglass')
@@ -143,6 +146,7 @@ onInit(STEP_GAME).then(async () => {
 
   WA.room.onEnterLayer('breakHourglass2Zone').subscribe(() => {
     if (inventory.hasItem('hammer') && !actionForAllPlayers.hasBeenTriggered('breakHourglass2')) {
+      // @ts-ignore
       breakHourglassAction = WA.ui.displayPlayerMessage({
         message: utils.translations.translate('utils.executeAction', {
           action: utils.translations.translate('treasureEnigma.breakHourglass')
@@ -205,6 +209,7 @@ onInit(STEP_GAME).then(async () => {
 
   let treasurePlayerMessage: PlayerMessage|null = null
   WA.room.onEnterLayer('treasure').subscribe(() => {
+    // @ts-ignore
     treasurePlayerMessage =WA.ui.displayPlayerMessage({
       message: utils.translations.translate('utils.executeAction', {
         action: utils.translations.translate('treasureEnigma.takeTheTreasure')

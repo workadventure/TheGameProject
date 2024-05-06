@@ -2,6 +2,7 @@
 
 import * as utils from '../utils'
 import { canUser } from "./job";
+// @ts-ignore
 import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
@@ -19,6 +20,7 @@ const initiateExcavations = (excavationZones: Array<string> = ['excavationZone']
 
           WA.room.onEnterLayer(`${excavationZones[i]}/trace`).subscribe(() => {
             if (!WA.state[`${excavationZones[i]}Discovered`]) {
+              // @ts-ignore
               makeExcavationAction = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                   action: utils.translations.translate('modules.excavation.makeExcavations')

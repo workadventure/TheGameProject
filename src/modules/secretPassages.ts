@@ -2,6 +2,7 @@
 
 import * as utils from '../utils'
 import { canUser } from "./job";
+// @ts-ignore
 import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
@@ -58,6 +59,7 @@ const initiateSecretPassages = (
 
           WA.room.onEnterLayer(`${secretPassagesZones[i]}/trace`).subscribe(() => {
             if (!WA.state[`${secretPassagesZones[i]}Discovered`]) {
+              // @ts-ignore
               findSecretPassageAction = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                   action: utils.translations.translate('modules.secretPassage.findSecretPassage')

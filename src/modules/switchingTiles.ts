@@ -1,6 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import * as utils from '../utils'
+// @ts-ignore
 import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
@@ -32,6 +33,7 @@ const setSwitchingTile = (switchingTile: string, victoryCallback: Function|null 
             makeTileSwitch(switchingTile, j, tilesNumber, victoryCondition)
           } else {
             setTimeout(() => {
+              // @ts-ignore
               switchTileAction = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                   action: utils.translations.translate(PlayerMessage)
