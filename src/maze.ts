@@ -3,7 +3,8 @@
 import {hiddenZone, excavations, inventory, switchingTiles, hooking, sounds} from './modules'
 import {initiateJob} from "./modules/job";
 import * as utils from './utils'
-import {ActionMessage, Sound} from "@workadventure/iframe-api-typings";
+// @ts-ignore
+import {PlayerMessage, Sound} from "@workadventure/iframe-api-typings";
 import {env, rootLink} from "./config"
 import { onInit } from './utils/init';
 import { getChoiceInFirebase, getGem, saveGameStep, saveGem } from './utils/firebase';
@@ -17,11 +18,12 @@ onInit(STEP_GAME).then( async () => {
     disableScreenSharing();
 
     // Trigger fire
-    let triggerBlue: ActionMessage|null = null;
+    let triggerBlue: PlayerMessage|null = null;
     WA.room.onEnterLayer(`triggerBlue`).subscribe(() => {
         if(!WA.state.blueFire){
             if(WA.player.state.hasFoundBlueSeed) {
-                triggerBlue = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerBlue = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerBlue'),
                     callback: () => {
                         inventory.removeFromInventory('powder')
@@ -30,14 +32,16 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
-                triggerBlue = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerBlue = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
                     }
                 })
             }
         } else {
-            triggerBlue = WA.ui.displayActionMessage({
+            // @ts-ignore
+            triggerBlue = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
                 }
@@ -48,11 +52,12 @@ onInit(STEP_GAME).then( async () => {
     WA.room.onLeaveLayer(`triggerBlue`).subscribe(() => {
         triggerBlue?.remove()
     });
-    let triggerRed: ActionMessage|null = null;
+    let triggerRed: PlayerMessage|null = null;
     WA.room.onEnterLayer(`triggerRed`).subscribe(() => {
         if(!WA.state.redFire){
             if(WA.player.state.hasFoundRedSeed) {
-                triggerRed = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerRed = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerRed'),
                     callback: () => {
                         inventory.removeFromInventory('gem')
@@ -61,14 +66,16 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
-                triggerRed = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerRed = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
                     }
                 })
             }
         } else {
-            triggerRed = WA.ui.displayActionMessage({
+            // @ts-ignore
+            triggerRed = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
                 }
@@ -79,11 +86,12 @@ onInit(STEP_GAME).then( async () => {
     WA.room.onLeaveLayer(`triggerRed`).subscribe(() => {
         triggerRed?.remove()
     });
-    let triggerGreen: ActionMessage|null = null;
+    let triggerGreen: PlayerMessage|null = null;
     WA.room.onEnterLayer(`triggerGreen`).subscribe(() => {
         if(!WA.state.greenFire){
             if(WA.player.state.hasFoundGreenSeed) {
-                triggerGreen = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerGreen = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.triggerGreen'),
                     callback: () => {
                         inventory.removeFromInventory('seed')
@@ -92,14 +100,16 @@ onInit(STEP_GAME).then( async () => {
                 })
             }
             else {
-                triggerGreen = WA.ui.displayActionMessage({
+                // @ts-ignore
+                triggerGreen = WA.ui.displayPlayerMessage({
                     message: utils.translations.translate('maze.empty'),
                     callback: () => {
                     }
                 })
             }
         } else {
-            triggerGreen = WA.ui.displayActionMessage({
+            // @ts-ignore
+            triggerGreen = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('maze.fireOn'),
                 callback: () => {
                     inventory.removeFromInventory('seed');
@@ -198,14 +208,15 @@ onInit(STEP_GAME).then( async () => {
             console.info('Excavation has been made !')} // List of callbacks for your excavationGroups
     ])
 
-    let findSeed: ActionMessage|null = null
+    let findSeed: PlayerMessage|null = null
 
     excavations.initiateExcavations(
         ['excavations/exca6'], // List of your excavationGroups names
         [() => {
             WA.room.onEnterLayer(`excavations/exca6/found`).subscribe(() => {
                 if(!WA.player.state.hasFoundGreenSeed){
-                    findSeed = WA.ui.displayActionMessage({
+                    // @ts-ignore
+                    findSeed = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('maze.takeSeedMsg'),
                         callback: async () => {
                             await hasFoundGreenSeed();
@@ -229,7 +240,8 @@ onInit(STEP_GAME).then( async () => {
             WA.room.showLayer('switchTileVictory')
             WA.room.onEnterLayer(`blueSeed`).subscribe(() => {
                 if(!WA.player.state.hasFoundBlueSeed) {
-                    findSeed = WA.ui.displayActionMessage({
+                    // @ts-ignore
+                    findSeed = WA.ui.displayPlayerMessage({
                         message: utils.translations.translate('maze.takePowderMsg'),
                         callback: async () => {
                             await hasFoundBlueSeed();

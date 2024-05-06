@@ -5,7 +5,8 @@ bootstrapExtra();
 
 import {hiddenZone, actionForAllPlayers, secretPassages, readRunes, arrayFilling, sounds} from './modules'
 import { Job, initiateJob, setPlayerJob} from "./modules/job";
-import {ActionMessage, Sound } from "@workadventure/iframe-api-typings";
+// @ts-ignore
+import {PlayerMessage, Sound } from "@workadventure/iframe-api-typings";
 import * as utils from "./utils";
 import {
     activateActionForAllPlayer,
@@ -161,10 +162,11 @@ onInit(STEP_GAME).then(async () => {
 
     }, false)
 
-    let blueOn: ActionMessage|null = null
+    let blueOn: PlayerMessage|null = null
     WA.room.onEnterLayer('runes/left').subscribe(() => {
         if (!WA.state.runesVictory && !hasBeenTriggered('blue')) {
-            blueOn = WA.ui.displayActionMessage({
+            // @ts-ignore
+            blueOn = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('escape.active'),
                 callback: () => {
                     activateActionForAllPlayer('blue', true)
@@ -188,10 +190,11 @@ onInit(STEP_GAME).then(async () => {
 
     }, false)
 
-    let redOn: ActionMessage|null = null
+    let redOn: PlayerMessage|null = null
     WA.room.onEnterLayer('runes/center').subscribe(() => {
         if (!WA.state.runesVictory && !WA.state.demon) {
-            redOn = WA.ui.displayActionMessage({
+            // @ts-ignore
+            redOn = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('escape.active'),
                 callback: () => {
                     activateActionForAllPlayer('red', true)
@@ -215,10 +218,11 @@ onInit(STEP_GAME).then(async () => {
 
     }, false)
 
-    let yellowOn: ActionMessage|null = null
+    let yellowOn: PlayerMessage|null = null
     WA.room.onEnterLayer('runes/right').subscribe(() => {
         if (!WA.state.runesVictory && !WA.state.knight) {
-            yellowOn = WA.ui.displayActionMessage({
+            // @ts-ignore
+            yellowOn = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('escape.active'),
                 callback: () => {
                     activateActionForAllPlayer('yellow', true)
@@ -340,10 +344,11 @@ onInit(STEP_GAME).then(async () => {
         WA.room.hideLayer('blackFogs/blackFog9');
         WA.room.hideLayer('blackFogs/blackFog10');
     })
-    let artifact: ActionMessage|null = null
+    let artifact: PlayerMessage|null = null
     WA.room.onEnterLayer('artifactZone').subscribe(() => {
         if(!hasBeenTriggered('artifactBrok')) {
-            artifact = WA.ui.displayActionMessage({
+            // @ts-ignore
+            artifact = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('escape.artifact'),
                 callback: () => {
                     actionForAllPlayers.activateActionForAllPlayer('artifactBrok');

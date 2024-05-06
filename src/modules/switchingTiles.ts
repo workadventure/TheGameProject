@@ -1,10 +1,11 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import * as utils from '../utils'
-import {ActionMessage} from "@workadventure/iframe-api-typings";
+// @ts-ignore
+import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
-let switchTileAction: ActionMessage|null = null
+let switchTileAction: PlayerMessage|null = null
 
 const initiateSwitchingTiles = (switchingTiles: Array<string> = ['switchingTiles'], victoryCallBacks: Array<Function> = []) => {
   for (let i = 0; i < switchingTiles.length; i++) {
@@ -12,7 +13,7 @@ const initiateSwitchingTiles = (switchingTiles: Array<string> = ['switchingTiles
   }
 }
 
-const setSwitchingTile = (switchingTile: string, victoryCallback: Function|null = null, isAction: boolean = false, actionMessage:string = '') => {
+const setSwitchingTile = (switchingTile: string, victoryCallback: Function|null = null, isAction: boolean = false, PlayerMessage:string = '') => {
   const victoryCondition = JSON.parse(WA.state[`${switchingTile}VictoryCondition`] as string)
   const tilesNumber = WA.state[`${switchingTile}TilesNumber`] as number
 
@@ -32,9 +33,10 @@ const setSwitchingTile = (switchingTile: string, victoryCallback: Function|null 
             makeTileSwitch(switchingTile, j, tilesNumber, victoryCondition)
           } else {
             setTimeout(() => {
-              switchTileAction = WA.ui.displayActionMessage({
+              // @ts-ignore
+              switchTileAction = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
-                  action: utils.translations.translate(actionMessage)
+                  action: utils.translations.translate(PlayerMessage)
                 }),
                 callback: () => {
                   makeTileSwitch(switchingTile, j, tilesNumber, victoryCondition)

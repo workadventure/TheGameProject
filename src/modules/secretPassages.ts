@@ -2,10 +2,11 @@
 
 import * as utils from '../utils'
 import { canUser } from "./job";
-import {ActionMessage} from "@workadventure/iframe-api-typings";
+// @ts-ignore
+import {PlayerMessage} from "@workadventure/iframe-api-typings";
 import { sounds } from '../modules'
 
-let findSecretPassageAction: ActionMessage|null = null
+let findSecretPassageAction: PlayerMessage|null = null
 
 type TilePosition = {
   x: number,
@@ -58,7 +59,8 @@ const initiateSecretPassages = (
 
           WA.room.onEnterLayer(`${secretPassagesZones[i]}/trace`).subscribe(() => {
             if (!WA.state[`${secretPassagesZones[i]}Discovered`]) {
-              findSecretPassageAction = WA.ui.displayActionMessage({
+              // @ts-ignore
+              findSecretPassageAction = WA.ui.displayPlayerMessage({
                 message: utils.translations.translate('utils.executeAction', {
                   action: utils.translations.translate('modules.secretPassage.findSecretPassage')
                 }),
