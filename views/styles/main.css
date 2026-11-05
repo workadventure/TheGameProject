@@ -1,3 +1,7 @@
+/* Match WorkAdventure's dark theme, otherwise the browser paints an opaque white backdrop behind the iframe */
+:root {
+    color-scheme: dark;
+}
 *{
     font-family: Roboto, ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
