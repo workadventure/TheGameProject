@@ -1,6 +1,6 @@
 import { myGameName, myPlayerId } from "./main";
 
-const FIREBASE_URL = "https://thegameproject-c216d-default-rtdb.europe-west1.firebasedatabase.app";
+const FIREBASE_URL = "https://thegameproject-373f3-default-rtdb.europe-west1.firebasedatabase.app";
 
 const getFirebaseUserRoleUrl = () => {
     return `${FIREBASE_URL}/${myGameName()}/userRole/${myPlayerId()}.json`;
@@ -27,7 +27,7 @@ export const getPlayerJob = async (): Promise<{job: string}> => {
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 export const saveGem = async (gem: string): Promise<boolean> => {
@@ -40,7 +40,7 @@ export const saveGem = async (gem: string): Promise<boolean> => {
         },
         body: JSON.stringify({find: true})
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 export const getGem = async (gem: string): Promise<{find: boolean}> => {
@@ -52,7 +52,7 @@ export const getGem = async (gem: string): Promise<{find: boolean}> => {
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 // Save game step of the user in firebase
@@ -78,7 +78,7 @@ export const getGameStep = async (): Promise<{step: "choice" | "museum" | "escap
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 export const saveStartGameTimestamp = async (): Promise<void> => {
@@ -115,7 +115,7 @@ export const getStartGameTimestamp = async (): Promise<unknown> => {
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 // Get end game timestamp of the user from firebase
@@ -128,12 +128,12 @@ export const getEndGameTimestamp = async (): Promise<unknown> => {
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 // Get all End game timestamp of the users from firebase
 export const getAllEndGameTimestamp = async (): Promise<any> => {
-    const url = `${FIREBASE_URL}/endGameTimestamp.json?orderBy="timestamp"`;
+    const url = `${FIREBASE_URL}/endGameTimestamp.json`;
     try{
         const response = await fetch(url, {
             method: 'GET',
@@ -142,7 +142,7 @@ export const getAllEndGameTimestamp = async (): Promise<any> => {
                 'Content-Type': 'application/json'
             }
         });
-        return await response.json();
+        return response.ok ? await response.json() : undefined;
     }catch(e){
         console.log('getAllEndGameTimestamp => error', e);
     }
@@ -150,7 +150,7 @@ export const getAllEndGameTimestamp = async (): Promise<any> => {
 
 // Get all Start game timestamp of the users from firebase
 export const getAllStartGameTimestamp = async (): Promise<any> => {
-    const url = `${FIREBASE_URL}/startGameTimestamp.json?orderBy="timestamp"`;
+    const url = `${FIREBASE_URL}/startGameTimestamp.json`;
     try{
         const response = await fetch(url, {
             method: 'GET',
@@ -159,7 +159,7 @@ export const getAllStartGameTimestamp = async (): Promise<any> => {
                 'Content-Type': 'application/json'
             }
         });
-        return await response.json();
+        return response.ok ? await response.json() : undefined;
     }catch(e){
         console.log('getAllStartGameTimestamp => error', e);
     }
@@ -188,7 +188,7 @@ export const getChoiceInFirebase = async (): Promise<{choice: "online"|"onlive"}
             'Content-Type': 'application/json'
         }
     });
-    return await response.json();
+    return response.ok ? await response.json() : undefined;
 };
 
 export{};
